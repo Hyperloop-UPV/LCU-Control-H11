@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'control'.
  *
- * Model version                  : 1.49
+ * Model version                  : 1.78
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Sat Jan 31 19:32:33 2026
+ * C/C++ source code generated on : Sat Feb 14 16:39:43 2026
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -20,13 +20,7 @@
 #ifndef control_private_h_
 #define control_private_h_
 #include "rtwtypes.h"
-#include "multiword_types.h"
 #include "control_types.h"
-
-/* Private macros used by the generated code to access rtModel */
-#ifndef rtmSetTFinal
-#define rtmSetTFinal(rtm, val)         ((rtm)->Timing.tFinal = (val))
-#endif
 #endif                                 /* control_private_h_ */
 
 /*

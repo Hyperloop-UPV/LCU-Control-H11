@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'control'.
  *
- * Model version                  : 1.49
+ * Model version                  : 1.78
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Sat Jan 31 19:32:33 2026
+ * C/C++ source code generated on : Sat Feb 14 16:39:43 2026
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -19,8 +19,6 @@
 
 #include "control.h"
 #include "rtwtypes.h"
-#include "control_private.h"
-#include <string.h>
 
 /* Block signals (default storage) */
 B_control_T control_B;
@@ -86,9 +84,12 @@ static void rate_monotonic_scheduler(void)
 void control_step0(void)               /* Sample time: [0.0005s, 0.0s] */
 {
   real32_T rtb_DeadZone;
-  real32_T rtb_IntegralGain;
+  real32_T rtb_ErrorCorriente;
+  real32_T rtb_PProdOut;
   int8_T tmp;
   int8_T tmp_0;
+  boolean_T rtb_Equal1;
+  boolean_T rtb_RelationalOperator1;
 
   {                                    /* Sample time: [0.0005s, 0.0s] */
     rate_monotonic_scheduler();
@@ -106,44 +107,30 @@ void control_step0(void)               /* Sample time: [0.0005s, 0.0s] */
   /* Sum: '<S1>/Add2' incorporates:
    *  Inport: '<Root>/corriente_real'
    */
-  rtb_IntegralGain = control_B.RateTransition - control_U.corriente_real;
+  rtb_ErrorCorriente = control_B.RateTransition - control_U.corriente_real;
 
-  /* Gain: '<S38>/Proportional Gain' incorporates:
-   *  DiscreteIntegrator: '<S40>/Integrator'
-   *  Sum: '<S49>/Sum'
+  /* Product: '<S39>/PProd Out' incorporates:
+   *  Inport: '<Root>/P'
+   *  Sum: '<S50>/Sum Fdbk'
    */
-  control_B.Saturation = (rtb_IntegralGain + control_DW.Integrator_DSTATE) *
-    22.9546F;
+  rtb_DeadZone = (rtb_ErrorCorriente + control_DW.Integrator_DSTATE) *
+    control_U.P;
 
-  /* DeadZone: '<S32>/DeadZone' incorporates:
-   *  Saturate: '<S47>/Saturation'
-   */
-  if (control_B.Saturation > 400.0F) {
-    rtb_DeadZone = control_B.Saturation - 400.0F;
-
-    /* Gain: '<S38>/Proportional Gain' incorporates:
-     *  Saturate: '<S47>/Saturation'
-     */
-    control_B.Saturation = 400.0F;
+  /* DeadZone: '<S32>/DeadZone' */
+  if (rtb_DeadZone > 400.0F) {
+    rtb_DeadZone -= 400.0F;
+  } else if (rtb_DeadZone >= -400.0F) {
+    rtb_DeadZone = 0.0F;
   } else {
-    if (control_B.Saturation >= -400.0F) {
-      rtb_DeadZone = 0.0F;
-    } else {
-      rtb_DeadZone = control_B.Saturation - -400.0F;
-    }
-
-    if (control_B.Saturation < -400.0F) {
-      /* Gain: '<S38>/Proportional Gain' incorporates:
-       *  Saturate: '<S47>/Saturation'
-       */
-      control_B.Saturation = -400.0F;
-    }
+    rtb_DeadZone -= -400.0F;
   }
 
   /* End of DeadZone: '<S32>/DeadZone' */
 
-  /* Gain: '<S37>/Integral Gain' */
-  rtb_IntegralGain *= 208.333298F;
+  /* Product: '<S37>/IProd Out' incorporates:
+   *  Inport: '<Root>/I'
+   */
+  rtb_PProdOut = rtb_ErrorCorriente * control_U.I;
 
   /* Switch: '<S30>/Switch3' incorporates:
    *  Constant: '<S30>/Clamping_zero'
@@ -163,43 +150,86 @@ void control_step0(void)               /* Sample time: [0.0005s, 0.0s] */
    *  Constant: '<S30>/Constant5'
    *  RelationalOperator: '<S30>/fix for DT propagation issue1'
    */
-  if (rtb_IntegralGain > 0.0F) {
+  if (rtb_PProdOut > 0.0F) {
     tmp_0 = 1;
   } else {
     tmp_0 = -1;
   }
 
-  /* Switch: '<S30>/Switch' incorporates:
-   *  Constant: '<S30>/Clamping_zero'
-   *  Constant: '<S30>/Constant1'
-   *  Logic: '<S30>/AND3'
-   *  RelationalOperator: '<S30>/Equal1'
-   *  RelationalOperator: '<S30>/Relational Operator'
+  /* RelationalOperator: '<S30>/Equal1' incorporates:
    *  Switch: '<S30>/Switch2'
    *  Switch: '<S30>/Switch3'
    */
-  if ((rtb_DeadZone != 0.0F) && (tmp == tmp_0)) {
-    rtb_IntegralGain = 0.0F;
+  rtb_Equal1 = (tmp == tmp_0);
+
+  /* RelationalOperator: '<S30>/Relational Operator1' incorporates:
+   *  Constant: '<S30>/Clamping_zero'
+   *  Inport: '<Root>/P'
+   */
+  rtb_RelationalOperator1 = (control_U.P > 0.0F);
+
+  /* Switch: '<S30>/Switch' incorporates:
+   *  Constant: '<S30>/Clamping_zero'
+   *  Constant: '<S30>/Constant1'
+   *  Logic: '<S30>/AND1'
+   *  Logic: '<S30>/AND2'
+   *  Logic: '<S30>/AND3'
+   *  Logic: '<S30>/NOT1'
+   *  Logic: '<S30>/NOT2'
+   *  Logic: '<S30>/OR1'
+   *  RelationalOperator: '<S30>/Relational Operator'
+   */
+  if ((rtb_DeadZone != 0.0F) && ((rtb_Equal1 && rtb_RelationalOperator1) ||
+       ((!rtb_Equal1) && (!rtb_RelationalOperator1)))) {
+    rtb_PProdOut = 0.0F;
   }
 
-  /* Update for DiscreteIntegrator: '<S40>/Integrator' incorporates:
-   *  Switch: '<S30>/Switch'
-   */
-  control_DW.Integrator_DSTATE += 0.0005F * rtb_IntegralGain;
+  /* End of Switch: '<S30>/Switch' */
 
+  /* DiscreteIntegrator: '<S40>/Integrator' */
+  rtb_DeadZone = 0.00025F * rtb_PProdOut;
+
+  /* DiscreteIntegrator: '<S40>/Integrator' */
+  rtb_PProdOut = rtb_DeadZone + control_DW.Integrator_DSTATE;
+
+  /* DiscreteIntegrator: '<S40>/Integrator' */
+  if (rtb_PProdOut > 400.0F) {
+    /* DiscreteIntegrator: '<S40>/Integrator' */
+    rtb_PProdOut = 400.0F;
+  } else if (rtb_PProdOut < -400.0F) {
+    /* DiscreteIntegrator: '<S40>/Integrator' */
+    rtb_PProdOut = -400.0F;
+  }
+
+  /* Update for DiscreteIntegrator: '<S40>/Integrator' */
+  control_DW.Integrator_DSTATE = rtb_DeadZone + rtb_PProdOut;
+  if (control_DW.Integrator_DSTATE > 400.0F) {
+    control_DW.Integrator_DSTATE = 400.0F;
+  } else if (control_DW.Integrator_DSTATE < -400.0F) {
+    control_DW.Integrator_DSTATE = -400.0F;
+  }
+
+  /* Product: '<S38>/PProd Out' incorporates:
+   *  Inport: '<Root>/P'
+   *  Sum: '<S49>/Sum'
+   */
+  control_Y.Voltage = (rtb_ErrorCorriente + rtb_PProdOut) * control_U.P;
+
+  /* Saturate: '<S47>/Saturation' */
+  if (control_Y.Voltage > 400.0F) {
+    /* Product: '<S38>/PProd Out' incorporates:
+     *  Outport: '<Root>/Voltage'
+     */
+    control_Y.Voltage = 400.0F;
+  } else if (control_Y.Voltage < -400.0F) {
+    /* Product: '<S38>/PProd Out' incorporates:
+     *  Outport: '<Root>/Voltage'
+     */
+    control_Y.Voltage = -400.0F;
+  }
+
+  /* End of Saturate: '<S47>/Saturation' */
   /* End of Outputs for SubSystem: '<Root>/Subsystem' */
-
-  /* Outport: '<Root>/Voltage' */
-  control_Y.Voltage = control_B.Saturation;
-
-  /* Update absolute time */
-  /* The "clockTick0" counts the number of times the code of this task has
-   * been executed. The absolute time is the multiplication of "clockTick0"
-   * and "Timing.stepSize0". Size of "clockTick0" ensures timer will not
-   * overflow during the application lifespan selected.
-   */
-  control_M->Timing.taskTime0 =
-    ((time_T)(++control_M->Timing.clockTick0)) * control_M->Timing.stepSize0;
 }
 
 /* Model step function for TID1 */
@@ -207,7 +237,7 @@ void control_step1(void)               /* Sample time: [0.001s, 0.0s] */
 {
   /* local block i/o variables */
   real32_T rtb_UnitDelay;
-  real32_T u0;
+  real32_T rtb_DiscreteStateSpace[3];
 
   /* Outputs for Atomic SubSystem: '<Root>/Subsystem' */
   /* UnitDelay: '<S1>/Unit Delay' */
@@ -218,24 +248,24 @@ void control_step1(void)               /* Sample time: [0.001s, 0.0s] */
    *  Inport: '<Root>/Gap'
    */
   {
-    control_B.DiscreteStateSpace[0] = (0.915141642F)*
+    rtb_DiscreteStateSpace[0] = (0.915141642F)*
       control_DW.DiscreteStateSpace_DSTATE[0]
       + (0.00045757083F)*control_DW.DiscreteStateSpace_DSTATE[1]
       + (2.2878541E-7F)*control_DW.DiscreteStateSpace_DSTATE[2];
-    control_B.DiscreteStateSpace[0] += (-2.28785417E-8F)*rtb_UnitDelay +
-      (0.084858343F)*control_U.Gap;
-    control_B.DiscreteStateSpace[1] = (-4.9911828F)*
+    rtb_DiscreteStateSpace[0] += (-3.75208096E-8F)*rtb_UnitDelay + (0.084858343F)*
+      control_U.Gap;
+    rtb_DiscreteStateSpace[1] = (-4.9911828F)*
       control_DW.DiscreteStateSpace_DSTATE[0]
       + (0.997504413F)*control_DW.DiscreteStateSpace_DSTATE[1]
       + (0.000498752226F)*control_DW.DiscreteStateSpace_DSTATE[2];
-    control_B.DiscreteStateSpace[1] += (-4.98752197E-5F)*rtb_UnitDelay +
-      (4.9911828F)*control_U.Gap;
-    control_B.DiscreteStateSpace[2] = (-98.8353F)*
+    rtb_DiscreteStateSpace[1] += (-8.17953623E-5F)*rtb_UnitDelay + (4.9911828F)*
+      control_U.Gap;
+    rtb_DiscreteStateSpace[2] = (-98.8353F)*
       control_DW.DiscreteStateSpace_DSTATE[0]
       + (-0.0494176485F)*control_DW.DiscreteStateSpace_DSTATE[1]
       + (0.999975264F)*control_DW.DiscreteStateSpace_DSTATE[2];
-    control_B.DiscreteStateSpace[2] += (2.47088246E-6F)*rtb_UnitDelay +
-      (98.8353F)*control_U.Gap;
+    rtb_DiscreteStateSpace[2] += (4.05224728E-6F)*rtb_UnitDelay + (98.8353F)*
+      control_U.Gap;
   }
 
   /* Update for DiscreteStateSpace: '<S3>/Discrete State-Space' incorporates:
@@ -246,102 +276,59 @@ void control_step1(void)               /* Sample time: [0.001s, 0.0s] */
     xnew[0] = (0.830283344F)*control_DW.DiscreteStateSpace_DSTATE[0]
       + (0.00091514166F)*control_DW.DiscreteStateSpace_DSTATE[1]
       + (4.5757082E-7F)*control_DW.DiscreteStateSpace_DSTATE[2];
-    xnew[0] += (-4.57570835E-8F)*rtb_UnitDelay + (0.169716686F)*control_U.Gap;
+    xnew[0] += (-7.50416191E-8F)*rtb_UnitDelay + (0.169716686F)*control_U.Gap;
     xnew[1] = (-9.98236561F)*control_DW.DiscreteStateSpace_DSTATE[0]
       + (0.995008826F)*control_DW.DiscreteStateSpace_DSTATE[1]
       + (0.000997504452F)*control_DW.DiscreteStateSpace_DSTATE[2];
-    xnew[1] += (-9.97504394E-5F)*rtb_UnitDelay + (9.98236561F)*control_U.Gap;
+    xnew[1] += (-0.000163590725F)*rtb_UnitDelay + (9.98236561F)*control_U.Gap;
     xnew[2] = (-197.670593F)*control_DW.DiscreteStateSpace_DSTATE[0]
       + (-0.0988353F)*control_DW.DiscreteStateSpace_DSTATE[1]
       + (0.999950588F)*control_DW.DiscreteStateSpace_DSTATE[2];
-    xnew[2] += (4.94176493E-6F)*rtb_UnitDelay + (197.670593F)*control_U.Gap;
+    xnew[2] += (8.10449455E-6F)*rtb_UnitDelay + (197.670593F)*control_U.Gap;
     (void) memcpy(&control_DW.DiscreteStateSpace_DSTATE[0], xnew,
                   sizeof(real32_T)*3);
   }
 
   /* End of Outputs for SubSystem: '<S1>/Subsystem' */
-  /* Gain: '<S1>/b0' incorporates:
-   *  Gain: '<S1>/Kd'
-   *  Gain: '<S1>/Kp'
+
+  /* Product: '<S1>/Divide' incorporates:
+   *  Inport: '<Root>/K_D'
+   *  Inport: '<Root>/K_P'
    *  Inport: '<Root>/Referencia'
+   *  Inport: '<Root>/b_0'
+   *  Product: '<S1>/Product'
+   *  Product: '<S1>/Product1'
    *  Sum: '<S1>/Sum1'
    *  Sum: '<S1>/Sum13'
    *  Sum: '<S1>/Sum5'
    */
-  u0 = (((control_U.Referencia - control_B.DiscreteStateSpace[0]) * 1600.0F -
-         80.0F * control_B.DiscreteStateSpace[1]) -
-        control_B.DiscreteStateSpace[2]) * -10.0F;
+  control_DW.UnitDelay_DSTATE = (((control_U.Referencia -
+    rtb_DiscreteStateSpace[0]) * control_U.K_P - rtb_DiscreteStateSpace[1] *
+    control_U.K_D) - rtb_DiscreteStateSpace[2]) / control_U.b_0;
 
   /* Saturate: '<S1>/Saturation' */
-  if (u0 > 50.0F) {
-    /* Saturate: '<S1>/Saturation' */
-    control_B.Corrientedereferencia = 50.0F;
-  } else if (u0 < -50.0F) {
-    /* Saturate: '<S1>/Saturation' */
-    control_B.Corrientedereferencia = -50.0F;
-  } else {
-    /* Saturate: '<S1>/Saturation' */
-    control_B.Corrientedereferencia = u0;
+  if (control_DW.UnitDelay_DSTATE > 50.0F) {
+    /* Product: '<S1>/Divide' */
+    control_DW.UnitDelay_DSTATE = 50.0F;
+  } else if (control_DW.UnitDelay_DSTATE < -50.0F) {
+    /* Product: '<S1>/Divide' */
+    control_DW.UnitDelay_DSTATE = -50.0F;
   }
 
   /* End of Saturate: '<S1>/Saturation' */
-  /* RateTransition: '<S1>/Rate Transition' */
-  control_DW.RateTransition_Buffer0 = control_B.Corrientedereferencia;
 
-  /* Update for UnitDelay: '<S1>/Unit Delay' */
-  control_DW.UnitDelay_DSTATE = control_B.Corrientedereferencia;
+  /* RateTransition: '<S1>/Rate Transition' incorporates:
+   *  UnitDelay: '<S1>/Unit Delay'
+   */
+  control_DW.RateTransition_Buffer0 = control_DW.UnitDelay_DSTATE;
 
   /* End of Outputs for SubSystem: '<Root>/Subsystem' */
-
-  /* Update absolute time */
-  /* The "clockTick1" counts the number of times the code of this task has
-   * been executed. The resolution of this integer timer is 0.001, which is the step size
-   * of the task. Size of "clockTick1" ensures timer will not overflow during the
-   * application lifespan selected.
-   */
-  control_M->Timing.clockTick1++;
 }
 
 /* Model initialize function */
 void control_initialize(void)
 {
-  /* Registration code */
-
-  /* initialize real-time model */
-  (void) memset((void *)control_M, 0,
-                sizeof(RT_MODEL_control_T));
-  rtmSetTFinal(control_M, -1);
-  control_M->Timing.stepSize0 = 0.0005;
-
-  /* External mode info */
-  control_M->Sizes.checksums[0] = (2865505258U);
-  control_M->Sizes.checksums[1] = (3979209131U);
-  control_M->Sizes.checksums[2] = (1347307208U);
-  control_M->Sizes.checksums[3] = (1713624325U);
-
-  {
-    static const sysRanDType rtAlwaysEnabled = SUBSYS_RAN_BC_ENABLE;
-    static RTWExtModeInfo rt_ExtModeInfo;
-    static const sysRanDType *systemRan[3];
-    control_M->extModeInfo = (&rt_ExtModeInfo);
-    rteiSetSubSystemActiveVectorAddresses(&rt_ExtModeInfo, systemRan);
-    systemRan[0] = &rtAlwaysEnabled;
-    systemRan[1] = &rtAlwaysEnabled;
-    systemRan[2] = &rtAlwaysEnabled;
-    rteiSetModelMappingInfoPtr(control_M->extModeInfo,
-      &control_M->SpecialInfo.mappingInfo);
-    rteiSetChecksumsPtr(control_M->extModeInfo, control_M->Sizes.checksums);
-    rteiSetTPtr(control_M->extModeInfo, rtmGetTPtr(control_M));
-  }
-
-  /* block I/O */
-  (void) memset(((void *) &control_B), 0,
-                sizeof(B_control_T));
-
-  /* states (dwork) */
-  (void) memset((void *)&control_DW, 0,
-                sizeof(DW_control_T));
-
+  /* SystemInitialize for Atomic SubSystem: '<Root>/Subsystem' */
   /* SystemInitialize for Atomic SubSystem: '<S1>/Subsystem' */
   /* InitializeConditions for DiscreteStateSpace: '<S3>/Discrete State-Space' incorporates:
    *  Inport: '<Root>/Gap'
