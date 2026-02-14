@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'control'.
  *
- * Model version                  : 1.49
+ * Model version                  : 1.78
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Sat Jan 31 19:32:33 2026
+ * C/C++ source code generated on : Sat Feb 14 16:39:43 2026
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -22,24 +22,13 @@
 #ifndef control_COMMON_INCLUDES_
 #define control_COMMON_INCLUDES_
 #include "rtwtypes.h"
-#include "rtw_extmode.h"
-#include "sysran_types.h"
 #include "math.h"
 #endif                                 /* control_COMMON_INCLUDES_ */
 
 #include "control_types.h"
 #include <string.h>
-#include "MW_target_hardware_resources.h"
 
 /* Macros for accessing real-time model data structure */
-#ifndef rtmGetFinalTime
-#define rtmGetFinalTime(rtm)           ((rtm)->Timing.tFinal)
-#endif
-
-#ifndef rtmGetRTWExtModeInfo
-#define rtmGetRTWExtModeInfo(rtm)      ((rtm)->extModeInfo)
-#endif
-
 #ifndef rtmGetErrorStatus
 #define rtmGetErrorStatus(rtm)         ((rtm)->errorStatus)
 #endif
@@ -52,30 +41,6 @@
 #define rtmStepTask(rtm, idx)          ((rtm)->Timing.TaskCounters.TID[(idx)] == 0)
 #endif
 
-#ifndef rtmGetStopRequested
-#define rtmGetStopRequested(rtm)       ((rtm)->Timing.stopRequestedFlag)
-#endif
-
-#ifndef rtmSetStopRequested
-#define rtmSetStopRequested(rtm, val)  ((rtm)->Timing.stopRequestedFlag = (val))
-#endif
-
-#ifndef rtmGetStopRequestedPtr
-#define rtmGetStopRequestedPtr(rtm)    (&((rtm)->Timing.stopRequestedFlag))
-#endif
-
-#ifndef rtmGetT
-#define rtmGetT(rtm)                   ((rtm)->Timing.taskTime0)
-#endif
-
-#ifndef rtmGetTFinal
-#define rtmGetTFinal(rtm)              ((rtm)->Timing.tFinal)
-#endif
-
-#ifndef rtmGetTPtr
-#define rtmGetTPtr(rtm)                (&(rtm)->Timing.taskTime0)
-#endif
-
 #ifndef rtmTaskCounter
 #define rtmTaskCounter(rtm, idx)       ((rtm)->Timing.TaskCounters.TID[(idx)])
 #endif
@@ -83,9 +48,6 @@
 /* Block signals (default storage) */
 typedef struct {
   real32_T RateTransition;             /* '<S1>/Rate Transition' */
-  real32_T Saturation;                 /* '<S47>/Saturation' */
-  real32_T Corrientedereferencia;      /* '<S1>/Saturation' */
-  real32_T DiscreteStateSpace[3];      /* '<S3>/Discrete State-Space' */
 } B_control_T;
 
 /* Block states (default storage) for system '<Root>' */
@@ -101,6 +63,11 @@ typedef struct {
   real32_T Gap;                        /* '<Root>/Gap' */
   real32_T Referencia;                 /* '<Root>/Referencia' */
   real32_T corriente_real;             /* '<Root>/corriente_real' */
+  real32_T K_P;                        /* '<Root>/K_P' */
+  real32_T K_D;                        /* '<Root>/K_D' */
+  real32_T b_0;                        /* '<Root>/b_0' */
+  real32_T P;                          /* '<Root>/P' */
+  real32_T I;                          /* '<Root>/I' */
 } ExtU_control_T;
 
 /* External outputs (root outports fed by signals with default storage) */
@@ -110,27 +77,7 @@ typedef struct {
 
 /* Real-time Model Data Structure */
 struct tag_RTM_control_T {
-  const char_T *errorStatus;
-  RTWExtModeInfo *extModeInfo;
-
-  /*
-   * Sizes:
-   * The following substructure contains sizes information
-   * for many of the model attributes such as inputs, outputs,
-   * dwork, sample times, etc.
-   */
-  struct {
-    uint32_T checksums[4];
-  } Sizes;
-
-  /*
-   * SpecialInfo:
-   * The following substructure contains special information
-   * related to other components that are dependent on RTW.
-   */
-  struct {
-    const void *mappingInfo;
-  } SpecialInfo;
+  const char_T * volatile errorStatus;
 
   /*
    * Timing:
@@ -138,10 +85,6 @@ struct tag_RTM_control_T {
    * the timing information for the model.
    */
   struct {
-    time_T taskTime0;
-    uint32_T clockTick0;
-    time_T stepSize0;
-    uint32_T clockTick1;
     struct {
       uint8_T TID[2];
     } TaskCounters;
@@ -149,9 +92,6 @@ struct tag_RTM_control_T {
     struct {
       boolean_T TID0_1;
     } RateInteraction;
-
-    time_T tFinal;
-    boolean_T stopRequestedFlag;
   } Timing;
 };
 
@@ -178,8 +118,6 @@ extern void control_terminate(void);
 
 /* Real-time Model object */
 extern RT_MODEL_control_T *const control_M;
-extern volatile boolean_T stopRequested;
-extern volatile boolean_T runModel;
 
 /*-
  * The generated code includes comments that allow you to trace directly
@@ -232,27 +170,27 @@ extern volatile boolean_T runModel;
  * '<S34>'  : 'control/Subsystem/PID Controller/External Derivative/Disabled'
  * '<S35>'  : 'control/Subsystem/PID Controller/Filter/Disabled'
  * '<S36>'  : 'control/Subsystem/PID Controller/Filter ICs/Disabled'
- * '<S37>'  : 'control/Subsystem/PID Controller/I Gain/Internal Parameters'
- * '<S38>'  : 'control/Subsystem/PID Controller/Ideal P Gain/Internal Parameters'
- * '<S39>'  : 'control/Subsystem/PID Controller/Ideal P Gain Fdbk/Disabled'
+ * '<S37>'  : 'control/Subsystem/PID Controller/I Gain/External Parameters'
+ * '<S38>'  : 'control/Subsystem/PID Controller/Ideal P Gain/External Parameters'
+ * '<S39>'  : 'control/Subsystem/PID Controller/Ideal P Gain Fdbk/External Parameters'
  * '<S40>'  : 'control/Subsystem/PID Controller/Integrator/Discrete'
  * '<S41>'  : 'control/Subsystem/PID Controller/Integrator ICs/Internal IC'
  * '<S42>'  : 'control/Subsystem/PID Controller/N Copy/Disabled wSignal Specification'
  * '<S43>'  : 'control/Subsystem/PID Controller/N Gain/Disabled'
- * '<S44>'  : 'control/Subsystem/PID Controller/P Copy/Internal Parameters Ideal'
+ * '<S44>'  : 'control/Subsystem/PID Controller/P Copy/External Parameters Ideal'
  * '<S45>'  : 'control/Subsystem/PID Controller/Parallel P Gain/Passthrough'
  * '<S46>'  : 'control/Subsystem/PID Controller/Reset Signal/Disabled'
  * '<S47>'  : 'control/Subsystem/PID Controller/Saturation/Enabled'
- * '<S48>'  : 'control/Subsystem/PID Controller/Saturation Fdbk/Disabled'
+ * '<S48>'  : 'control/Subsystem/PID Controller/Saturation Fdbk/Passthrough'
  * '<S49>'  : 'control/Subsystem/PID Controller/Sum/Sum_PI'
- * '<S50>'  : 'control/Subsystem/PID Controller/Sum Fdbk/Disabled'
+ * '<S50>'  : 'control/Subsystem/PID Controller/Sum Fdbk/Enabled'
  * '<S51>'  : 'control/Subsystem/PID Controller/Tracking Mode/Disabled'
  * '<S52>'  : 'control/Subsystem/PID Controller/Tracking Mode Sum/Passthrough'
  * '<S53>'  : 'control/Subsystem/PID Controller/Tsamp - Integral/TsSignalSpecification'
  * '<S54>'  : 'control/Subsystem/PID Controller/Tsamp - Ngain/Passthrough'
- * '<S55>'  : 'control/Subsystem/PID Controller/postSat Signal/Forward_Path'
+ * '<S55>'  : 'control/Subsystem/PID Controller/postSat Signal/Feedback_Path'
  * '<S56>'  : 'control/Subsystem/PID Controller/preInt Signal/Internal PreInt'
- * '<S57>'  : 'control/Subsystem/PID Controller/preSat Signal/Forward_Path'
+ * '<S57>'  : 'control/Subsystem/PID Controller/preSat Signal/Feedback_Path'
  */
 #endif                                 /* control_h_ */
 
