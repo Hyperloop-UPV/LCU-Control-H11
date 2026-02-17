@@ -2,7 +2,7 @@
 ## Makefile generated for component 'control'. 
 ## 
 ## Makefile     : control.mk
-## Generated on : Sat Feb 14 16:38:19 2026
+## Generated on : Mon Feb 16 13:01:47 2026
 ## Final product: $(RELATIVE_PATH_TO_ANCHOR)/control.elf
 ## Product type : executable
 ## 
@@ -224,7 +224,7 @@ DEFINES = $(DEFINES_) $(DEFINES_BUILD_ARGS) $(DEFINES_CUSTOM) $(DEFINES_OPTS) $(
 ## SOURCE FILES
 ###########################################################################
 
-SRCS = $(START_DIR)/control_ert_rtw/control.c C:/ProgramData/MATLAB/SupportPackages/R2025b/toolbox/shared/supportpackages/stm32/src/overrideHALDelay.c C:/ProgramData/MATLAB/SupportPackages/R2025b/toolbox/shared/supportpackages/stm32/src/platform_timer.c $(MATLAB_ROOT)/toolbox/target/shared/armcortexmbase/scheduler/src/SysTickScheduler.c $(MATLAB_ROOT)/toolbox/target/shared/armcortexmbase/scheduler/src/m3m4m4f_multitasking.c $(START_DIR)/Core/Src/main.c $(START_DIR)/Core/Src/stm32h7xx_it.c $(START_DIR)/Core/Src/stm32h7xx_hal_msp.c $(START_DIR)/Core/Src/stm32h7xx_hal_timebase_tim.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_exti.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_tim.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_tim_ex.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_cortex.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_gpio.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_dma.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_rcc.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_rcc_ex.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_flash.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_flash_ex.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_gpio.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_hsem.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma_ex.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_mdma.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr_ex.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_i2c.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_i2c_ex.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_exti.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_rcc.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_utils.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_usart.c $(START_DIR)/Core/Src/system_stm32h7xx.c $(START_DIR)/STM32CubeIDE/Application/User/Core/syscalls.c $(START_DIR)/STM32CubeIDE/Application/User/Core/sysmem.c $(START_DIR)/STM32CubeIDE/Application/User/Startup/startup_stm32h723zgtx.s
+SRCS = $(START_DIR)/control_ert_rtw/control.c C:/ProgramData/MATLAB/SupportPackages/R2025b/toolbox/shared/supportpackages/stm32/src/overrideHALDelay.c C:/ProgramData/MATLAB/SupportPackages/R2025b/toolbox/shared/supportpackages/stm32/src/platform_timer.c $(MATLAB_ROOT)/toolbox/target/shared/armcortexmbase/scheduler/src/SysTickScheduler.c $(MATLAB_ROOT)/toolbox/target/shared/armcortexmbase/scheduler/src/m3m4m4f_multitasking.c $(START_DIR)/Core/Src/main.c $(START_DIR)/Core/Src/stm32h7xx_it.c $(START_DIR)/Core/Src/stm32h7xx_hal_msp.c $(START_DIR)/Core/Src/stm32h7xx_hal_timebase_tim.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_exti.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_tim.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_tim_ex.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc_ex.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_rcc.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_rcc_ex.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_flash.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_flash_ex.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_gpio.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_hsem.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma_ex.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_mdma.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr_ex.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_cortex.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_i2c.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_i2c_ex.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_exti.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_rcc.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_utils.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dac.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dac_ex.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_gpio.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_dma.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_usart.c $(START_DIR)/Core/Src/system_stm32h7xx.c $(START_DIR)/STM32CubeIDE/Application/User/Core/syscalls.c $(START_DIR)/STM32CubeIDE/Application/User/Core/sysmem.c $(START_DIR)/STM32CubeIDE/Application/User/Startup/startup_stm32h723zgtx.s
 
 ALL_SRCS = $(SRCS)
 
@@ -232,7 +232,7 @@ ALL_SRCS = $(SRCS)
 ## OBJECTS
 ###########################################################################
 
-OBJS = control.c.o overrideHALDelay.c.o platform_timer.c.o SysTickScheduler.c.o m3m4m4f_multitasking.c.o main.c.o stm32h7xx_it.c.o stm32h7xx_hal_msp.c.o stm32h7xx_hal_timebase_tim.c.o stm32h7xx_ll_exti.c.o stm32h7xx_hal_tim.c.o stm32h7xx_hal_tim_ex.c.o stm32h7xx_hal_cortex.c.o stm32h7xx_ll_gpio.c.o stm32h7xx_ll_dma.c.o stm32h7xx_hal_rcc.c.o stm32h7xx_hal_rcc_ex.c.o stm32h7xx_hal_flash.c.o stm32h7xx_hal_flash_ex.c.o stm32h7xx_hal_gpio.c.o stm32h7xx_hal_hsem.c.o stm32h7xx_hal_dma.c.o stm32h7xx_hal_dma_ex.c.o stm32h7xx_hal_mdma.c.o stm32h7xx_hal_pwr.c.o stm32h7xx_hal_pwr_ex.c.o stm32h7xx_hal.c.o stm32h7xx_hal_i2c.c.o stm32h7xx_hal_i2c_ex.c.o stm32h7xx_hal_exti.c.o stm32h7xx_ll_rcc.c.o stm32h7xx_ll_utils.c.o stm32h7xx_ll_usart.c.o system_stm32h7xx.c.o syscalls.c.o sysmem.c.o startup_stm32h723zgtx.s.o
+OBJS = control.c.o overrideHALDelay.c.o platform_timer.c.o SysTickScheduler.c.o m3m4m4f_multitasking.c.o main.c.o stm32h7xx_it.c.o stm32h7xx_hal_msp.c.o stm32h7xx_hal_timebase_tim.c.o stm32h7xx_ll_exti.c.o stm32h7xx_hal_tim.c.o stm32h7xx_hal_tim_ex.c.o stm32h7xx_hal_adc.c.o stm32h7xx_hal_adc_ex.c.o stm32h7xx_hal_rcc.c.o stm32h7xx_hal_rcc_ex.c.o stm32h7xx_hal_flash.c.o stm32h7xx_hal_flash_ex.c.o stm32h7xx_hal_gpio.c.o stm32h7xx_hal_hsem.c.o stm32h7xx_hal_dma.c.o stm32h7xx_hal_dma_ex.c.o stm32h7xx_hal_mdma.c.o stm32h7xx_hal_pwr.c.o stm32h7xx_hal_pwr_ex.c.o stm32h7xx_hal_cortex.c.o stm32h7xx_hal.c.o stm32h7xx_hal_i2c.c.o stm32h7xx_hal_i2c_ex.c.o stm32h7xx_hal_exti.c.o stm32h7xx_ll_rcc.c.o stm32h7xx_ll_utils.c.o stm32h7xx_hal_dac.c.o stm32h7xx_hal_dac_ex.c.o stm32h7xx_ll_gpio.c.o stm32h7xx_ll_dma.c.o stm32h7xx_ll_usart.c.o system_stm32h7xx.c.o syscalls.c.o sysmem.c.o startup_stm32h723zgtx.s.o
 
 ALL_OBJS = $(OBJS)
 
@@ -655,15 +655,11 @@ stm32h7xx_hal_tim_ex.c.o : $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-stm32h7xx_hal_cortex.c.o : $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_cortex.c
+stm32h7xx_hal_adc.c.o : $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-stm32h7xx_ll_gpio.c.o : $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_gpio.c
-	$(CC) $(CFLAGS) -o "$@" "$<"
-
-
-stm32h7xx_ll_dma.c.o : $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_dma.c
+stm32h7xx_hal_adc_ex.c.o : $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc_ex.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
@@ -711,6 +707,10 @@ stm32h7xx_hal_pwr_ex.c.o : $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
+stm32h7xx_hal_cortex.c.o : $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_cortex.c
+	$(CC) $(CFLAGS) -o "$@" "$<"
+
+
 stm32h7xx_hal.c.o : $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
@@ -732,6 +732,22 @@ stm32h7xx_ll_rcc.c.o : $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_l
 
 
 stm32h7xx_ll_utils.c.o : $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_utils.c
+	$(CC) $(CFLAGS) -o "$@" "$<"
+
+
+stm32h7xx_hal_dac.c.o : $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dac.c
+	$(CC) $(CFLAGS) -o "$@" "$<"
+
+
+stm32h7xx_hal_dac_ex.c.o : $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dac_ex.c
+	$(CC) $(CFLAGS) -o "$@" "$<"
+
+
+stm32h7xx_ll_gpio.c.o : $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_gpio.c
+	$(CC) $(CFLAGS) -o "$@" "$<"
+
+
+stm32h7xx_ll_dma.c.o : $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_dma.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
