@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'control'.
  *
- * Model version                  : 1.81
+ * Model version                  : 1.82
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Tue Feb 17 14:33:05 2026
+ * C/C++ source code generated on : Tue Feb 17 14:41:37 2026
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -171,14 +171,14 @@ extern RT_MODEL_control_T *const control_M;
  * '<S34>'  : 'control/Subsystem/PID Controller/External Derivative/Disabled'
  * '<S35>'  : 'control/Subsystem/PID Controller/Filter/Disabled'
  * '<S36>'  : 'control/Subsystem/PID Controller/Filter ICs/Disabled'
- * '<S37>'  : 'control/Subsystem/PID Controller/I Gain/External Parameters'
- * '<S38>'  : 'control/Subsystem/PID Controller/Ideal P Gain/External Parameters'
- * '<S39>'  : 'control/Subsystem/PID Controller/Ideal P Gain Fdbk/External Parameters'
+ * '<S37>'  : 'control/Subsystem/PID Controller/I Gain/Internal Parameters'
+ * '<S38>'  : 'control/Subsystem/PID Controller/Ideal P Gain/Internal Parameters'
+ * '<S39>'  : 'control/Subsystem/PID Controller/Ideal P Gain Fdbk/Internal Parameters'
  * '<S40>'  : 'control/Subsystem/PID Controller/Integrator/Discrete'
  * '<S41>'  : 'control/Subsystem/PID Controller/Integrator ICs/Internal IC'
  * '<S42>'  : 'control/Subsystem/PID Controller/N Copy/Disabled wSignal Specification'
  * '<S43>'  : 'control/Subsystem/PID Controller/N Gain/Disabled'
- * '<S44>'  : 'control/Subsystem/PID Controller/P Copy/External Parameters Ideal'
+ * '<S44>'  : 'control/Subsystem/PID Controller/P Copy/Internal Parameters Ideal'
  * '<S45>'  : 'control/Subsystem/PID Controller/Parallel P Gain/Passthrough'
  * '<S46>'  : 'control/Subsystem/PID Controller/Reset Signal/Disabled'
  * '<S47>'  : 'control/Subsystem/PID Controller/Saturation/Enabled'

@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'control'.
  *
- * Model version                  : 1.81
+ * Model version                  : 1.82
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Tue Feb 17 14:33:05 2026
+ * C/C++ source code generated on : Tue Feb 17 14:41:37 2026
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -88,8 +88,6 @@ void control_step0(void)               /* Sample time: [0.0005s, 0.0s] */
   real32_T rtb_UnitDelay;
   int8_T tmp_0;
   int8_T tmp_1;
-  boolean_T rtb_Equal1;
-  boolean_T rtb_RelationalOperator1;
   boolean_T tmp;
 
   {                                    /* Sample time: [0.0005s, 0.0s] */
@@ -113,12 +111,10 @@ void control_step0(void)               /* Sample time: [0.0005s, 0.0s] */
    */
   rtb_ErrorCorriente = control_B.RateTransition - control_U.corriente_real;
 
-  /* Product: '<S39>/PProd Out' incorporates:
-   *  Inport: '<Root>/P'
+  /* Gain: '<S39>/Proportional Gain' incorporates:
    *  Sum: '<S50>/Sum Fdbk'
    */
-  rtb_DeadZone = (rtb_ErrorCorriente + control_DW.Integrator_DSTATE) *
-    control_U.P;
+  rtb_DeadZone = (rtb_ErrorCorriente + control_DW.Integrator_DSTATE) * 10.0F;
 
   /* DeadZone: '<S32>/DeadZone' */
   if (rtb_DeadZone > 400.0F) {
@@ -131,10 +127,8 @@ void control_step0(void)               /* Sample time: [0.0005s, 0.0s] */
 
   /* End of DeadZone: '<S32>/DeadZone' */
 
-  /* Product: '<S37>/IProd Out' incorporates:
-   *  Inport: '<Root>/I'
-   */
-  rtb_UnitDelay = rtb_ErrorCorriente * control_U.I;
+  /* Gain: '<S37>/Integral Gain' */
+  rtb_UnitDelay = 100.0F * rtb_ErrorCorriente;
 
   /* Switch: '<S30>/Switch3' incorporates:
    *  Constant: '<S30>/Clamping_zero'
@@ -160,31 +154,16 @@ void control_step0(void)               /* Sample time: [0.0005s, 0.0s] */
     tmp_1 = -1;
   }
 
-  /* RelationalOperator: '<S30>/Equal1' incorporates:
-   *  Switch: '<S30>/Switch2'
-   *  Switch: '<S30>/Switch3'
-   */
-  rtb_Equal1 = (tmp_0 == tmp_1);
-
-  /* RelationalOperator: '<S30>/Relational Operator1' incorporates:
-   *  Constant: '<S30>/Clamping_zero'
-   *  Inport: '<Root>/P'
-   */
-  rtb_RelationalOperator1 = (control_U.P > 0.0F);
-
   /* Switch: '<S30>/Switch' incorporates:
    *  Constant: '<S30>/Clamping_zero'
    *  Constant: '<S30>/Constant1'
-   *  Logic: '<S30>/AND1'
-   *  Logic: '<S30>/AND2'
    *  Logic: '<S30>/AND3'
-   *  Logic: '<S30>/NOT1'
-   *  Logic: '<S30>/NOT2'
-   *  Logic: '<S30>/OR1'
+   *  RelationalOperator: '<S30>/Equal1'
    *  RelationalOperator: '<S30>/Relational Operator'
+   *  Switch: '<S30>/Switch2'
+   *  Switch: '<S30>/Switch3'
    */
-  if ((rtb_DeadZone != 0.0F) && ((rtb_Equal1 && rtb_RelationalOperator1) ||
-       ((!rtb_Equal1) && (!rtb_RelationalOperator1)))) {
+  if ((rtb_DeadZone != 0.0F) && (tmp_0 == tmp_1)) {
     rtb_UnitDelay = 0.0F;
   }
 
@@ -225,20 +204,19 @@ void control_step0(void)               /* Sample time: [0.0005s, 0.0s] */
    */
   control_DW.UnitDelay_DSTATE = control_U.corriente_real;
 
-  /* Product: '<S38>/PProd Out' incorporates:
-   *  Inport: '<Root>/P'
+  /* Gain: '<S38>/Proportional Gain' incorporates:
    *  Sum: '<S49>/Sum'
    */
-  control_Y.Voltage = (rtb_ErrorCorriente + rtb_UnitDelay) * control_U.P;
+  control_Y.Voltage = (rtb_ErrorCorriente + rtb_UnitDelay) * 10.0F;
 
   /* Saturate: '<S47>/Saturation' */
   if (control_Y.Voltage > 400.0F) {
-    /* Product: '<S38>/PProd Out' incorporates:
+    /* Gain: '<S38>/Proportional Gain' incorporates:
      *  Outport: '<Root>/Voltage'
      */
     control_Y.Voltage = 400.0F;
   } else if (control_Y.Voltage < -400.0F) {
-    /* Product: '<S38>/PProd Out' incorporates:
+    /* Gain: '<S38>/Proportional Gain' incorporates:
      *  Outport: '<Root>/Voltage'
      */
     control_Y.Voltage = -400.0F;
@@ -311,20 +289,17 @@ void control_step1(void)               /* Sample time: [0.001s, 0.0s] */
 
   /* End of Outputs for SubSystem: '<S1>/Subsystem' */
 
-  /* Product: '<S1>/Divide' incorporates:
-   *  Inport: '<Root>/K_D'
-   *  Inport: '<Root>/K_P'
+  /* Gain: '<S1>/Gain' incorporates:
+   *  Gain: '<S1>/Gain1'
+   *  Gain: '<S1>/Gain2'
    *  Inport: '<Root>/Referencia'
-   *  Inport: '<Root>/b_0'
-   *  Product: '<S1>/Product'
-   *  Product: '<S1>/Product1'
    *  Sum: '<S1>/Sum1'
    *  Sum: '<S1>/Sum13'
    *  Sum: '<S1>/Sum5'
    */
   rtb_Corrientedereferencia = (((control_U.Referencia - rtb_DiscreteStateSpace[0])
-    * control_U.K_P - rtb_DiscreteStateSpace[1] * control_U.K_D) -
-    rtb_DiscreteStateSpace[2]) / control_U.b_0;
+    * 900.0F - 60.0F * rtb_DiscreteStateSpace[1]) - rtb_DiscreteStateSpace[2]) *
+    -10.0F;
 
   /* Saturate: '<S1>/Saturation' */
   if (rtb_Corrientedereferencia > 50.0F) {
