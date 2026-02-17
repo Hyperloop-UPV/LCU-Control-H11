@@ -9,7 +9,7 @@
  *
  * Model version                  : 1.78
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Sat Feb 14 16:39:43 2026
+ * C/C++ source code generated on : Sat Feb 14 17:12:40 2026
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -252,19 +252,19 @@ void control_step1(void)               /* Sample time: [0.001s, 0.0s] */
       control_DW.DiscreteStateSpace_DSTATE[0]
       + (0.00045757083F)*control_DW.DiscreteStateSpace_DSTATE[1]
       + (2.2878541E-7F)*control_DW.DiscreteStateSpace_DSTATE[2];
-    rtb_DiscreteStateSpace[0] += (-3.75208096E-8F)*rtb_UnitDelay + (0.084858343F)*
+    rtb_DiscreteStateSpace[0] += (-2.28785417E-8F)*rtb_UnitDelay + (0.084858343F)*
       control_U.Gap;
     rtb_DiscreteStateSpace[1] = (-4.9911828F)*
       control_DW.DiscreteStateSpace_DSTATE[0]
       + (0.997504413F)*control_DW.DiscreteStateSpace_DSTATE[1]
       + (0.000498752226F)*control_DW.DiscreteStateSpace_DSTATE[2];
-    rtb_DiscreteStateSpace[1] += (-8.17953623E-5F)*rtb_UnitDelay + (4.9911828F)*
+    rtb_DiscreteStateSpace[1] += (-4.98752197E-5F)*rtb_UnitDelay + (4.9911828F)*
       control_U.Gap;
     rtb_DiscreteStateSpace[2] = (-98.8353F)*
       control_DW.DiscreteStateSpace_DSTATE[0]
       + (-0.0494176485F)*control_DW.DiscreteStateSpace_DSTATE[1]
       + (0.999975264F)*control_DW.DiscreteStateSpace_DSTATE[2];
-    rtb_DiscreteStateSpace[2] += (4.05224728E-6F)*rtb_UnitDelay + (98.8353F)*
+    rtb_DiscreteStateSpace[2] += (2.47088246E-6F)*rtb_UnitDelay + (98.8353F)*
       control_U.Gap;
   }
 
@@ -276,15 +276,15 @@ void control_step1(void)               /* Sample time: [0.001s, 0.0s] */
     xnew[0] = (0.830283344F)*control_DW.DiscreteStateSpace_DSTATE[0]
       + (0.00091514166F)*control_DW.DiscreteStateSpace_DSTATE[1]
       + (4.5757082E-7F)*control_DW.DiscreteStateSpace_DSTATE[2];
-    xnew[0] += (-7.50416191E-8F)*rtb_UnitDelay + (0.169716686F)*control_U.Gap;
+    xnew[0] += (-4.57570835E-8F)*rtb_UnitDelay + (0.169716686F)*control_U.Gap;
     xnew[1] = (-9.98236561F)*control_DW.DiscreteStateSpace_DSTATE[0]
       + (0.995008826F)*control_DW.DiscreteStateSpace_DSTATE[1]
       + (0.000997504452F)*control_DW.DiscreteStateSpace_DSTATE[2];
-    xnew[1] += (-0.000163590725F)*rtb_UnitDelay + (9.98236561F)*control_U.Gap;
+    xnew[1] += (-9.97504394E-5F)*rtb_UnitDelay + (9.98236561F)*control_U.Gap;
     xnew[2] = (-197.670593F)*control_DW.DiscreteStateSpace_DSTATE[0]
       + (-0.0988353F)*control_DW.DiscreteStateSpace_DSTATE[1]
       + (0.999950588F)*control_DW.DiscreteStateSpace_DSTATE[2];
-    xnew[2] += (8.10449455E-6F)*rtb_UnitDelay + (197.670593F)*control_U.Gap;
+    xnew[2] += (4.94176493E-6F)*rtb_UnitDelay + (197.670593F)*control_U.Gap;
     (void) memcpy(&control_DW.DiscreteStateSpace_DSTATE[0], xnew,
                   sizeof(real32_T)*3);
   }
