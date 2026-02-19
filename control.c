@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'control'.
  *
- * Model version                  : 1.82
+ * Model version                  : 1.85
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Tue Feb 17 14:41:37 2026
+ * C/C++ source code generated on : Thu Feb 19 16:15:45 2026
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -324,7 +324,7 @@ void control_initialize(void)
   /* InitializeConditions for DiscreteStateSpace: '<S3>/Discrete State-Space' incorporates:
    *  Inport: '<Root>/Gap'
    */
-  control_DW.DiscreteStateSpace_DSTATE[0] = (0.0225F);
+  control_DW.DiscreteStateSpace_DSTATE[0] = (0.0216F);
   control_DW.DiscreteStateSpace_DSTATE[1] = (0.0F);
   control_DW.DiscreteStateSpace_DSTATE[2] = (0.0F);
 
