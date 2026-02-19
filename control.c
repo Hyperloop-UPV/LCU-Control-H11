@@ -9,7 +9,7 @@
  *
  * Model version                  : 1.85
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Thu Feb 19 16:15:45 2026
+ * C/C++ source code generated on : Thu Feb 19 19:35:29 2026
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -314,6 +314,15 @@ void control_step1(void)               /* Sample time: [0.001s, 0.0s] */
   control_DW.RateTransition_Buffer0 = rtb_Corrientedereferencia;
 
   /* End of Outputs for SubSystem: '<Root>/Subsystem' */
+
+  /* Outport: '<Root>/z3' */
+  control_Y.z3 = rtb_DiscreteStateSpace[2];
+
+  /* Outport: '<Root>/z1' */
+  control_Y.z1 = rtb_DiscreteStateSpace[0];
+
+  /* Outport: '<Root>/z2' */
+  control_Y.z2 = rtb_DiscreteStateSpace[1];
 }
 
 /* Model initialize function */
