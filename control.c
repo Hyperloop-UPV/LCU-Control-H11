@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'control'.
  *
- * Model version                  : 1.85
+ * Model version                  : 1.86
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Thu Feb 19 19:35:29 2026
+ * C/C++ source code generated on : Fri Feb 20 13:06:32 2026
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -114,21 +114,21 @@ void control_step0(void)               /* Sample time: [0.0005s, 0.0s] */
   /* Gain: '<S39>/Proportional Gain' incorporates:
    *  Sum: '<S50>/Sum Fdbk'
    */
-  rtb_DeadZone = (rtb_ErrorCorriente + control_DW.Integrator_DSTATE) * 10.0F;
+  rtb_DeadZone = (rtb_ErrorCorriente + control_DW.Integrator_DSTATE) * 20.0F;
 
   /* DeadZone: '<S32>/DeadZone' */
-  if (rtb_DeadZone > 400.0F) {
-    rtb_DeadZone -= 400.0F;
-  } else if (rtb_DeadZone >= -400.0F) {
+  if (rtb_DeadZone > 315.0F) {
+    rtb_DeadZone -= 315.0F;
+  } else if (rtb_DeadZone >= -315.0F) {
     rtb_DeadZone = 0.0F;
   } else {
-    rtb_DeadZone -= -400.0F;
+    rtb_DeadZone -= -315.0F;
   }
 
   /* End of DeadZone: '<S32>/DeadZone' */
 
   /* Gain: '<S37>/Integral Gain' */
-  rtb_UnitDelay = 100.0F * rtb_ErrorCorriente;
+  rtb_UnitDelay = 400.0F * rtb_ErrorCorriente;
 
   /* Switch: '<S30>/Switch3' incorporates:
    *  Constant: '<S30>/Clamping_zero'
@@ -176,12 +176,12 @@ void control_step0(void)               /* Sample time: [0.0005s, 0.0s] */
   rtb_UnitDelay = rtb_DeadZone + control_DW.Integrator_DSTATE;
 
   /* DiscreteIntegrator: '<S40>/Integrator' */
-  if (rtb_UnitDelay > 400.0F) {
+  if (rtb_UnitDelay > 315.0F) {
     /* DiscreteIntegrator: '<S40>/Integrator' */
-    rtb_UnitDelay = 400.0F;
-  } else if (rtb_UnitDelay < -400.0F) {
+    rtb_UnitDelay = 315.0F;
+  } else if (rtb_UnitDelay < -315.0F) {
     /* DiscreteIntegrator: '<S40>/Integrator' */
-    rtb_UnitDelay = -400.0F;
+    rtb_UnitDelay = -315.0F;
   }
 
   /* RateTransition generated from: '<S1>/Unit Delay' incorporates:
@@ -193,10 +193,10 @@ void control_step0(void)               /* Sample time: [0.0005s, 0.0s] */
 
   /* Update for DiscreteIntegrator: '<S40>/Integrator' */
   control_DW.Integrator_DSTATE = rtb_DeadZone + rtb_UnitDelay;
-  if (control_DW.Integrator_DSTATE > 400.0F) {
-    control_DW.Integrator_DSTATE = 400.0F;
-  } else if (control_DW.Integrator_DSTATE < -400.0F) {
-    control_DW.Integrator_DSTATE = -400.0F;
+  if (control_DW.Integrator_DSTATE > 315.0F) {
+    control_DW.Integrator_DSTATE = 315.0F;
+  } else if (control_DW.Integrator_DSTATE < -315.0F) {
+    control_DW.Integrator_DSTATE = -315.0F;
   }
 
   /* Update for UnitDelay: '<S1>/Unit Delay' incorporates:
@@ -207,19 +207,19 @@ void control_step0(void)               /* Sample time: [0.0005s, 0.0s] */
   /* Gain: '<S38>/Proportional Gain' incorporates:
    *  Sum: '<S49>/Sum'
    */
-  control_Y.Voltage = (rtb_ErrorCorriente + rtb_UnitDelay) * 10.0F;
+  control_Y.Voltage = (rtb_ErrorCorriente + rtb_UnitDelay) * 20.0F;
 
   /* Saturate: '<S47>/Saturation' */
-  if (control_Y.Voltage > 400.0F) {
+  if (control_Y.Voltage > 315.0F) {
     /* Gain: '<S38>/Proportional Gain' incorporates:
      *  Outport: '<Root>/Voltage'
      */
-    control_Y.Voltage = 400.0F;
-  } else if (control_Y.Voltage < -400.0F) {
+    control_Y.Voltage = 315.0F;
+  } else if (control_Y.Voltage < -315.0F) {
     /* Gain: '<S38>/Proportional Gain' incorporates:
      *  Outport: '<Root>/Voltage'
      */
-    control_Y.Voltage = -400.0F;
+    control_Y.Voltage = -315.0F;
   }
 
   /* End of Saturate: '<S47>/Saturation' */
