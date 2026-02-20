@@ -9,7 +9,7 @@
  *
  * Model version                  : 1.86
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Fri Feb 20 13:06:32 2026
+ * C/C++ source code generated on : Fri Feb 20 14:47:00 2026
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -44,14 +44,6 @@
 #ifndef rtmTaskCounter
 #define rtmTaskCounter(rtm, idx)       ((rtm)->Timing.TaskCounters.TID[(idx)])
 #endif
-
-#define Kp 900.0F
-#define Kd 60.0F
-#define b0 -10.0F
-#define Saturation 50.0F
-#define Kp_current 20.0F
-#define Ki_current 400.0F
-#define Saturation_Current 315.0F
 
 /* Block signals (default storage) */
 typedef struct {
@@ -123,7 +115,7 @@ extern ExtY_control_T control_Y;
 extern void control_SetEventsForThisBaseStep(boolean_T *eventFlags);
 
 /* Model entry point functions */
-extern void control_initialize(float current_gap_value);
+extern void control_initialize(void);
 extern void control_step0(void);       /* Sample time: [0.0005s, 0.0s] */
 extern void control_step1(void);       /* Sample time: [0.001s, 0.0s] */
 extern void control_terminate(void);

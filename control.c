@@ -9,7 +9,7 @@
  *
  * Model version                  : 1.86
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Fri Feb 20 13:06:32 2026
+ * C/C++ source code generated on : Fri Feb 20 14:47:00 2026
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -114,21 +114,21 @@ void control_step0(void)               /* Sample time: [0.0005s, 0.0s] */
   /* Gain: '<S39>/Proportional Gain' incorporates:
    *  Sum: '<S50>/Sum Fdbk'
    */
-  rtb_DeadZone = (rtb_ErrorCorriente + control_DW.Integrator_DSTATE) * Kp_current;
+  rtb_DeadZone = (rtb_ErrorCorriente + control_DW.Integrator_DSTATE) * 20.0F;
 
   /* DeadZone: '<S32>/DeadZone' */
-  if (rtb_DeadZone > Saturation_Current) {
-    rtb_DeadZone -= Saturation_Current;
-  } else if (rtb_DeadZone >= -Saturation_Current) {
+  if (rtb_DeadZone > 315.0F) {
+    rtb_DeadZone -= 315.0F;
+  } else if (rtb_DeadZone >= -315.0F) {
     rtb_DeadZone = 0.0F;
   } else {
-    rtb_DeadZone -= -Saturation_Current;
+    rtb_DeadZone -= -315.0F;
   }
 
   /* End of DeadZone: '<S32>/DeadZone' */
 
   /* Gain: '<S37>/Integral Gain' */
-  rtb_UnitDelay = Ki_current * rtb_ErrorCorriente;
+  rtb_UnitDelay = 400.0F * rtb_ErrorCorriente;
 
   /* Switch: '<S30>/Switch3' incorporates:
    *  Constant: '<S30>/Clamping_zero'
@@ -176,12 +176,12 @@ void control_step0(void)               /* Sample time: [0.0005s, 0.0s] */
   rtb_UnitDelay = rtb_DeadZone + control_DW.Integrator_DSTATE;
 
   /* DiscreteIntegrator: '<S40>/Integrator' */
-  if (rtb_UnitDelay > Saturation_Current) {
+  if (rtb_UnitDelay > 315.0F) {
     /* DiscreteIntegrator: '<S40>/Integrator' */
-    rtb_UnitDelay = Saturation_Current;
-  } else if (rtb_UnitDelay < -Saturation_Current) {
+    rtb_UnitDelay = 315.0F;
+  } else if (rtb_UnitDelay < -315.0F) {
     /* DiscreteIntegrator: '<S40>/Integrator' */
-    rtb_UnitDelay = -Saturation_Current;
+    rtb_UnitDelay = -315.0F;
   }
 
   /* RateTransition generated from: '<S1>/Unit Delay' incorporates:
@@ -193,10 +193,10 @@ void control_step0(void)               /* Sample time: [0.0005s, 0.0s] */
 
   /* Update for DiscreteIntegrator: '<S40>/Integrator' */
   control_DW.Integrator_DSTATE = rtb_DeadZone + rtb_UnitDelay;
-  if (control_DW.Integrator_DSTATE > Saturation_Current) {
-    control_DW.Integrator_DSTATE = Saturation_Current;
-  } else if (control_DW.Integrator_DSTATE < -Saturation_Current) {
-    control_DW.Integrator_DSTATE = -Saturation_Current;
+  if (control_DW.Integrator_DSTATE > 315.0F) {
+    control_DW.Integrator_DSTATE = 315.0F;
+  } else if (control_DW.Integrator_DSTATE < -315.0F) {
+    control_DW.Integrator_DSTATE = -315.0F;
   }
 
   /* Update for UnitDelay: '<S1>/Unit Delay' incorporates:
@@ -207,19 +207,19 @@ void control_step0(void)               /* Sample time: [0.0005s, 0.0s] */
   /* Gain: '<S38>/Proportional Gain' incorporates:
    *  Sum: '<S49>/Sum'
    */
-  control_Y.Voltage = (rtb_ErrorCorriente + rtb_UnitDelay) * Kp_current;
+  control_Y.Voltage = (rtb_ErrorCorriente + rtb_UnitDelay) * 20.0F;
 
   /* Saturate: '<S47>/Saturation' */
-  if (control_Y.Voltage > Saturation_Current) {
+  if (control_Y.Voltage > 315.0F) {
     /* Gain: '<S38>/Proportional Gain' incorporates:
      *  Outport: '<Root>/Voltage'
      */
-    control_Y.Voltage = Saturation_Current;
-  } else if (control_Y.Voltage < -Saturation_Current) {
+    control_Y.Voltage = 315.0F;
+  } else if (control_Y.Voltage < -315.0F) {
     /* Gain: '<S38>/Proportional Gain' incorporates:
      *  Outport: '<Root>/Voltage'
      */
-    control_Y.Voltage = -Saturation_Current;
+    control_Y.Voltage = -315.0F;
   }
 
   /* End of Saturate: '<S47>/Saturation' */
@@ -243,24 +243,24 @@ void control_step1(void)               /* Sample time: [0.001s, 0.0s] */
    *  Inport: '<Root>/Gap'
    */
   {
-    rtb_DiscreteStateSpace[0] = (0.935427308F)*
+    rtb_DiscreteStateSpace[0] = (0.87629658F)*
       control_DW.DiscreteStateSpace_DSTATE[0]
-      + (0.00046771366F)*control_DW.DiscreteStateSpace_DSTATE[1]
-      + (2.33856824E-7F)*control_DW.DiscreteStateSpace_DSTATE[2];
-    rtb_DiscreteStateSpace[0] += (-2.33856827E-8F)*rtb_TmpRTBAtUnitDelayOutport1
-      + (0.064572677F)*control_U.Gap;
-    rtb_DiscreteStateSpace[1] = (-2.86267066F)*
+      + (0.000438148301F)*control_DW.DiscreteStateSpace_DSTATE[1]
+      + (2.19074153E-7F)*control_DW.DiscreteStateSpace_DSTATE[2];
+    rtb_DiscreteStateSpace[0] += (-4.38148291E-8F)*rtb_TmpRTBAtUnitDelayOutport1
+      + (0.123703398F)*control_U.Gap;
+    rtb_DiscreteStateSpace[1] = (-10.8067083F)*
       control_DW.DiscreteStateSpace_DSTATE[0]
-      + (0.998568654F)*control_DW.DiscreteStateSpace_DSTATE[1]
-      + (0.000499284361F)*control_DW.DiscreteStateSpace_DSTATE[2];
-    rtb_DiscreteStateSpace[1] += (-4.99284324E-5F)*rtb_TmpRTBAtUnitDelayOutport1
-      + (2.86267066F)*control_U.Gap;
-    rtb_DiscreteStateSpace[2] = (-42.6204071F)*
+      + (0.99459666F)*control_DW.DiscreteStateSpace_DSTATE[1]
+      + (0.000497298315F)*control_DW.DiscreteStateSpace_DSTATE[2];
+    rtb_DiscreteStateSpace[1] += (-9.9459663E-5F)*rtb_TmpRTBAtUnitDelayOutport1
+      + (10.8067083F)*control_U.Gap;
+    rtb_DiscreteStateSpace[2] = (-319.410126F)*
       control_DW.DiscreteStateSpace_DSTATE[0]
-      + (-0.0213102028F)*control_DW.DiscreteStateSpace_DSTATE[1]
-      + (0.999989331F)*control_DW.DiscreteStateSpace_DSTATE[2];
-    rtb_DiscreteStateSpace[2] += (1.06551022E-6F)*rtb_TmpRTBAtUnitDelayOutport1
-      + (42.6204071F)*control_U.Gap;
+      + (-0.159705058F)*control_DW.DiscreteStateSpace_DSTATE[1]
+      + (0.99992013F)*control_DW.DiscreteStateSpace_DSTATE[2];
+    rtb_DiscreteStateSpace[2] += (1.5970505E-5F)*rtb_TmpRTBAtUnitDelayOutport1 +
+      (319.410126F)*control_U.Gap;
   }
 
   /* Update for DiscreteStateSpace: '<S3>/Discrete State-Space' incorporates:
@@ -268,20 +268,20 @@ void control_step1(void)               /* Sample time: [0.001s, 0.0s] */
    */
   {
     real32_T xnew[3];
-    xnew[0] = (0.870854616F)*control_DW.DiscreteStateSpace_DSTATE[0]
-      + (0.000935427321F)*control_DW.DiscreteStateSpace_DSTATE[1]
-      + (4.67713647E-7F)*control_DW.DiscreteStateSpace_DSTATE[2];
-    xnew[0] += (-4.67713654E-8F)*rtb_TmpRTBAtUnitDelayOutport1 + (0.129145354F)*
+    xnew[0] = (0.752593219F)*control_DW.DiscreteStateSpace_DSTATE[0]
+      + (0.000876296603F)*control_DW.DiscreteStateSpace_DSTATE[1]
+      + (4.38148305E-7F)*control_DW.DiscreteStateSpace_DSTATE[2];
+    xnew[0] += (-8.76296582E-8F)*rtb_TmpRTBAtUnitDelayOutport1 + (0.247406796F)*
       control_U.Gap;
-    xnew[1] = (-5.72534132F)*control_DW.DiscreteStateSpace_DSTATE[0]
-      + (0.997137308F)*control_DW.DiscreteStateSpace_DSTATE[1]
-      + (0.000998568721F)*control_DW.DiscreteStateSpace_DSTATE[2];
-    xnew[1] += (-9.98568648E-5F)*rtb_TmpRTBAtUnitDelayOutport1 + (5.72534132F)*
+    xnew[1] = (-21.6134167F)*control_DW.DiscreteStateSpace_DSTATE[0]
+      + (0.98919332F)*control_DW.DiscreteStateSpace_DSTATE[1]
+      + (0.00099459663F)*control_DW.DiscreteStateSpace_DSTATE[2];
+    xnew[1] += (-0.000198919326F)*rtb_TmpRTBAtUnitDelayOutport1 + (21.6134167F)*
       control_U.Gap;
-    xnew[2] = (-85.2408142F)*control_DW.DiscreteStateSpace_DSTATE[0]
-      + (-0.0426204056F)*control_DW.DiscreteStateSpace_DSTATE[1]
-      + (0.999978662F)*control_DW.DiscreteStateSpace_DSTATE[2];
-    xnew[2] += (2.13102044E-6F)*rtb_TmpRTBAtUnitDelayOutport1 + (85.2408142F)*
+    xnew[2] = (-638.820251F)*control_DW.DiscreteStateSpace_DSTATE[0]
+      + (-0.319410115F)*control_DW.DiscreteStateSpace_DSTATE[1]
+      + (0.999840319F)*control_DW.DiscreteStateSpace_DSTATE[2];
+    xnew[2] += (3.19410101E-5F)*rtb_TmpRTBAtUnitDelayOutport1 + (638.820251F)*
       control_U.Gap;
     (void) memcpy(&control_DW.DiscreteStateSpace_DSTATE[0], xnew,
                   sizeof(real32_T)*3);
@@ -298,14 +298,14 @@ void control_step1(void)               /* Sample time: [0.001s, 0.0s] */
    *  Sum: '<S1>/Sum5'
    */
   rtb_Corrientedereferencia = (((control_U.Referencia - rtb_DiscreteStateSpace[0])
-    * Kp - Kd * rtb_DiscreteStateSpace[1]) - rtb_DiscreteStateSpace[2]) *
-    b0;
+    * 900.0F - 60.0F * rtb_DiscreteStateSpace[1]) - rtb_DiscreteStateSpace[2]) *
+    -5.0F;
 
   /* Saturate: '<S1>/Saturation' */
-  if (rtb_Corrientedereferencia > Saturation) {
-    rtb_Corrientedereferencia = Saturation;
-  } else if (rtb_Corrientedereferencia < -Saturation) {
-    rtb_Corrientedereferencia = -Saturation;
+  if (rtb_Corrientedereferencia > 50.0F) {
+    rtb_Corrientedereferencia = 50.0F;
+  } else if (rtb_Corrientedereferencia < -50.0F) {
+    rtb_Corrientedereferencia = -50.0F;
   }
 
   /* End of Saturate: '<S1>/Saturation' */
@@ -326,14 +326,14 @@ void control_step1(void)               /* Sample time: [0.001s, 0.0s] */
 }
 
 /* Model initialize function */
-void control_initialize(float current_gap_value)
+void control_initialize(void)
 {
   /* SystemInitialize for Atomic SubSystem: '<Root>/Subsystem' */
   /* SystemInitialize for Atomic SubSystem: '<S1>/Subsystem' */
   /* InitializeConditions for DiscreteStateSpace: '<S3>/Discrete State-Space' incorporates:
    *  Inport: '<Root>/Gap'
    */
-  control_DW.DiscreteStateSpace_DSTATE[0] = current_gap_value;
+  control_DW.DiscreteStateSpace_DSTATE[0] = (0.0216F);
   control_DW.DiscreteStateSpace_DSTATE[1] = (0.0F);
   control_DW.DiscreteStateSpace_DSTATE[2] = (0.0F);
 
