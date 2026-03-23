@@ -3,7 +3,7 @@
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
  *
- * File: rtmodel.h
+ * File: ADRCPOLE_types.h
  *
  * Code generated for Simulink model 'ADRCPOLE'.
  *
@@ -17,15 +17,13 @@
  * Validation result: Not run
  */
 
-#ifndef rtmodel_h_
-#define rtmodel_h_
-#include "ADRCPOLE.h"
+#ifndef ADRCPOLE_types_h_
+#define ADRCPOLE_types_h_
 
-/* Macros generated for backwards compatibility  */
-#ifndef rtmGetStopRequested
-#define rtmGetStopRequested(rtm)       ((void*) 0)
-#endif
-#endif                                 /* rtmodel_h_ */
+/* Forward declaration for rtModel */
+typedef struct tag_RTM_ADRCPOLE_T RT_MODEL_ADRCPOLE_T;
+
+#endif                                 /* ADRCPOLE_types_h_ */
 
 /*
  * File trailer for generated code.

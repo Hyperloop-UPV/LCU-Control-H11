@@ -3,7 +3,7 @@
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
  *
- * File: rtmodel.h
+ * File: ADRCPOLE_private.h
  *
  * Code generated for Simulink model 'ADRCPOLE'.
  *
@@ -17,15 +17,20 @@
  * Validation result: Not run
  */
 
-#ifndef rtmodel_h_
-#define rtmodel_h_
+#ifndef ADRCPOLE_private_h_
+#define ADRCPOLE_private_h_
+#include "rtwtypes.h"
 #include "ADRCPOLE.h"
+#include "ADRCPOLE_types.h"
 
-/* Macros generated for backwards compatibility  */
-#ifndef rtmGetStopRequested
-#define rtmGetStopRequested(rtm)       ((void*) 0)
-#endif
-#endif                                 /* rtmodel_h_ */
+extern void ADRCPOLE_Simulink1_Init(DW_Simulink1_ADRCPOLE_T *localDW);
+extern void ADRCPOLE_Simulink1(real_T rtu_ref_out, real_T rtu_y_out, real_T
+  *rty_u_out, real_T rty_Out1[3], DW_Simulink1_ADRCPOLE_T *localDW);
+extern void ADRCPOLE_Simulink1_k_Init(DW_Simulink1_ADRCPOLE_i_T *localDW);
+extern void ADRCPOLE_Simulink1_m(real_T rtu_ref_out, real_T rtu_y_out, real_T
+  *rty_u_out, real_T rty_Out1[3], DW_Simulink1_ADRCPOLE_i_T *localDW);
+
+#endif                                 /* ADRCPOLE_private_h_ */
 
 /*
  * File trailer for generated code.
