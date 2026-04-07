@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'control'.
  *
- * Model version                  : 1.94
+ * Model version                  : 1.107
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Tue Apr  7 18:58:36 2026
+ * C/C++ source code generated on : Tue Apr  7 21:05:07 2026
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -50,7 +50,6 @@ typedef struct {
   real32_T TmpRTBAtSumRefInport2;
   real32_T TmpRTBAtSumVInport2;        /* '<S1>/Kd' */
   real32_T TmpRTBAtSumCtrlInport2;
-  real32_T I_ref;                      /* '<S1>/LUT_Inv_F2I' */
 } B_control_T;
 
 /* Block states (default storage) for system '<Root>' */
@@ -114,9 +113,6 @@ typedef struct {
 /* External outputs (root outports fed by signals with default storage) */
 typedef struct {
   real32_T Voltage;                    /* '<Root>/Voltage' */
-  real32_T z3;                         /* '<Root>/z3' */
-  real32_T z1;                         /* '<Root>/z1' */
-  real32_T z2;                         /* '<Root>/z2' */
 } ExtY_control_T;
 
 /* Real-time Model Data Structure */
