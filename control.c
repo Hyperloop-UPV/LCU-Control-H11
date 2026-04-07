@@ -3,13 +3,13 @@
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
  *
- * File: control1.c
+ * File: control.c
  *
- * Code generated for Simulink model 'control1'.
+ * Code generated for Simulink model 'control'.
  *
- * Model version                  : 1.91
+ * Model version                  : 1.92
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Tue Apr  7 15:56:09 2026
+ * C/C++ source code generated on : Tue Apr  7 17:30:13 2026
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -17,25 +17,25 @@
  * Validation result: Not run
  */
 
-#include "control1.h"
+#include "control.h"
 #include "rtwtypes.h"
-#include "control1_private.h"
+#include "control_private.h"
 
 /* Block signals (default storage) */
-B_control1_T control1_B;
+B_control_T control_B;
 
 /* Block states (default storage) */
-DW_control1_T control1_DW;
+DW_control_T control_DW;
 
 /* External inputs (root inport signals with default storage) */
-ExtU_control1_T control1_U;
+ExtU_control_T control_U;
 
 /* External outputs (root outports fed by signals with default storage) */
-ExtY_control1_T control1_Y;
+ExtY_control_T control_Y;
 
 /* Real-time model */
-static RT_MODEL_control1_T control1_M_;
-RT_MODEL_control1_T *const control1_M = &control1_M_;
+static RT_MODEL_control_T control_M_;
+RT_MODEL_control_T *const control_M = &control_M_;
 static void rate_monotonic_scheduler(void);
 real32_T look2_iflf_binlcpw(real32_T u0, real32_T u1, const real32_T bp0[],
   const real32_T bp1[], const real32_T table[], const uint32_T maxIndex[],
@@ -143,10 +143,10 @@ real32_T look2_iflf_binlcpw(real32_T u0, real32_T u1, const real32_T bp0[],
  * in order to remember which rates need to run this base step.  The
  * buffering of events allows for overlapping preemption.
  */
-void control1_SetEventsForThisBaseStep(boolean_T *eventFlags)
+void control_SetEventsForThisBaseStep(boolean_T *eventFlags)
 {
   /* Task runs when its counter is zero, computed via rtmStepTask macro */
-  eventFlags[1] = ((boolean_T)rtmStepTask(control1_M, 1));
+  eventFlags[1] = ((boolean_T)rtmStepTask(control_M, 1));
 }
 
 /*
@@ -167,21 +167,21 @@ static void rate_monotonic_scheduler(void)
    */
 
   /* tid 0 shares data with slower tid rate: 1 */
-  control1_M->Timing.RateInteraction.TID0_1 =
-    (control1_M->Timing.TaskCounters.TID[1] == 0);
+  control_M->Timing.RateInteraction.TID0_1 = (control_M->
+    Timing.TaskCounters.TID[1] == 0);
 
   /* Compute which subrates run during the next base time step.  Subrates
    * are an integer multiple of the base rate counter.  Therefore, the subtask
    * counter is reset when it reaches its limit (zero means run).
    */
-  (control1_M->Timing.TaskCounters.TID[1])++;
-  if ((control1_M->Timing.TaskCounters.TID[1]) > 1) {/* Sample time: [0.001s, 0.0s] */
-    control1_M->Timing.TaskCounters.TID[1] = 0;
+  (control_M->Timing.TaskCounters.TID[1])++;
+  if ((control_M->Timing.TaskCounters.TID[1]) > 1) {/* Sample time: [0.001s, 0.0s] */
+    control_M->Timing.TaskCounters.TID[1] = 0;
   }
 }
 
 /* Model step function for TID0 */
-void control1_step0(void)              /* Sample time: [0.0005s, 0.0s] */
+void control_step0(void)               /* Sample time: [0.0005s, 0.0s] */
 {
   real32_T rtb_DeadZone;
   real32_T rtb_ErrorCorriente;
@@ -199,24 +199,23 @@ void control1_step0(void)              /* Sample time: [0.0005s, 0.0s] */
   /* Gain: '<S1>/m2mm' incorporates:
    *  Inport: '<Root>/Gap'
    */
-  rtb_LUT_Dir_I2F = 1000.0F * control1_U.Gap;
+  rtb_LUT_Dir_I2F = 1000.0F * control_U.Gap;
 
   /* RateTransition generated from: '<S1>/SumRef' incorporates:
    *  RateTransition generated from: '<S1>/ESO'
    *  RateTransition generated from: '<S1>/SumCtrl'
    *  RateTransition generated from: '<S1>/SumV'
    */
-  tmp = control1_M->Timing.RateInteraction.TID0_1;
+  tmp = control_M->Timing.RateInteraction.TID0_1;
   if (tmp) {
     /* RateTransition generated from: '<S1>/SumRef' */
-    control1_B.TmpRTBAtSumRefInport2 = control1_DW.TmpRTBAtSumRefInport2_Buffer0;
+    control_B.TmpRTBAtSumRefInport2 = control_DW.TmpRTBAtSumRefInport2_Buffer0;
 
     /* RateTransition generated from: '<S1>/SumV' */
-    control1_B.TmpRTBAtSumVInport2 = control1_DW.TmpRTBAtSumVInport2_Buffer0;
+    control_B.TmpRTBAtSumVInport2 = control_DW.TmpRTBAtSumVInport2_Buffer0;
 
     /* RateTransition generated from: '<S1>/SumCtrl' */
-    control1_B.TmpRTBAtSumCtrlInport2 =
-      control1_DW.TmpRTBAtSumCtrlInport2_Buffer0;
+    control_B.TmpRTBAtSumCtrlInport2 = control_DW.TmpRTBAtSumCtrlInport2_Buffer0;
   }
 
   /* End of RateTransition generated from: '<S1>/SumRef' */
@@ -231,10 +230,10 @@ void control1_step0(void)              /* Sample time: [0.0005s, 0.0s] */
    *  Sum: '<S1>/SumV'
    */
   rtb_ErrorCorriente = look2_iflf_binlcpw(rtb_LUT_Dir_I2F,
-    (((control1_U.Referencia - control1_B.TmpRTBAtSumRefInport2) * 900.0F -
-      control1_B.TmpRTBAtSumVInport2) - control1_B.TmpRTBAtSumCtrlInport2) *
-    -40.0F, control1_ConstP.pooled2, control1_ConstP.LUT_Inv_F2I_bp02Data,
-    control1_ConstP.LUT_Inv_F2I_tableData, control1_ConstP.LUT_Inv_F2I_maxIndex,
+    (((control_U.Referencia - control_B.TmpRTBAtSumRefInport2) * 900.0F -
+      control_B.TmpRTBAtSumVInport2) - control_B.TmpRTBAtSumCtrlInport2) *
+    -40.0F, control_ConstP.pooled2, control_ConstP.LUT_Inv_F2I_bp02Data,
+    control_ConstP.LUT_Inv_F2I_tableData, control_ConstP.LUT_Inv_F2I_maxIndex,
     14U);
 
   /* Saturate: '<S1>/Sat_I' */
@@ -248,20 +247,20 @@ void control1_step0(void)              /* Sample time: [0.0005s, 0.0s] */
    *  Saturate: '<S1>/Sat_I'
    *  UnitDelay: '<S1>/Unit Delay'
    */
-  rtb_ErrorCorriente -= control1_DW.UnitDelay_DSTATE;
+  rtb_ErrorCorriente -= control_DW.UnitDelay_DSTATE;
 
   /* Lookup_n-D: '<S1>/LUT_Dir_I2F' incorporates:
    *  UnitDelay: '<S1>/Unit Delay'
    */
   rtb_LUT_Dir_I2F = look2_iflf_binlcpw(rtb_LUT_Dir_I2F,
-    control1_DW.UnitDelay_DSTATE, control1_ConstP.pooled2,
-    control1_ConstP.LUT_Dir_I2F_bp02Data, control1_ConstP.LUT_Dir_I2F_tableData,
-    control1_ConstP.LUT_Dir_I2F_maxIndex, 14U);
+    control_DW.UnitDelay_DSTATE, control_ConstP.pooled2,
+    control_ConstP.LUT_Dir_I2F_bp02Data, control_ConstP.LUT_Dir_I2F_tableData,
+    control_ConstP.LUT_Dir_I2F_maxIndex, 14U);
 
   /* Gain: '<S38>/Proportional Gain' incorporates:
    *  Sum: '<S49>/Sum Fdbk'
    */
-  rtb_DeadZone = (rtb_ErrorCorriente + control1_DW.Integrator_DSTATE) * 20.0F;
+  rtb_DeadZone = (rtb_ErrorCorriente + control_DW.Integrator_DSTATE) * 20.0F;
 
   /* DeadZone: '<S31>/DeadZone' */
   if (rtb_DeadZone > 400.0F) {
@@ -320,7 +319,7 @@ void control1_step0(void)              /* Sample time: [0.0005s, 0.0s] */
   rtb_DeadZone = 0.00025F * rtb_ProportionalGain;
 
   /* DiscreteIntegrator: '<S39>/Integrator' */
-  rtb_ProportionalGain = rtb_DeadZone + control1_DW.Integrator_DSTATE;
+  rtb_ProportionalGain = rtb_DeadZone + control_DW.Integrator_DSTATE;
 
   /* DiscreteIntegrator: '<S39>/Integrator' */
   if (rtb_ProportionalGain > 400.0F) {
@@ -335,39 +334,39 @@ void control1_step0(void)              /* Sample time: [0.0005s, 0.0s] */
    *  Inport: '<Root>/Gap'
    */
   if (tmp) {
-    control1_DW.TmpRTBAtESOInport1_Buffer[0] = rtb_LUT_Dir_I2F;
-    control1_DW.TmpRTBAtESOInport1_Buffer[1] = control1_U.Gap;
+    control_DW.TmpRTBAtESOInport1_Buffer[0] = rtb_LUT_Dir_I2F;
+    control_DW.TmpRTBAtESOInport1_Buffer[1] = control_U.Gap;
   }
 
   /* Update for UnitDelay: '<S1>/Unit Delay' incorporates:
    *  Inport: '<Root>/corriente_real'
    */
-  control1_DW.UnitDelay_DSTATE = control1_U.corriente_real;
+  control_DW.UnitDelay_DSTATE = control_U.corriente_real;
 
   /* Update for DiscreteIntegrator: '<S39>/Integrator' */
-  control1_DW.Integrator_DSTATE = rtb_DeadZone + rtb_ProportionalGain;
-  if (control1_DW.Integrator_DSTATE > 400.0F) {
-    control1_DW.Integrator_DSTATE = 400.0F;
-  } else if (control1_DW.Integrator_DSTATE < -400.0F) {
-    control1_DW.Integrator_DSTATE = -400.0F;
+  control_DW.Integrator_DSTATE = rtb_DeadZone + rtb_ProportionalGain;
+  if (control_DW.Integrator_DSTATE > 400.0F) {
+    control_DW.Integrator_DSTATE = 400.0F;
+  } else if (control_DW.Integrator_DSTATE < -400.0F) {
+    control_DW.Integrator_DSTATE = -400.0F;
   }
 
   /* Gain: '<S37>/Proportional Gain' incorporates:
    *  Sum: '<S48>/Sum'
    */
-  control1_Y.Voltage = (rtb_ErrorCorriente + rtb_ProportionalGain) * 20.0F;
+  control_Y.Voltage = (rtb_ErrorCorriente + rtb_ProportionalGain) * 20.0F;
 
   /* Saturate: '<S46>/Saturation' */
-  if (control1_Y.Voltage > 400.0F) {
+  if (control_Y.Voltage > 400.0F) {
     /* Gain: '<S37>/Proportional Gain' incorporates:
      *  Outport: '<Root>/Voltage'
      */
-    control1_Y.Voltage = 400.0F;
-  } else if (control1_Y.Voltage < -400.0F) {
+    control_Y.Voltage = 400.0F;
+  } else if (control_Y.Voltage < -400.0F) {
     /* Gain: '<S37>/Proportional Gain' incorporates:
      *  Outport: '<Root>/Voltage'
      */
-    control1_Y.Voltage = -400.0F;
+    control_Y.Voltage = -400.0F;
   }
 
   /* End of Saturate: '<S46>/Saturation' */
@@ -375,7 +374,7 @@ void control1_step0(void)              /* Sample time: [0.0005s, 0.0s] */
 }
 
 /* Model step function for TID1 */
-void control1_step1(void)              /* Sample time: [0.001s, 0.0s] */
+void control_step1(void)               /* Sample time: [0.001s, 0.0s] */
 {
   /* local block i/o variables */
   real32_T rtb_TmpRTBAtESOInport1[2];
@@ -384,24 +383,24 @@ void control1_step1(void)              /* Sample time: [0.001s, 0.0s] */
 
   /* Outputs for Atomic SubSystem: '<Root>/Subsystem' */
   /* RateTransition generated from: '<S1>/ESO' */
-  rtb_TmpRTBAtESOInport1[0] = control1_DW.TmpRTBAtESOInport1_Buffer[0];
-  rtb_TmpRTBAtESOInport1[1] = control1_DW.TmpRTBAtESOInport1_Buffer[1];
+  rtb_TmpRTBAtESOInport1[0] = control_DW.TmpRTBAtESOInport1_Buffer[0];
+  rtb_TmpRTBAtESOInport1[1] = control_DW.TmpRTBAtESOInport1_Buffer[1];
 
   /* DiscreteStateSpace: '<S1>/ESO' */
   {
-    rtb_ESO[0] = (0.87629658F)*control1_DW.ESO_DSTATE[0] + (0.000438148301F)*
-      control1_DW.ESO_DSTATE[1]
-      + (2.19074153E-7F)*control1_DW.ESO_DSTATE[2];
+    rtb_ESO[0] = (0.87629658F)*control_DW.ESO_DSTATE[0] + (0.000438148301F)*
+      control_DW.ESO_DSTATE[1]
+      + (2.19074153E-7F)*control_DW.ESO_DSTATE[2];
     rtb_ESO[0] += (-5.47685364E-9F)*rtb_TmpRTBAtESOInport1[0] + (0.123703398F)*
       rtb_TmpRTBAtESOInport1[1];
-    rtb_ESO[1] = (-10.8067083F)*control1_DW.ESO_DSTATE[0] + (0.99459666F)*
-      control1_DW.ESO_DSTATE[1]
-      + (0.000497298315F)*control1_DW.ESO_DSTATE[2];
+    rtb_ESO[1] = (-10.8067083F)*control_DW.ESO_DSTATE[0] + (0.99459666F)*
+      control_DW.ESO_DSTATE[1]
+      + (0.000497298315F)*control_DW.ESO_DSTATE[2];
     rtb_ESO[1] += (-1.24324579E-5F)*rtb_TmpRTBAtESOInport1[0] + (10.8067083F)*
       rtb_TmpRTBAtESOInport1[1];
-    rtb_ESO[2] = (-319.410126F)*control1_DW.ESO_DSTATE[0] + (-0.159705058F)*
-      control1_DW.ESO_DSTATE[1]
-      + (0.99992013F)*control1_DW.ESO_DSTATE[2];
+    rtb_ESO[2] = (-319.410126F)*control_DW.ESO_DSTATE[0] + (-0.159705058F)*
+      control_DW.ESO_DSTATE[1]
+      + (0.99992013F)*control_DW.ESO_DSTATE[2];
     rtb_ESO[2] += (1.99631313E-6F)*rtb_TmpRTBAtESOInport1[0] + (319.410126F)*
       rtb_TmpRTBAtESOInport1[1];
   }
@@ -410,63 +409,63 @@ void control1_step1(void)              /* Sample time: [0.001s, 0.0s] */
   rtb_Kd = 60.0F * rtb_ESO[1];
 
   /* RateTransition generated from: '<S1>/SumCtrl' */
-  control1_DW.TmpRTBAtSumCtrlInport2_Buffer0 = rtb_ESO[2];
+  control_DW.TmpRTBAtSumCtrlInport2_Buffer0 = rtb_ESO[2];
 
   /* RateTransition generated from: '<S1>/SumRef' */
-  control1_DW.TmpRTBAtSumRefInport2_Buffer0 = rtb_ESO[0];
+  control_DW.TmpRTBAtSumRefInport2_Buffer0 = rtb_ESO[0];
 
   /* RateTransition generated from: '<S1>/SumV' */
-  control1_DW.TmpRTBAtSumVInport2_Buffer0 = rtb_Kd;
+  control_DW.TmpRTBAtSumVInport2_Buffer0 = rtb_Kd;
 
   /* Update for DiscreteStateSpace: '<S1>/ESO' */
   {
     real32_T xnew[3];
-    xnew[0] = (0.752593219F)*control1_DW.ESO_DSTATE[0] + (0.000876296603F)*
-      control1_DW.ESO_DSTATE[1]
-      + (4.38148305E-7F)*control1_DW.ESO_DSTATE[2];
+    xnew[0] = (0.752593219F)*control_DW.ESO_DSTATE[0] + (0.000876296603F)*
+      control_DW.ESO_DSTATE[1]
+      + (4.38148305E-7F)*control_DW.ESO_DSTATE[2];
     xnew[0] += (-1.09537073E-8F)*rtb_TmpRTBAtESOInport1[0] + (0.247406796F)*
       rtb_TmpRTBAtESOInport1[1];
-    xnew[1] = (-21.6134167F)*control1_DW.ESO_DSTATE[0] + (0.98919332F)*
-      control1_DW.ESO_DSTATE[1]
-      + (0.00099459663F)*control1_DW.ESO_DSTATE[2];
+    xnew[1] = (-21.6134167F)*control_DW.ESO_DSTATE[0] + (0.98919332F)*
+      control_DW.ESO_DSTATE[1]
+      + (0.00099459663F)*control_DW.ESO_DSTATE[2];
     xnew[1] += (-2.48649158E-5F)*rtb_TmpRTBAtESOInport1[0] + (21.6134167F)*
       rtb_TmpRTBAtESOInport1[1];
-    xnew[2] = (-638.820251F)*control1_DW.ESO_DSTATE[0] + (-0.319410115F)*
-      control1_DW.ESO_DSTATE[1]
-      + (0.999840319F)*control1_DW.ESO_DSTATE[2];
+    xnew[2] = (-638.820251F)*control_DW.ESO_DSTATE[0] + (-0.319410115F)*
+      control_DW.ESO_DSTATE[1]
+      + (0.999840319F)*control_DW.ESO_DSTATE[2];
     xnew[2] += (3.99262626E-6F)*rtb_TmpRTBAtESOInport1[0] + (638.820251F)*
       rtb_TmpRTBAtESOInport1[1];
-    (void) memcpy(&control1_DW.ESO_DSTATE[0], xnew,
+    (void) memcpy(&control_DW.ESO_DSTATE[0], xnew,
                   sizeof(real32_T)*3);
   }
 
   /* End of Outputs for SubSystem: '<Root>/Subsystem' */
 
   /* Outport: '<Root>/z3' */
-  control1_Y.z3 = rtb_ESO[2];
+  control_Y.z3 = rtb_ESO[2];
 
   /* Outport: '<Root>/z1' */
-  control1_Y.z1 = rtb_ESO[0];
+  control_Y.z1 = rtb_ESO[0];
 
   /* Outport: '<Root>/z2' */
-  control1_Y.z2 = rtb_ESO[1];
+  control_Y.z2 = rtb_ESO[1];
 }
 
 /* Model initialize function */
-void control1_initialize(void)
+void control_initialize(void)
 {
   /* SystemInitialize for Atomic SubSystem: '<Root>/Subsystem' */
 
   /* InitializeConditions for DiscreteStateSpace: '<S1>/ESO' */
-  control1_DW.ESO_DSTATE[0] = (0.0225F);
-  control1_DW.ESO_DSTATE[1] = (0.0F);
-  control1_DW.ESO_DSTATE[2] = (0.0F);
+  control_DW.ESO_DSTATE[0] = (0.0225F);
+  control_DW.ESO_DSTATE[1] = (0.0F);
+  control_DW.ESO_DSTATE[2] = (0.0F);
 
   /* End of SystemInitialize for SubSystem: '<Root>/Subsystem' */
 }
 
 /* Model terminate function */
-void control1_terminate(void)
+void control_terminate(void)
 {
   /* (no terminate code required) */
 }
