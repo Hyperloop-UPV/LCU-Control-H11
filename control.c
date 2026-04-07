@@ -21,6 +21,10 @@
 #include "rtwtypes.h"
 #include "control_private.h"
 
+/* [PATCH] Direct current control bypass variables */
+int control_bypass_active = 0;
+real32_T control_bypass_i_ref = 0.0F;
+
 /* Block signals (default storage) */
 B_control_T control_B;
 
@@ -239,6 +243,12 @@ void control_step0(void)               /* Sample time: [0.0005s, 0.0s] */
     control_ConstP.pooled2, control_ConstP.LUT_Inv_F2I_bp02Data,
     control_ConstP.LUT_Inv_F2I_tableData, control_ConstP.LUT_Inv_F2I_maxIndex,
     14U);
+
+  /* [PATCH] Override I_ref when direct current control bypass is active.
+   * Equivalent to setting DW.RateTransition_Buffer0 in the old model. */
+  if (control_bypass_active) {
+    rtb_ErrorCorriente = control_bypass_i_ref;
+  }
 
   /* Saturate: '<S1>/Sat_I' */
   rtb_ErrorCorriente = rtb_DeadZone;
