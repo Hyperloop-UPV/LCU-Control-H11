@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'control'.
  *
- * Model version                  : 1.94
+ * Model version                  : 1.107
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Tue Apr  7 18:58:36 2026
+ * C/C++ source code generated on : Tue Apr  7 21:05:07 2026
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -233,11 +233,12 @@ void control_step0(void)               /* Sample time: [0.0005s, 0.0s] */
    *  Sum: '<S1>/SumRef'
    *  Sum: '<S1>/SumV'
    */
-  control_B.I_ref = look2_iflf_binlcpw(rtb_LUT_Dir_I2F, (((control_U.Referencia
-    - control_B.TmpRTBAtSumRefInport2) * 900.0F - control_B.TmpRTBAtSumVInport2)
-    - control_B.TmpRTBAtSumCtrlInport2) * -40.0F, control_ConstP.pooled2,
-    control_ConstP.LUT_Inv_F2I_bp02Data, control_ConstP.LUT_Inv_F2I_tableData,
-    control_ConstP.LUT_Inv_F2I_maxIndex, 14U);
+  rtb_ErrorCorriente = look2_iflf_binlcpw(rtb_LUT_Dir_I2F,
+    (((control_U.Referencia - control_B.TmpRTBAtSumRefInport2) * 900.0F -
+      control_B.TmpRTBAtSumVInport2) - control_B.TmpRTBAtSumCtrlInport2) *
+    -40.0F, control_ConstP.pooled2, control_ConstP.LUT_Inv_F2I_bp02Data,
+    control_ConstP.LUT_Inv_F2I_tableData, control_ConstP.LUT_Inv_F2I_maxIndex,
+    14U);
 
   /* [PATCH] Override I_ref when direct current control bypass is active.
    * This replaces the rate transition that existed in the old model between
@@ -247,12 +248,10 @@ void control_step0(void)               /* Sample time: [0.0005s, 0.0s] */
   }
 
   /* Saturate: '<S1>/Sat_I' */
-  if (control_B.I_ref > 50.0F) {
+  if (rtb_ErrorCorriente > 50.0F) {
     rtb_ErrorCorriente = 50.0F;
-  } else if (control_B.I_ref < -50.0F) {
+  } else if (rtb_ErrorCorriente < -50.0F) {
     rtb_ErrorCorriente = -50.0F;
-  } else {
-    rtb_ErrorCorriente = control_B.I_ref;
   }
 
   /* Sum: '<S1>/Add2' incorporates:
@@ -272,21 +271,21 @@ void control_step0(void)               /* Sample time: [0.0005s, 0.0s] */
   /* Gain: '<S38>/Proportional Gain' incorporates:
    *  Sum: '<S49>/Sum Fdbk'
    */
-  rtb_DeadZone = (rtb_ErrorCorriente + control_DW.Integrator_DSTATE) * 20.0F;
+  rtb_DeadZone = (rtb_ErrorCorriente + control_DW.Integrator_DSTATE) * 10.0F;
 
   /* DeadZone: '<S31>/DeadZone' */
-  if (rtb_DeadZone > 400.0F) {
-    rtb_DeadZone -= 400.0F;
-  } else if (rtb_DeadZone >= -400.0F) {
+  if (rtb_DeadZone > 80.0F) {
+    rtb_DeadZone -= 80.0F;
+  } else if (rtb_DeadZone >= -80.0F) {
     rtb_DeadZone = 0.0F;
   } else {
-    rtb_DeadZone -= -400.0F;
+    rtb_DeadZone -= -80.0F;
   }
 
   /* End of DeadZone: '<S31>/DeadZone' */
 
   /* Gain: '<S36>/Integral Gain' */
-  rtb_ProportionalGain = 400.0F * rtb_ErrorCorriente;
+  rtb_ProportionalGain = 200.0F * rtb_ErrorCorriente;
 
   /* Switch: '<S29>/Switch3' incorporates:
    *  Constant: '<S29>/Clamping_zero'
@@ -334,12 +333,12 @@ void control_step0(void)               /* Sample time: [0.0005s, 0.0s] */
   rtb_ProportionalGain = rtb_DeadZone + control_DW.Integrator_DSTATE;
 
   /* DiscreteIntegrator: '<S39>/Integrator' */
-  if (rtb_ProportionalGain > 400.0F) {
+  if (rtb_ProportionalGain > 80.0F) {
     /* DiscreteIntegrator: '<S39>/Integrator' */
-    rtb_ProportionalGain = 400.0F;
-  } else if (rtb_ProportionalGain < -400.0F) {
+    rtb_ProportionalGain = 80.0F;
+  } else if (rtb_ProportionalGain < -80.0F) {
     /* DiscreteIntegrator: '<S39>/Integrator' */
-    rtb_ProportionalGain = -400.0F;
+    rtb_ProportionalGain = -80.0F;
   }
 
   /* RateTransition generated from: '<S1>/ESO' incorporates:
@@ -357,28 +356,28 @@ void control_step0(void)               /* Sample time: [0.0005s, 0.0s] */
 
   /* Update for DiscreteIntegrator: '<S39>/Integrator' */
   control_DW.Integrator_DSTATE = rtb_DeadZone + rtb_ProportionalGain;
-  if (control_DW.Integrator_DSTATE > 400.0F) {
-    control_DW.Integrator_DSTATE = 400.0F;
-  } else if (control_DW.Integrator_DSTATE < -400.0F) {
-    control_DW.Integrator_DSTATE = -400.0F;
+  if (control_DW.Integrator_DSTATE > 80.0F) {
+    control_DW.Integrator_DSTATE = 80.0F;
+  } else if (control_DW.Integrator_DSTATE < -80.0F) {
+    control_DW.Integrator_DSTATE = -80.0F;
   }
 
   /* Gain: '<S37>/Proportional Gain' incorporates:
    *  Sum: '<S48>/Sum'
    */
-  control_Y.Voltage = (rtb_ErrorCorriente + rtb_ProportionalGain) * 20.0F;
+  control_Y.Voltage = (rtb_ErrorCorriente + rtb_ProportionalGain) * 10.0F;
 
   /* Saturate: '<S46>/Saturation' */
-  if (control_Y.Voltage > 400.0F) {
+  if (control_Y.Voltage > 80.0F) {
     /* Gain: '<S37>/Proportional Gain' incorporates:
      *  Outport: '<Root>/Voltage'
      */
-    control_Y.Voltage = 400.0F;
-  } else if (control_Y.Voltage < -400.0F) {
+    control_Y.Voltage = 80.0F;
+  } else if (control_Y.Voltage < -80.0F) {
     /* Gain: '<S37>/Proportional Gain' incorporates:
      *  Outport: '<Root>/Voltage'
      */
-    control_Y.Voltage = -400.0F;
+    control_Y.Voltage = -80.0F;
   }
 
   /* End of Saturate: '<S46>/Saturation' */
@@ -452,15 +451,6 @@ void control_step1(void)               /* Sample time: [0.001s, 0.0s] */
   }
 
   /* End of Outputs for SubSystem: '<Root>/Subsystem' */
-
-  /* Outport: '<Root>/z3' */
-  control_Y.z3 = rtb_ESO[2];
-
-  /* Outport: '<Root>/z1' */
-  control_Y.z1 = rtb_ESO[0];
-
-  /* Outport: '<Root>/z2' */
-  control_Y.z2 = rtb_ESO[1];
 }
 
 /* Model initialize function */
