@@ -9,7 +9,7 @@
  *
  * Model version                  : 1.107
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Tue Apr  7 21:05:07 2026
+ * C/C++ source code generated on : Tue Apr  7 21:18:06 2026
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -161,10 +161,6 @@ extern void control_terminate(void);
 
 /* Real-time Model object */
 extern RT_MODEL_control_T *const control_M;
-
-/* [PATCH] Direct current control bypass */
-extern int control_bypass_active;
-extern real32_T control_bypass_i_ref;
 
 /*-
  * The generated code includes comments that allow you to trace directly

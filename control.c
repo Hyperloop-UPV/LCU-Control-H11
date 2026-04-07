@@ -9,7 +9,7 @@
  *
  * Model version                  : 1.107
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Tue Apr  7 21:05:07 2026
+ * C/C++ source code generated on : Tue Apr  7 21:18:06 2026
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -20,10 +20,6 @@
 #include "control.h"
 #include "rtwtypes.h"
 #include "control_private.h"
-
-/* [PATCH] Direct current control bypass variables */
-int control_bypass_active = 0;
-real32_T control_bypass_i_ref = 0.0F;
 
 /* Block signals (default storage) */
 B_control_T control_B;
@@ -239,13 +235,6 @@ void control_step0(void)               /* Sample time: [0.0005s, 0.0s] */
     -40.0F, control_ConstP.pooled2, control_ConstP.LUT_Inv_F2I_bp02Data,
     control_ConstP.LUT_Inv_F2I_tableData, control_ConstP.LUT_Inv_F2I_maxIndex,
     14U);
-
-  /* [PATCH] Override I_ref when direct current control bypass is active.
-   * This replaces the rate transition that existed in the old model between
-   * the outer loop (LUT) and the inner current PI. */
-  if (control_bypass_active) {
-    control_B.I_ref = control_bypass_i_ref;
-  }
 
   /* Saturate: '<S1>/Sat_I' */
   if (rtb_ErrorCorriente > 50.0F) {
