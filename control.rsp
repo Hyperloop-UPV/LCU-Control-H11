@@ -1,4 +1,5 @@
 control.c.o
+control_data.c.o
 overrideHALDelay.c.o
 platform_timer.c.o
 SysTickScheduler.c.o

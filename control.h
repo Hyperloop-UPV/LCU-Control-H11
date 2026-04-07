@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'control'.
  *
- * Model version                  : 1.87
+ * Model version                  : 1.89
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Mon Feb 23 12:13:03 2026
+ * C/C++ source code generated on : Tue Apr  7 12:49:28 2026
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -52,12 +52,58 @@ typedef struct {
 
 /* Block states (default storage) for system '<Root>' */
 typedef struct {
-  real32_T Integrator_DSTATE;          /* '<S40>/Integrator' */
   real32_T UnitDelay_DSTATE;           /* '<S1>/Unit Delay' */
-  real32_T DiscreteStateSpace_DSTATE[3];/* '<S3>/Discrete State-Space' */
+  real32_T Integrator_DSTATE;          /* '<S39>/Integrator' */
+  real32_T ESO_DSTATE[3];              /* '<S1>/ESO' */
   real32_T RateTransition_Buffer0;     /* '<S1>/Rate Transition' */
-  real32_T TmpRTBAtUnitDelayOutport1_Buffe;/* synthesized block */
+  real32_T TmpRTBAtESOInport1_Buffer[2];/* synthesized block */
 } DW_control_T;
+
+/* Invariant block signals (default storage) */
+typedef struct {
+  const real32_T DataTypeConversion;   /* '<S1>/Data Type Conversion' */
+  const real32_T m2mm;                 /* '<S1>/m2mm' */
+} ConstB_control_T;
+
+/* Constant parameters (default storage) */
+typedef struct {
+  /* Computed Parameter: LUT_Dir_I2F_tableData
+   * Referenced by: '<S1>/LUT_Dir_I2F'
+   */
+  real32_T LUT_Dir_I2F_tableData[1554];
+
+  /* Pooled Parameter (Mixed Expressions)
+   * Referenced by:
+   *   '<S1>/LUT_Dir_I2F'
+   *   '<S1>/LUT_Inv_F2I'
+   */
+  real32_T pooled2[14];
+
+  /* Computed Parameter: LUT_Dir_I2F_bp02Data
+   * Referenced by: '<S1>/LUT_Dir_I2F'
+   */
+  real32_T LUT_Dir_I2F_bp02Data[111];
+
+  /* Computed Parameter: LUT_Inv_F2I_tableData
+   * Referenced by: '<S1>/LUT_Inv_F2I'
+   */
+  real32_T LUT_Inv_F2I_tableData[2800];
+
+  /* Computed Parameter: LUT_Inv_F2I_bp02Data
+   * Referenced by: '<S1>/LUT_Inv_F2I'
+   */
+  real32_T LUT_Inv_F2I_bp02Data[200];
+
+  /* Computed Parameter: LUT_Dir_I2F_maxIndex
+   * Referenced by: '<S1>/LUT_Dir_I2F'
+   */
+  uint32_T LUT_Dir_I2F_maxIndex[2];
+
+  /* Computed Parameter: LUT_Inv_F2I_maxIndex
+   * Referenced by: '<S1>/LUT_Inv_F2I'
+   */
+  uint32_T LUT_Inv_F2I_maxIndex[2];
+} ConstP_control_T;
 
 /* External inputs (root inport signals with default storage) */
 typedef struct {
@@ -110,6 +156,10 @@ extern ExtU_control_T control_U;
 
 /* External outputs (root outports fed by signals with default storage) */
 extern ExtY_control_T control_Y;
+extern const ConstB_control_T control_ConstB;/* constant block i/o */
+
+/* Constant parameters (default storage) */
+extern const ConstP_control_T control_ConstP;
 
 /* External function called from main */
 extern void control_SetEventsForThisBaseStep(boolean_T *eventFlags);
@@ -140,61 +190,60 @@ extern RT_MODEL_control_T *const control_M;
  * '<Root>' : 'control'
  * '<S1>'   : 'control/Subsystem'
  * '<S2>'   : 'control/Subsystem/PID Controller'
- * '<S3>'   : 'control/Subsystem/Subsystem'
- * '<S4>'   : 'control/Subsystem/PID Controller/Anti-windup'
- * '<S5>'   : 'control/Subsystem/PID Controller/D Gain'
- * '<S6>'   : 'control/Subsystem/PID Controller/External Derivative'
- * '<S7>'   : 'control/Subsystem/PID Controller/Filter'
- * '<S8>'   : 'control/Subsystem/PID Controller/Filter ICs'
- * '<S9>'   : 'control/Subsystem/PID Controller/I Gain'
- * '<S10>'  : 'control/Subsystem/PID Controller/Ideal P Gain'
- * '<S11>'  : 'control/Subsystem/PID Controller/Ideal P Gain Fdbk'
- * '<S12>'  : 'control/Subsystem/PID Controller/Integrator'
- * '<S13>'  : 'control/Subsystem/PID Controller/Integrator ICs'
- * '<S14>'  : 'control/Subsystem/PID Controller/N Copy'
- * '<S15>'  : 'control/Subsystem/PID Controller/N Gain'
- * '<S16>'  : 'control/Subsystem/PID Controller/P Copy'
- * '<S17>'  : 'control/Subsystem/PID Controller/Parallel P Gain'
- * '<S18>'  : 'control/Subsystem/PID Controller/Reset Signal'
- * '<S19>'  : 'control/Subsystem/PID Controller/Saturation'
- * '<S20>'  : 'control/Subsystem/PID Controller/Saturation Fdbk'
- * '<S21>'  : 'control/Subsystem/PID Controller/Sum'
- * '<S22>'  : 'control/Subsystem/PID Controller/Sum Fdbk'
- * '<S23>'  : 'control/Subsystem/PID Controller/Tracking Mode'
- * '<S24>'  : 'control/Subsystem/PID Controller/Tracking Mode Sum'
- * '<S25>'  : 'control/Subsystem/PID Controller/Tsamp - Integral'
- * '<S26>'  : 'control/Subsystem/PID Controller/Tsamp - Ngain'
- * '<S27>'  : 'control/Subsystem/PID Controller/postSat Signal'
- * '<S28>'  : 'control/Subsystem/PID Controller/preInt Signal'
- * '<S29>'  : 'control/Subsystem/PID Controller/preSat Signal'
- * '<S30>'  : 'control/Subsystem/PID Controller/Anti-windup/Disc. Clamping Ideal'
- * '<S31>'  : 'control/Subsystem/PID Controller/Anti-windup/Disc. Clamping Ideal/Dead Zone'
- * '<S32>'  : 'control/Subsystem/PID Controller/Anti-windup/Disc. Clamping Ideal/Dead Zone/Enabled'
- * '<S33>'  : 'control/Subsystem/PID Controller/D Gain/Disabled'
- * '<S34>'  : 'control/Subsystem/PID Controller/External Derivative/Disabled'
- * '<S35>'  : 'control/Subsystem/PID Controller/Filter/Disabled'
- * '<S36>'  : 'control/Subsystem/PID Controller/Filter ICs/Disabled'
- * '<S37>'  : 'control/Subsystem/PID Controller/I Gain/Internal Parameters'
- * '<S38>'  : 'control/Subsystem/PID Controller/Ideal P Gain/Internal Parameters'
- * '<S39>'  : 'control/Subsystem/PID Controller/Ideal P Gain Fdbk/Internal Parameters'
- * '<S40>'  : 'control/Subsystem/PID Controller/Integrator/Discrete'
- * '<S41>'  : 'control/Subsystem/PID Controller/Integrator ICs/Internal IC'
- * '<S42>'  : 'control/Subsystem/PID Controller/N Copy/Disabled wSignal Specification'
- * '<S43>'  : 'control/Subsystem/PID Controller/N Gain/Disabled'
- * '<S44>'  : 'control/Subsystem/PID Controller/P Copy/Internal Parameters Ideal'
- * '<S45>'  : 'control/Subsystem/PID Controller/Parallel P Gain/Passthrough'
- * '<S46>'  : 'control/Subsystem/PID Controller/Reset Signal/Disabled'
- * '<S47>'  : 'control/Subsystem/PID Controller/Saturation/Enabled'
- * '<S48>'  : 'control/Subsystem/PID Controller/Saturation Fdbk/Passthrough'
- * '<S49>'  : 'control/Subsystem/PID Controller/Sum/Sum_PI'
- * '<S50>'  : 'control/Subsystem/PID Controller/Sum Fdbk/Enabled'
- * '<S51>'  : 'control/Subsystem/PID Controller/Tracking Mode/Disabled'
- * '<S52>'  : 'control/Subsystem/PID Controller/Tracking Mode Sum/Passthrough'
- * '<S53>'  : 'control/Subsystem/PID Controller/Tsamp - Integral/TsSignalSpecification'
- * '<S54>'  : 'control/Subsystem/PID Controller/Tsamp - Ngain/Passthrough'
- * '<S55>'  : 'control/Subsystem/PID Controller/postSat Signal/Feedback_Path'
- * '<S56>'  : 'control/Subsystem/PID Controller/preInt Signal/Internal PreInt'
- * '<S57>'  : 'control/Subsystem/PID Controller/preSat Signal/Feedback_Path'
+ * '<S3>'   : 'control/Subsystem/PID Controller/Anti-windup'
+ * '<S4>'   : 'control/Subsystem/PID Controller/D Gain'
+ * '<S5>'   : 'control/Subsystem/PID Controller/External Derivative'
+ * '<S6>'   : 'control/Subsystem/PID Controller/Filter'
+ * '<S7>'   : 'control/Subsystem/PID Controller/Filter ICs'
+ * '<S8>'   : 'control/Subsystem/PID Controller/I Gain'
+ * '<S9>'   : 'control/Subsystem/PID Controller/Ideal P Gain'
+ * '<S10>'  : 'control/Subsystem/PID Controller/Ideal P Gain Fdbk'
+ * '<S11>'  : 'control/Subsystem/PID Controller/Integrator'
+ * '<S12>'  : 'control/Subsystem/PID Controller/Integrator ICs'
+ * '<S13>'  : 'control/Subsystem/PID Controller/N Copy'
+ * '<S14>'  : 'control/Subsystem/PID Controller/N Gain'
+ * '<S15>'  : 'control/Subsystem/PID Controller/P Copy'
+ * '<S16>'  : 'control/Subsystem/PID Controller/Parallel P Gain'
+ * '<S17>'  : 'control/Subsystem/PID Controller/Reset Signal'
+ * '<S18>'  : 'control/Subsystem/PID Controller/Saturation'
+ * '<S19>'  : 'control/Subsystem/PID Controller/Saturation Fdbk'
+ * '<S20>'  : 'control/Subsystem/PID Controller/Sum'
+ * '<S21>'  : 'control/Subsystem/PID Controller/Sum Fdbk'
+ * '<S22>'  : 'control/Subsystem/PID Controller/Tracking Mode'
+ * '<S23>'  : 'control/Subsystem/PID Controller/Tracking Mode Sum'
+ * '<S24>'  : 'control/Subsystem/PID Controller/Tsamp - Integral'
+ * '<S25>'  : 'control/Subsystem/PID Controller/Tsamp - Ngain'
+ * '<S26>'  : 'control/Subsystem/PID Controller/postSat Signal'
+ * '<S27>'  : 'control/Subsystem/PID Controller/preInt Signal'
+ * '<S28>'  : 'control/Subsystem/PID Controller/preSat Signal'
+ * '<S29>'  : 'control/Subsystem/PID Controller/Anti-windup/Disc. Clamping Ideal'
+ * '<S30>'  : 'control/Subsystem/PID Controller/Anti-windup/Disc. Clamping Ideal/Dead Zone'
+ * '<S31>'  : 'control/Subsystem/PID Controller/Anti-windup/Disc. Clamping Ideal/Dead Zone/Enabled'
+ * '<S32>'  : 'control/Subsystem/PID Controller/D Gain/Disabled'
+ * '<S33>'  : 'control/Subsystem/PID Controller/External Derivative/Disabled'
+ * '<S34>'  : 'control/Subsystem/PID Controller/Filter/Disabled'
+ * '<S35>'  : 'control/Subsystem/PID Controller/Filter ICs/Disabled'
+ * '<S36>'  : 'control/Subsystem/PID Controller/I Gain/Internal Parameters'
+ * '<S37>'  : 'control/Subsystem/PID Controller/Ideal P Gain/Internal Parameters'
+ * '<S38>'  : 'control/Subsystem/PID Controller/Ideal P Gain Fdbk/Internal Parameters'
+ * '<S39>'  : 'control/Subsystem/PID Controller/Integrator/Discrete'
+ * '<S40>'  : 'control/Subsystem/PID Controller/Integrator ICs/Internal IC'
+ * '<S41>'  : 'control/Subsystem/PID Controller/N Copy/Disabled wSignal Specification'
+ * '<S42>'  : 'control/Subsystem/PID Controller/N Gain/Disabled'
+ * '<S43>'  : 'control/Subsystem/PID Controller/P Copy/Internal Parameters Ideal'
+ * '<S44>'  : 'control/Subsystem/PID Controller/Parallel P Gain/Passthrough'
+ * '<S45>'  : 'control/Subsystem/PID Controller/Reset Signal/Disabled'
+ * '<S46>'  : 'control/Subsystem/PID Controller/Saturation/Enabled'
+ * '<S47>'  : 'control/Subsystem/PID Controller/Saturation Fdbk/Passthrough'
+ * '<S48>'  : 'control/Subsystem/PID Controller/Sum/Sum_PI'
+ * '<S49>'  : 'control/Subsystem/PID Controller/Sum Fdbk/Enabled'
+ * '<S50>'  : 'control/Subsystem/PID Controller/Tracking Mode/Disabled'
+ * '<S51>'  : 'control/Subsystem/PID Controller/Tracking Mode Sum/Passthrough'
+ * '<S52>'  : 'control/Subsystem/PID Controller/Tsamp - Integral/TsSignalSpecification'
+ * '<S53>'  : 'control/Subsystem/PID Controller/Tsamp - Ngain/Passthrough'
+ * '<S54>'  : 'control/Subsystem/PID Controller/postSat Signal/Feedback_Path'
+ * '<S55>'  : 'control/Subsystem/PID Controller/preInt Signal/Internal PreInt'
+ * '<S56>'  : 'control/Subsystem/PID Controller/preSat Signal/Feedback_Path'
  */
 #endif                                 /* control_h_ */
 
