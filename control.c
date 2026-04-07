@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'control'.
  *
- * Model version                  : 1.92
+ * Model version                  : 1.94
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Tue Apr  7 17:30:13 2026
+ * C/C++ source code generated on : Tue Apr  7 18:58:36 2026
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -229,18 +229,19 @@ void control_step0(void)               /* Sample time: [0.0005s, 0.0s] */
    *  Sum: '<S1>/SumRef'
    *  Sum: '<S1>/SumV'
    */
-  rtb_ErrorCorriente = look2_iflf_binlcpw(rtb_LUT_Dir_I2F,
-    (((control_U.Referencia - control_B.TmpRTBAtSumRefInport2) * 900.0F -
-      control_B.TmpRTBAtSumVInport2) - control_B.TmpRTBAtSumCtrlInport2) *
-    -40.0F, control_ConstP.pooled2, control_ConstP.LUT_Inv_F2I_bp02Data,
-    control_ConstP.LUT_Inv_F2I_tableData, control_ConstP.LUT_Inv_F2I_maxIndex,
-    14U);
+  control_B.I_ref = look2_iflf_binlcpw(rtb_LUT_Dir_I2F, (((control_U.Referencia
+    - control_B.TmpRTBAtSumRefInport2) * 900.0F - control_B.TmpRTBAtSumVInport2)
+    - control_B.TmpRTBAtSumCtrlInport2) * -40.0F, control_ConstP.pooled2,
+    control_ConstP.LUT_Inv_F2I_bp02Data, control_ConstP.LUT_Inv_F2I_tableData,
+    control_ConstP.LUT_Inv_F2I_maxIndex, 14U);
 
   /* Saturate: '<S1>/Sat_I' */
-  if (rtb_ErrorCorriente > 50.0F) {
+  if (control_B.I_ref > 50.0F) {
     rtb_ErrorCorriente = 50.0F;
-  } else if (rtb_ErrorCorriente < -50.0F) {
+  } else if (control_B.I_ref < -50.0F) {
     rtb_ErrorCorriente = -50.0F;
+  } else {
+    rtb_ErrorCorriente = control_B.I_ref;
   }
 
   /* Sum: '<S1>/Add2' incorporates:

@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'control'.
  *
- * Model version                  : 1.92
+ * Model version                  : 1.94
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Tue Apr  7 17:30:13 2026
+ * C/C++ source code generated on : Tue Apr  7 18:58:36 2026
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -50,6 +50,7 @@ typedef struct {
   real32_T TmpRTBAtSumRefInport2;
   real32_T TmpRTBAtSumVInport2;        /* '<S1>/Kd' */
   real32_T TmpRTBAtSumCtrlInport2;
+  real32_T I_ref;                      /* '<S1>/LUT_Inv_F2I' */
 } B_control_T;
 
 /* Block states (default storage) for system '<Root>' */
