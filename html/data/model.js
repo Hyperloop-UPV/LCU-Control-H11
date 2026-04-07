@@ -1,1 +1,1 @@
-var modelInfo = {model:"control"};var modelHierarchy=[{model:"control",relativePath:"_internal.html",parent:"null"},];var AddCode = true;var ProtectedModel = false;
+var modelInfo = {model:"control1"};var modelHierarchy=[{model:"control1",relativePath:"_internal.html",parent:"null"},];var AddCode = true;var ProtectedModel = false;

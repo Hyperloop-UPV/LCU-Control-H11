@@ -5,11 +5,11 @@
  *
  * File: rtmodel.h
  *
- * Code generated for Simulink model 'control'.
+ * Code generated for Simulink model 'control1'.
  *
- * Model version                  : 1.89
+ * Model version                  : 1.91
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Tue Apr  7 12:49:28 2026
+ * C/C++ source code generated on : Tue Apr  7 15:56:09 2026
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -19,7 +19,7 @@
 
 #ifndef rtmodel_h_
 #define rtmodel_h_
-#include "control.h"
+#include "control1.h"
 
 /* Macros generated for backwards compatibility  */
 #ifndef rtmGetStopRequested

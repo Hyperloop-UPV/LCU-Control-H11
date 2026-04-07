@@ -1,9 +1,9 @@
 ###########################################################################
-## Makefile generated for component 'control'. 
+## Makefile generated for component 'control1'. 
 ## 
-## Makefile     : control.mk
-## Generated on : Tue Apr 07 12:49:34 2026
-## Final product: $(RELATIVE_PATH_TO_ANCHOR)/control.elf
+## Makefile     : control1.mk
+## Generated on : Tue Apr 07 15:56:17 2026
+## Final product: $(RELATIVE_PATH_TO_ANCHOR)/control1.elf
 ## Product type : executable
 ## 
 ###########################################################################
@@ -18,8 +18,8 @@
 # COMPILER_COMMAND_FILE   Compiler command listing model reference header paths
 # CMD_FILE                Command file
 
-PRODUCT_NAME              = control
-MAKEFILE                  = control.mk
+PRODUCT_NAME              = control1
+MAKEFILE                  = control1.mk
 MATLAB_ROOT               = C:/PROGRA~1/MATLAB/R2025b
 MATLAB_BIN                = C:/PROGRA~1/MATLAB/R2025b/bin
 MATLAB_ARCH_BIN           = $(MATLAB_BIN)/win64
@@ -30,8 +30,8 @@ CLASSIC_INTERFACE         = 0
 TGT_FCN_LIB               = ISO_C
 MODEL_HAS_DYNAMICALLY_LOADED_SFCNS = 0
 RELATIVE_PATH_TO_ANCHOR   = ..
-COMPILER_COMMAND_FILE     = control_comp.rsp
-CMD_FILE                  = control.rsp
+COMPILER_COMMAND_FILE     = control1_comp.rsp
+CMD_FILE                  = control1.rsp
 C_STANDARD_OPTS           = 
 CPP_STANDARD_OPTS         = 
 
@@ -195,7 +195,7 @@ SHAREDLIB_LDFLAGS    =
 ## OUTPUT INFO
 ###########################################################################
 
-PRODUCT = $(RELATIVE_PATH_TO_ANCHOR)/control.elf
+PRODUCT = $(RELATIVE_PATH_TO_ANCHOR)/control1.elf
 PRODUCT_TYPE = "executable"
 BUILD_TYPE = "Top-Level Standalone Executable"
 
@@ -216,7 +216,7 @@ DEFINES_BUILD_ARGS = -DCLASSIC_INTERFACE=0 -DALLOCATIONFCN=0 -DTERMFCN=1 -DONEST
 DEFINES_CUSTOM = 
 DEFINES_OPTS = -DTID01EQ=0
 DEFINES_SKIPFORSIL = -DXCP_CUSTOM_PLATFORM -DXCP_MEM_DAQ_RESERVED_POOL_BLOCKS_NUMBER=10 -D__FPU_PRESENT=1U -D__FPU_USED=1U -DSTACK_SIZE=512 -DRT
-DEFINES_STANDARD = -DMODEL=control -DNUMST=2 -DNCSTATES=0 -DHAVESTDIO -DMODEL_HAS_DYNAMICALLY_LOADED_SFCNS=0
+DEFINES_STANDARD = -DMODEL=control1 -DNUMST=2 -DNCSTATES=0 -DHAVESTDIO -DMODEL_HAS_DYNAMICALLY_LOADED_SFCNS=0
 
 DEFINES = $(DEFINES_) $(DEFINES_BUILD_ARGS) $(DEFINES_CUSTOM) $(DEFINES_OPTS) $(DEFINES_SKIPFORSIL) $(DEFINES_STANDARD)
 
@@ -224,7 +224,7 @@ DEFINES = $(DEFINES_) $(DEFINES_BUILD_ARGS) $(DEFINES_CUSTOM) $(DEFINES_OPTS) $(
 ## SOURCE FILES
 ###########################################################################
 
-SRCS = $(START_DIR)/control_ert_rtw/control.c $(START_DIR)/control_ert_rtw/control_data.c C:/ProgramData/MATLAB/SupportPackages/R2025b/toolbox/shared/supportpackages/stm32/src/overrideHALDelay.c C:/ProgramData/MATLAB/SupportPackages/R2025b/toolbox/shared/supportpackages/stm32/src/platform_timer.c $(MATLAB_ROOT)/toolbox/target/shared/armcortexmbase/scheduler/src/SysTickScheduler.c $(MATLAB_ROOT)/toolbox/target/shared/armcortexmbase/scheduler/src/m3m4m4f_multitasking.c $(START_DIR)/Core/Src/main.c $(START_DIR)/Core/Src/stm32h7xx_it.c $(START_DIR)/Core/Src/stm32h7xx_hal_msp.c $(START_DIR)/Core/Src/stm32h7xx_hal_timebase_tim.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_exti.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_tim.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_tim_ex.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc_ex.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_rcc.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_rcc_ex.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_flash.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_flash_ex.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_gpio.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_hsem.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma_ex.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_mdma.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr_ex.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_cortex.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_i2c.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_i2c_ex.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_exti.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_rcc.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_utils.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dac.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dac_ex.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_gpio.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_dma.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_usart.c $(START_DIR)/Core/Src/system_stm32h7xx.c $(START_DIR)/STM32CubeIDE/Application/User/Core/syscalls.c $(START_DIR)/STM32CubeIDE/Application/User/Core/sysmem.c $(START_DIR)/STM32CubeIDE/Application/User/Startup/startup_stm32h723zgtx.s
+SRCS = $(START_DIR)/control1_ert_rtw/control1.c $(START_DIR)/control1_ert_rtw/control1_data.c C:/ProgramData/MATLAB/SupportPackages/R2025b/toolbox/shared/supportpackages/stm32/src/overrideHALDelay.c C:/ProgramData/MATLAB/SupportPackages/R2025b/toolbox/shared/supportpackages/stm32/src/platform_timer.c $(MATLAB_ROOT)/toolbox/target/shared/armcortexmbase/scheduler/src/SysTickScheduler.c $(MATLAB_ROOT)/toolbox/target/shared/armcortexmbase/scheduler/src/m3m4m4f_multitasking.c $(START_DIR)/Core/Src/main.c $(START_DIR)/Core/Src/stm32h7xx_it.c $(START_DIR)/Core/Src/stm32h7xx_hal_msp.c $(START_DIR)/Core/Src/stm32h7xx_hal_timebase_tim.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_exti.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_tim.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_tim_ex.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_adc_ex.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_rcc.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_rcc_ex.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_flash.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_flash_ex.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_gpio.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_hsem.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dma_ex.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_mdma.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_pwr_ex.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_cortex.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_i2c.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_i2c_ex.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_exti.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_rcc.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_utils.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dac.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_dac_ex.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_gpio.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_dma.c $(START_DIR)/Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_ll_usart.c $(START_DIR)/Core/Src/system_stm32h7xx.c $(START_DIR)/STM32CubeIDE/Application/User/Core/syscalls.c $(START_DIR)/STM32CubeIDE/Application/User/Core/sysmem.c $(START_DIR)/STM32CubeIDE/Application/User/Startup/startup_stm32h723zgtx.s
 
 ALL_SRCS = $(SRCS)
 
@@ -232,7 +232,7 @@ ALL_SRCS = $(SRCS)
 ## OBJECTS
 ###########################################################################
 
-OBJS = control.c.o control_data.c.o overrideHALDelay.c.o platform_timer.c.o SysTickScheduler.c.o m3m4m4f_multitasking.c.o main.c.o stm32h7xx_it.c.o stm32h7xx_hal_msp.c.o stm32h7xx_hal_timebase_tim.c.o stm32h7xx_ll_exti.c.o stm32h7xx_hal_tim.c.o stm32h7xx_hal_tim_ex.c.o stm32h7xx_hal_adc.c.o stm32h7xx_hal_adc_ex.c.o stm32h7xx_hal_rcc.c.o stm32h7xx_hal_rcc_ex.c.o stm32h7xx_hal_flash.c.o stm32h7xx_hal_flash_ex.c.o stm32h7xx_hal_gpio.c.o stm32h7xx_hal_hsem.c.o stm32h7xx_hal_dma.c.o stm32h7xx_hal_dma_ex.c.o stm32h7xx_hal_mdma.c.o stm32h7xx_hal_pwr.c.o stm32h7xx_hal_pwr_ex.c.o stm32h7xx_hal_cortex.c.o stm32h7xx_hal.c.o stm32h7xx_hal_i2c.c.o stm32h7xx_hal_i2c_ex.c.o stm32h7xx_hal_exti.c.o stm32h7xx_ll_rcc.c.o stm32h7xx_ll_utils.c.o stm32h7xx_hal_dac.c.o stm32h7xx_hal_dac_ex.c.o stm32h7xx_ll_gpio.c.o stm32h7xx_ll_dma.c.o stm32h7xx_ll_usart.c.o system_stm32h7xx.c.o syscalls.c.o sysmem.c.o startup_stm32h723zgtx.s.o
+OBJS = control1.c.o control1_data.c.o overrideHALDelay.c.o platform_timer.c.o SysTickScheduler.c.o m3m4m4f_multitasking.c.o main.c.o stm32h7xx_it.c.o stm32h7xx_hal_msp.c.o stm32h7xx_hal_timebase_tim.c.o stm32h7xx_ll_exti.c.o stm32h7xx_hal_tim.c.o stm32h7xx_hal_tim_ex.c.o stm32h7xx_hal_adc.c.o stm32h7xx_hal_adc_ex.c.o stm32h7xx_hal_rcc.c.o stm32h7xx_hal_rcc_ex.c.o stm32h7xx_hal_flash.c.o stm32h7xx_hal_flash_ex.c.o stm32h7xx_hal_gpio.c.o stm32h7xx_hal_hsem.c.o stm32h7xx_hal_dma.c.o stm32h7xx_hal_dma_ex.c.o stm32h7xx_hal_mdma.c.o stm32h7xx_hal_pwr.c.o stm32h7xx_hal_pwr_ex.c.o stm32h7xx_hal_cortex.c.o stm32h7xx_hal.c.o stm32h7xx_hal_i2c.c.o stm32h7xx_hal_i2c_ex.c.o stm32h7xx_hal_exti.c.o stm32h7xx_ll_rcc.c.o stm32h7xx_ll_utils.c.o stm32h7xx_hal_dac.c.o stm32h7xx_hal_dac_ex.c.o stm32h7xx_ll_gpio.c.o stm32h7xx_ll_dma.c.o stm32h7xx_ll_usart.c.o system_stm32h7xx.c.o syscalls.c.o sysmem.c.o startup_stm32h723zgtx.s.o
 
 ALL_OBJS = $(OBJS)
 
@@ -495,31 +495,31 @@ $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS) $(LIBS)
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.c.o : $(START_DIR)/control_ert_rtw/%.c
+%.c.o : $(START_DIR)/control1_ert_rtw/%.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-%.s.o : $(START_DIR)/control_ert_rtw/%.s
+%.s.o : $(START_DIR)/control1_ert_rtw/%.s
 	$(AS) $(ASFLAGS) -o "$@" "$<"
 
 
-%.s.o : $(START_DIR)/control_ert_rtw/%.S
+%.s.o : $(START_DIR)/control1_ert_rtw/%.S
 	$(AS) $(ASFLAGS) -o "$@" "$<"
 
 
-%.cpp.o : $(START_DIR)/control_ert_rtw/%.cpp
+%.cpp.o : $(START_DIR)/control1_ert_rtw/%.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.cpp.o : $(START_DIR)/control_ert_rtw/%.cc
+%.cpp.o : $(START_DIR)/control1_ert_rtw/%.cc
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.cpp.o : $(START_DIR)/control_ert_rtw/%.C
+%.cpp.o : $(START_DIR)/control1_ert_rtw/%.C
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.cpp.o : $(START_DIR)/control_ert_rtw/%.cxx
+%.cpp.o : $(START_DIR)/control1_ert_rtw/%.cxx
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
@@ -607,11 +607,11 @@ $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS) $(LIBS)
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-control.c.o : $(START_DIR)/control_ert_rtw/control.c
+control1.c.o : $(START_DIR)/control1_ert_rtw/control1.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-control_data.c.o : $(START_DIR)/control_ert_rtw/control_data.c
+control1_data.c.o : $(START_DIR)/control1_ert_rtw/control1_data.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 

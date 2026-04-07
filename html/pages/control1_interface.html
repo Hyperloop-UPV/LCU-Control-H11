@@ -1,13 +1,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><link rel="stylesheet" type="text/css" href="rtwreport.css" /><script language="JavaScript" type="text/javascript" src="rtwshrink.js"></script><script>function postParentWindowMessage(message) {window.parent.postMessage(message, "*");}</script><style> h3 { margin-bottom: 1ex; } h4.function {   font-size: larger; font-weight: normal;   color: #c05709;	margin-bottom: 0ex; } .description {	border-style: none;	color: DimGray; } .footnote { margin-top: 0.5ex; font-size: small; color: DimGray;} a:visited, a:hover { color: #004b87 } ul.services { margin-top: 0.5ex; } .include { color: #992211 } a.include:link { color:inherit; text-decoration: none } a.include:hover { text-decoration: underline } a.fcn:link { color:inherit; text-decoration: none } a.fcn:hover { text-decoration: underline } code.usage { white-space: pre-wrap; } .programlisting {   margin-left: 4ex; margin-right: 4ex;   margin-top: 2ex;  margin-bottom: 2ex; } .tooltip { position: relative; display: inline-block; } .tooltip .tooltip-text {   visibility: hidden;   position: absolute;   top: 110%;   left: 0;   background-color: white;   z-index: 1;   box-shadow: 5px 5px 10px 5px Gainsboro;   border-radius: 10px;   padding: 10px 15px 0px; } .tooltip:hover .tooltip-text { visibility: visible; } .tooltip-text .footnote { white-space: nowrap;} </style><title>
-Code Interface Report for control
+Code Interface Report for control1
 </title>
 
 </head>
 <body>
 <h1>
-Code Interface Report for control
+Code Interface Report for control1
 </h1>
 <div>
 
@@ -131,16 +131,16 @@ External code initiates execution of the generated code by calling entry-point f
 <p>
 Initialize entry-point functions implement startup behavior. In a model, Initialize Function blocks represent startup behavior explicitly.
 </p>
-<div id="fcn_control_initialize">
+<div id="fcn_control1_initialize">
 <h4 class="function">
-control_initialize
+control1_initialize
 </h4>
 <span class="description">
 Initialization entry point of generated code
 </span>
 <div class="programlisting">
-<code class="usage"><span class="include">#include "<a href="javascript: void(0)" onclick="postParentWindowMessage({message:'jumpToCode',location:'control.h'})" class="include">control.h</a>"</span>
-void <a href="javascript: void(0)" onclick="postParentWindowMessage({message:'jumpToCode',location:'control_initialize'})" class="fcn">control_initialize</a>(void)</code>
+<code class="usage"><span class="include">#include "<a href="javascript: void(0)" onclick="postParentWindowMessage({message:'jumpToCode',location:'control1.h'})" class="include">control1.h</a>"</span>
+void <a href="javascript: void(0)" onclick="postParentWindowMessage({message:'jumpToCode',location:'control1_initialize'})" class="fcn">control1_initialize</a>(void)</code>
 </div>
 </div>
 </section>
@@ -151,16 +151,16 @@ void <a href="javascript: void(0)" onclick="postParentWindowMessage({message:'ju
 <p>
 Terminate entry-point functions implement shutdown behavior. In a model, Terminate Function blocks represent shutdown behavior explicitly.
 </p>
-<div id="fcn_control_terminate">
+<div id="fcn_control1_terminate">
 <h4 class="function">
-control_terminate
+control1_terminate
 </h4>
 <span class="description">
 Termination entry point of generated code
 </span>
 <div class="programlisting">
-<code class="usage"><span class="include">#include "<a href="javascript: void(0)" onclick="postParentWindowMessage({message:'jumpToCode',location:'control.h'})" class="include">control.h</a>"</span>
-void <a href="javascript: void(0)" onclick="postParentWindowMessage({message:'jumpToCode',location:'control_terminate'})" class="fcn">control_terminate</a>(void)</code>
+<code class="usage"><span class="include">#include "<a href="javascript: void(0)" onclick="postParentWindowMessage({message:'jumpToCode',location:'control1.h'})" class="include">control1.h</a>"</span>
+void <a href="javascript: void(0)" onclick="postParentWindowMessage({message:'jumpToCode',location:'control1_terminate'})" class="fcn">control1_terminate</a>(void)</code>
 </div>
 </div>
 </section>
@@ -171,28 +171,28 @@ void <a href="javascript: void(0)" onclick="postParentWindowMessage({message:'ju
 <p>
 Periodic entry-point functions implement model behavior that occurs at a fixed sampling rate. For a rate-based model, the code generator produces a periodic entry-point function for each rate used in the model. In a function-call (export-function) model, Function Call Subsystem blocks that specify a sampling rate represent periodic functions.
 </p>
-<div id="fcn_control_step0">
+<div id="fcn_control1_step0">
 <h4 class="function">
-control_step0
+control1_step0
 </h4>
 <span class="description">
 Output entry point of generated code. Must be called periodically, every 0.0005 seconds. 
 </span>
 <div class="programlisting">
-<code class="usage"><span class="include">#include "<a href="javascript: void(0)" onclick="postParentWindowMessage({message:'jumpToCode',location:'control.h'})" class="include">control.h</a>"</span>
-void <a href="javascript: void(0)" onclick="postParentWindowMessage({message:'jumpToCode',location:'control_step0'})" class="fcn">control_step0</a>(void)</code>
+<code class="usage"><span class="include">#include "<a href="javascript: void(0)" onclick="postParentWindowMessage({message:'jumpToCode',location:'control1.h'})" class="include">control1.h</a>"</span>
+void <a href="javascript: void(0)" onclick="postParentWindowMessage({message:'jumpToCode',location:'control1_step0'})" class="fcn">control1_step0</a>(void)</code>
 </div>
 </div>
-<div id="fcn_control_step1">
+<div id="fcn_control1_step1">
 <h4 class="function">
-control_step1
+control1_step1
 </h4>
 <span class="description">
 Output entry point of generated code. Must be called periodically, every 0.001 seconds. 
 </span>
 <div class="programlisting">
-<code class="usage"><span class="include">#include "<a href="javascript: void(0)" onclick="postParentWindowMessage({message:'jumpToCode',location:'control.h'})" class="include">control.h</a>"</span>
-void <a href="javascript: void(0)" onclick="postParentWindowMessage({message:'jumpToCode',location:'control_step1'})" class="fcn">control_step1</a>(void)</code>
+<code class="usage"><span class="include">#include "<a href="javascript: void(0)" onclick="postParentWindowMessage({message:'jumpToCode',location:'control1.h'})" class="include">control1.h</a>"</span>
+void <a href="javascript: void(0)" onclick="postParentWindowMessage({message:'jumpToCode',location:'control1_step1'})" class="fcn">control1_step1</a>(void)</code>
 </div>
 </div>
 </section>
@@ -229,132 +229,52 @@ A data code interface maps model data interface elements, such as root-level inp
 <h3>
 3.1 Inports
 </h3>
-Inputs are variables that are generated in the code based on storage class specifications for model root-level input ports.<div id="fcn_control_U.Gap">
+Inputs are variables that are generated in the code based on storage class specifications for model root-level input ports.<div id="fcn_control1_U.Gap">
 <h4 class="function">
-control_U.Gap
+control1_U.Gap
 </h4>
 <span class="description">
 Input data for &lt;Root&gt;/Gap
 </span>
 <div class="programlisting">
-<code class="usage"><span class="include">#include "<a href="javascript: void(0)" onclick="postParentWindowMessage({message:'jumpToCode',location:'control.h'})" class="include">control.h</a>"</span>
+<code class="usage"><span class="include">#include "<a href="javascript: void(0)" onclick="postParentWindowMessage({message:'jumpToCode',location:'control1.h'})" class="include">control1.h</a>"</span>
 struct {
   ...
   real32_T Gap;
   ...
-} control_U;</code>
+} control1_U;</code>
 </div>
 </div>
-<div id="fcn_control_U.Referencia">
+<div id="fcn_control1_U.Referencia">
 <h4 class="function">
-control_U.Referencia
+control1_U.Referencia
 </h4>
 <span class="description">
 Input data for &lt;Root&gt;/Referencia
 </span>
 <div class="programlisting">
-<code class="usage"><span class="include">#include "<a href="javascript: void(0)" onclick="postParentWindowMessage({message:'jumpToCode',location:'control.h'})" class="include">control.h</a>"</span>
+<code class="usage"><span class="include">#include "<a href="javascript: void(0)" onclick="postParentWindowMessage({message:'jumpToCode',location:'control1.h'})" class="include">control1.h</a>"</span>
 struct {
   ...
   real32_T Referencia;
   ...
-} control_U;</code>
+} control1_U;</code>
 </div>
 </div>
-<div id="fcn_control_U.corriente_real">
+<div id="fcn_control1_U.corriente_real">
 <h4 class="function">
-control_U.corriente_real
+control1_U.corriente_real
 </h4>
 <span class="description">
 Input data for &lt;Root&gt;/corriente_real
 </span>
 <div class="programlisting">
-<code class="usage"><span class="include">#include "<a href="javascript: void(0)" onclick="postParentWindowMessage({message:'jumpToCode',location:'control.h'})" class="include">control.h</a>"</span>
+<code class="usage"><span class="include">#include "<a href="javascript: void(0)" onclick="postParentWindowMessage({message:'jumpToCode',location:'control1.h'})" class="include">control1.h</a>"</span>
 struct {
   ...
   real32_T corriente_real;
   ...
-} control_U;</code>
-</div>
-</div>
-<div id="fcn_control_U.K_P">
-<h4 class="function">
-control_U.K_P
-</h4>
-<span class="description">
-Input data for &lt;Root&gt;/K_P
-</span>
-<div class="programlisting">
-<code class="usage"><span class="include">#include "<a href="javascript: void(0)" onclick="postParentWindowMessage({message:'jumpToCode',location:'control.h'})" class="include">control.h</a>"</span>
-struct {
-  ...
-  real32_T K_P;
-  ...
-} control_U;</code>
-</div>
-</div>
-<div id="fcn_control_U.K_D">
-<h4 class="function">
-control_U.K_D
-</h4>
-<span class="description">
-Input data for &lt;Root&gt;/K_D
-</span>
-<div class="programlisting">
-<code class="usage"><span class="include">#include "<a href="javascript: void(0)" onclick="postParentWindowMessage({message:'jumpToCode',location:'control.h'})" class="include">control.h</a>"</span>
-struct {
-  ...
-  real32_T K_D;
-  ...
-} control_U;</code>
-</div>
-</div>
-<div id="fcn_control_U.b_0">
-<h4 class="function">
-control_U.b_0
-</h4>
-<span class="description">
-Input data for &lt;Root&gt;/b_0
-</span>
-<div class="programlisting">
-<code class="usage"><span class="include">#include "<a href="javascript: void(0)" onclick="postParentWindowMessage({message:'jumpToCode',location:'control.h'})" class="include">control.h</a>"</span>
-struct {
-  ...
-  real32_T b_0;
-  ...
-} control_U;</code>
-</div>
-</div>
-<div id="fcn_control_U.P">
-<h4 class="function">
-control_U.P
-</h4>
-<span class="description">
-Input data for &lt;Root&gt;/P
-</span>
-<div class="programlisting">
-<code class="usage"><span class="include">#include "<a href="javascript: void(0)" onclick="postParentWindowMessage({message:'jumpToCode',location:'control.h'})" class="include">control.h</a>"</span>
-struct {
-  ...
-  real32_T P;
-  ...
-} control_U;</code>
-</div>
-</div>
-<div id="fcn_control_U.I">
-<h4 class="function">
-control_U.I
-</h4>
-<span class="description">
-Input data for &lt;Root&gt;/I
-</span>
-<div class="programlisting">
-<code class="usage"><span class="include">#include "<a href="javascript: void(0)" onclick="postParentWindowMessage({message:'jumpToCode',location:'control.h'})" class="include">control.h</a>"</span>
-struct {
-  ...
-  real32_T I;
-  ...
-} control_U;</code>
+} control1_U;</code>
 </div>
 </div>
 </section>
@@ -362,68 +282,68 @@ struct {
 <h3>
 3.2 Outports
 </h3>
-Outputs are variables that are generated in the code based on storage class specifications for model root-level output ports.<div id="fcn_control_Y.Voltage">
+Outputs are variables that are generated in the code based on storage class specifications for model root-level output ports.<div id="fcn_control1_Y.Voltage">
 <h4 class="function">
-control_Y.Voltage
+control1_Y.Voltage
 </h4>
 <span class="description">
 Output data for &lt;Root&gt;/Voltage
 </span>
 <div class="programlisting">
-<code class="usage"><span class="include">#include "<a href="javascript: void(0)" onclick="postParentWindowMessage({message:'jumpToCode',location:'control.h'})" class="include">control.h</a>"</span>
+<code class="usage"><span class="include">#include "<a href="javascript: void(0)" onclick="postParentWindowMessage({message:'jumpToCode',location:'control1.h'})" class="include">control1.h</a>"</span>
 struct {
   ...
   real32_T Voltage;
   ...
-} control_Y;</code>
+} control1_Y;</code>
 </div>
 </div>
-<div id="fcn_control_Y.z3">
+<div id="fcn_control1_Y.z3">
 <h4 class="function">
-control_Y.z3
+control1_Y.z3
 </h4>
 <span class="description">
 Output data for &lt;Root&gt;/z3
 </span>
 <div class="programlisting">
-<code class="usage"><span class="include">#include "<a href="javascript: void(0)" onclick="postParentWindowMessage({message:'jumpToCode',location:'control.h'})" class="include">control.h</a>"</span>
+<code class="usage"><span class="include">#include "<a href="javascript: void(0)" onclick="postParentWindowMessage({message:'jumpToCode',location:'control1.h'})" class="include">control1.h</a>"</span>
 struct {
   ...
   real32_T z3;
   ...
-} control_Y;</code>
+} control1_Y;</code>
 </div>
 </div>
-<div id="fcn_control_Y.z1">
+<div id="fcn_control1_Y.z1">
 <h4 class="function">
-control_Y.z1
+control1_Y.z1
 </h4>
 <span class="description">
 Output data for &lt;Root&gt;/z1
 </span>
 <div class="programlisting">
-<code class="usage"><span class="include">#include "<a href="javascript: void(0)" onclick="postParentWindowMessage({message:'jumpToCode',location:'control.h'})" class="include">control.h</a>"</span>
+<code class="usage"><span class="include">#include "<a href="javascript: void(0)" onclick="postParentWindowMessage({message:'jumpToCode',location:'control1.h'})" class="include">control1.h</a>"</span>
 struct {
   ...
   real32_T z1;
   ...
-} control_Y;</code>
+} control1_Y;</code>
 </div>
 </div>
-<div id="fcn_control_Y.z2">
+<div id="fcn_control1_Y.z2">
 <h4 class="function">
-control_Y.z2
+control1_Y.z2
 </h4>
 <span class="description">
 Output data for &lt;Root&gt;/z2
 </span>
 <div class="programlisting">
-<code class="usage"><span class="include">#include "<a href="javascript: void(0)" onclick="postParentWindowMessage({message:'jumpToCode',location:'control.h'})" class="include">control.h</a>"</span>
+<code class="usage"><span class="include">#include "<a href="javascript: void(0)" onclick="postParentWindowMessage({message:'jumpToCode',location:'control1.h'})" class="include">control1.h</a>"</span>
 struct {
   ...
   real32_T z2;
   ...
-} control_Y;</code>
+} control1_Y;</code>
 </div>
 </div>
 </section>

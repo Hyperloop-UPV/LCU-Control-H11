@@ -3,13 +3,13 @@
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
  *
- * File: control_types.h
+ * File: control1_types.h
  *
- * Code generated for Simulink model 'control'.
+ * Code generated for Simulink model 'control1'.
  *
- * Model version                  : 1.89
+ * Model version                  : 1.91
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Tue Apr  7 12:49:28 2026
+ * C/C++ source code generated on : Tue Apr  7 15:56:09 2026
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -17,13 +17,13 @@
  * Validation result: Not run
  */
 
-#ifndef control_types_h_
-#define control_types_h_
+#ifndef control1_types_h_
+#define control1_types_h_
 
 /* Forward declaration for rtModel */
-typedef struct tag_RTM_control_T RT_MODEL_control_T;
+typedef struct tag_RTM_control1_T RT_MODEL_control1_T;
 
-#endif                                 /* control_types_h_ */
+#endif                                 /* control1_types_h_ */
 
 /*
  * File trailer for generated code.
