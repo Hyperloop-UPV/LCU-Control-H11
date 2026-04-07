@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'control'.
  *
- * Model version                  : 1.107
+ * Model version                  : 1.108
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Tue Apr  7 21:18:06 2026
+ * C/C++ source code generated on : Tue Apr  7 22:36:53 2026
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -220,21 +220,31 @@ void control_step0(void)               /* Sample time: [0.0005s, 0.0s] */
 
   /* End of RateTransition generated from: '<S1>/SumRef' */
 
-  /* Lookup_n-D: '<S1>/LUT_Inv_F2I' incorporates:
-   *  Gain: '<S1>/InvB0'
+  /* Gain: '<S1>/InvB0' incorporates:
    *  Gain: '<S1>/Kp'
    *  Inport: '<Root>/Referencia'
-   *  Lookup_n-D: '<S1>/LUT_Dir_I2F'
    *  Sum: '<S1>/SumCtrl'
    *  Sum: '<S1>/SumRef'
    *  Sum: '<S1>/SumV'
    */
-  rtb_ErrorCorriente = look2_iflf_binlcpw(rtb_LUT_Dir_I2F,
-    (((control_U.Referencia - control_B.TmpRTBAtSumRefInport2) * 900.0F -
-      control_B.TmpRTBAtSumVInport2) - control_B.TmpRTBAtSumCtrlInport2) *
-    -40.0F, control_ConstP.pooled2, control_ConstP.LUT_Inv_F2I_bp02Data,
+  rtb_DeadZone = (((control_U.Referencia - control_B.TmpRTBAtSumRefInport2) *
+                   900.0F - control_B.TmpRTBAtSumVInport2) -
+                  control_B.TmpRTBAtSumCtrlInport2) * -40.0F;
+
+  /* Lookup_n-D: '<S1>/LUT_Inv_F2I' incorporates:
+   *  DeadZone: '<S31>/DeadZone'
+   *  Lookup_n-D: '<S1>/LUT_Dir_I2F'
+   */
+  rtb_DeadZone = look2_iflf_binlcpw(rtb_LUT_Dir_I2F, rtb_DeadZone,
+    control_ConstP.pooled2, control_ConstP.LUT_Inv_F2I_bp02Data,
     control_ConstP.LUT_Inv_F2I_tableData, control_ConstP.LUT_Inv_F2I_maxIndex,
     14U);
+
+  /* Saturate: '<S1>/Sat_I' */
+  rtb_ErrorCorriente = rtb_DeadZone;
+
+  /* UnitDelay: '<S1>/Unit Delay' */
+  rtb_DeadZone = control_DW.UnitDelay_DSTATE;
 
   /* Saturate: '<S1>/Sat_I' */
   if (rtb_ErrorCorriente > 50.0F) {
@@ -245,22 +255,22 @@ void control_step0(void)               /* Sample time: [0.0005s, 0.0s] */
 
   /* Sum: '<S1>/Add2' incorporates:
    *  Saturate: '<S1>/Sat_I'
-   *  UnitDelay: '<S1>/Unit Delay'
    */
-  rtb_ErrorCorriente -= control_DW.UnitDelay_DSTATE;
+  rtb_ErrorCorriente -= rtb_DeadZone;
 
   /* Lookup_n-D: '<S1>/LUT_Dir_I2F' incorporates:
-   *  UnitDelay: '<S1>/Unit Delay'
+   *  DeadZone: '<S31>/DeadZone'
    */
-  rtb_LUT_Dir_I2F = look2_iflf_binlcpw(rtb_LUT_Dir_I2F,
-    control_DW.UnitDelay_DSTATE, control_ConstP.pooled2,
-    control_ConstP.LUT_Dir_I2F_bp02Data, control_ConstP.LUT_Dir_I2F_tableData,
-    control_ConstP.LUT_Dir_I2F_maxIndex, 14U);
+  rtb_LUT_Dir_I2F = look2_iflf_binlcpw(rtb_LUT_Dir_I2F, rtb_DeadZone,
+    control_ConstP.pooled2, control_ConstP.LUT_Dir_I2F_bp02Data,
+    control_ConstP.LUT_Dir_I2F_tableData, control_ConstP.LUT_Dir_I2F_maxIndex,
+    14U);
 
-  /* Gain: '<S38>/Proportional Gain' incorporates:
-   *  Sum: '<S49>/Sum Fdbk'
-   */
-  rtb_DeadZone = (rtb_ErrorCorriente + control_DW.Integrator_DSTATE) * 10.0F;
+  /* Sum: '<S49>/Sum Fdbk' */
+  rtb_DeadZone = rtb_ErrorCorriente + control_DW.Integrator_DSTATE;
+
+  /* Gain: '<S38>/Proportional Gain' */
+  rtb_DeadZone *= 10.0F;
 
   /* DeadZone: '<S31>/DeadZone' */
   if (rtb_DeadZone > 80.0F) {
