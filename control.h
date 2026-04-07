@@ -166,6 +166,10 @@ extern void control_terminate(void);
 /* Real-time Model object */
 extern RT_MODEL_control_T *const control_M;
 
+/* [PATCH] Direct current control bypass */
+extern int control_bypass_active;
+extern real32_T control_bypass_i_ref;
+
 /*-
  * The generated code includes comments that allow you to trace directly
  * back to the appropriate location in the model.  The basic format
