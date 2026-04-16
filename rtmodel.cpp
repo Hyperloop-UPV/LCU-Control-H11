@@ -3,7 +3,7 @@
 // course requirements at degree granting institutions only.  Not for
 // government, commercial, or other organizational use.
 //
-// File: C_5DOF_EL_private.h
+// File: rtmodel.cpp
 //
 // Code generated for Simulink model 'C_5DOF_EL'.
 //
@@ -16,16 +16,25 @@
 // Code generation objectives: Unspecified
 // Validation result: Not run
 //
-#ifndef C_5DOF_EL_private_h_
-#define C_5DOF_EL_private_h_
-#include "rtwtypes.h"
-#include "C_5DOF_EL_types.h"
-#include "C_5DOF_EL.h"
+#include "rtmodel.h"
 
-extern real_T look2_binlcpw(real_T u0, real_T u1, const real_T bp0[], const
-  real_T bp1[], const real_T table[], const uint32_T maxIndex[], uint32_T stride);
+// Use this function only if you need to maintain compatibility with an existing static main program.
+void C_5DOF_EL_step(C_5DOF_EL & C_5DOF_EL_Obj_In, int_T tid)
+{
+  switch (tid) {
+   case 0 :
+    C_5DOF_EL_Obj_In.step0();
+    break;
 
-#endif                                 // C_5DOF_EL_private_h_
+   case 1 :
+    C_5DOF_EL_Obj_In.step1();
+    break;
+
+   default :
+    // do nothing
+    break;
+  }
+}
 
 //
 // File trailer for generated code.
