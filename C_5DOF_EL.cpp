@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'C_5DOF_EL'.
 //
-// Model version                  : 1.81
+// Model version                  : 1.82
 // Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
-// C/C++ source code generated on : Thu Apr 16 19:43:07 2026
+// C/C++ source code generated on : Thu Apr 16 19:58:10 2026
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -344,7 +344,7 @@ void C_5DOF_EL::step0()                // Sample time: [0.0005s, 0.0s]
 
   // RateTransition generated from: '<S4>/Mezclador' incorporates:
   //   RateTransition generated from: '<S4>/Y'
-  //   RateTransition generated from: '<S6>/Mezclador'
+  //   RateTransition generated from: '<S6>/Sum3_Z'
 
   tmp = ((&C_5DOF_EL_M)->Timing.RateInteraction.TID0_1 == 1);
   if (tmp) {
@@ -476,18 +476,43 @@ void C_5DOF_EL::step0()                // Sample time: [0.0005s, 0.0s]
     }
   }
 
-  // RateTransition generated from: '<S6>/Mezclador'
+  // RateTransition generated from: '<S6>/Sum3_Z' incorporates:
+  //   RateTransition generated from: '<S6>/b0_Roll'
+
   if (tmp) {
-    // RateTransition generated from: '<S6>/Mezclador'
-    C_5DOF_EL_B.TmpRTBAtMezcladorOutport1_j[0] =
-      C_5DOF_EL_DW.TmpRTBAtMezcladorOutport1_Buf_g[0];
-    C_5DOF_EL_B.TmpRTBAtMezcladorOutport1_j[1] =
-      C_5DOF_EL_DW.TmpRTBAtMezcladorOutport1_Buf_g[1];
-    C_5DOF_EL_B.TmpRTBAtMezcladorOutport1_j[2] =
-      C_5DOF_EL_DW.TmpRTBAtMezcladorOutport1_Buf_g[2];
-    C_5DOF_EL_B.TmpRTBAtMezcladorOutport1_j[3] =
-      C_5DOF_EL_DW.TmpRTBAtMezcladorOutport1_Buf_g[3];
+    // RateTransition generated from: '<S6>/Sum3_Z'
+    C_5DOF_EL_B.TmpRTBAtSum3_ZInport2 =
+      C_5DOF_EL_DW.TmpRTBAtSum3_ZInport2_Buffer0;
+
+    // RateTransition generated from: '<S6>/Sum2_Z'
+    C_5DOF_EL_B.TmpRTBAtSum2_ZInport2 =
+      C_5DOF_EL_DW.TmpRTBAtSum2_ZInport2_Buffer0;
+
+    // RateTransition generated from: '<S6>/SumErr_Z'
+    C_5DOF_EL_B.TmpRTBAtSumErr_ZInport2 =
+      C_5DOF_EL_DW.TmpRTBAtSumErr_ZInport2_Buffer0;
+
+    // RateTransition generated from: '<S6>/b0_Roll'
+    C_5DOF_EL_B.TmpRTBAtb0_RollOutport1 =
+      C_5DOF_EL_DW.TmpRTBAtb0_RollOutport1_Buffer0;
+
+    // RateTransition generated from: '<S6>/b0_Pitch'
+    C_5DOF_EL_B.TmpRTBAtb0_PitchOutport1 =
+      C_5DOF_EL_DW.TmpRTBAtb0_PitchOutport1_Buffer;
   }
+
+  // MATLAB Function: '<S6>/Mezclador' incorporates:
+  //   Gain: '<S6>/Kp_Z'
+  //   Gain: '<S6>/b0_Z'
+  //   Inport: '<Root>/RefZ'
+  //   Sum: '<S6>/Sum2_Z'
+  //   Sum: '<S6>/Sum3_Z'
+  //   Sum: '<S6>/SumErr_Z'
+
+  C_5DOF_EL_B.unnamed_idx_0_tmp = (((C_5DOF_EL_U.RefZ -
+    C_5DOF_EL_B.TmpRTBAtSumErr_ZInport2) * 900.0 -
+    C_5DOF_EL_B.TmpRTBAtSum2_ZInport2) - C_5DOF_EL_B.TmpRTBAtSum3_ZInport2) *
+    250.0 * -0.25;
 
   // Gain: '<S6>/AG_mm' incorporates:
   //   Gain: '<S5>/AG_HEMS_mm'
@@ -498,12 +523,15 @@ void C_5DOF_EL::step0()                // Sample time: [0.0005s, 0.0s]
 
   // Lookup_n-D: '<S6>/InvLUT_1' incorporates:
   //   Gain: '<S6>/AG_mm'
+  //   MATLAB Function: '<S6>/Mezclador'
+  //   SignalConversion generated from: '<S559>/ SFunction '
 
   C_5DOF_EL_B.rtb_airgaps_actuadores_idx_5_tm = look2_binlcpw
-    (C_5DOF_EL_B.rtb_airgaps_actuadores_idx_4__b,
-     C_5DOF_EL_B.TmpRTBAtMezcladorOutport1_j[0], C_5DOF_EL_ConstP.pooled15,
-     C_5DOF_EL_ConstP.pooled16, C_5DOF_EL_ConstP.pooled14,
-     C_5DOF_EL_ConstP.pooled32, 14U);
+    (C_5DOF_EL_B.rtb_airgaps_actuadores_idx_4__b, (1.3089005235602094 *
+      C_5DOF_EL_B.TmpRTBAtb0_RollOutport1 + C_5DOF_EL_B.unnamed_idx_0_tmp) +
+     0.36764705882352938 * C_5DOF_EL_B.TmpRTBAtb0_PitchOutport1,
+     C_5DOF_EL_ConstP.pooled16, C_5DOF_EL_ConstP.pooled17,
+     C_5DOF_EL_ConstP.pooled15, C_5DOF_EL_ConstP.pooled32, 14U);
 
   // Gain: '<S6>/AG_mm' incorporates:
   //   Gain: '<S5>/AG_HEMS_mm'
@@ -514,10 +542,14 @@ void C_5DOF_EL::step0()                // Sample time: [0.0005s, 0.0s]
 
   // Lookup_n-D: '<S6>/InvLUT_2' incorporates:
   //   Gain: '<S6>/AG_mm'
+  //   MATLAB Function: '<S6>/Mezclador'
+  //   SignalConversion generated from: '<S559>/ SFunction '
 
   C_5DOF_EL_B.unnamed_idx_1 = look2_binlcpw(C_5DOF_EL_B.unnamed_idx_1_tmp,
-    C_5DOF_EL_B.TmpRTBAtMezcladorOutport1_j[1], C_5DOF_EL_ConstP.pooled15,
-    C_5DOF_EL_ConstP.pooled16, C_5DOF_EL_ConstP.pooled14,
+    (C_5DOF_EL_B.unnamed_idx_0_tmp - 1.3089005235602094 *
+     C_5DOF_EL_B.TmpRTBAtb0_RollOutport1) + 0.36764705882352938 *
+    C_5DOF_EL_B.TmpRTBAtb0_PitchOutport1, C_5DOF_EL_ConstP.pooled16,
+    C_5DOF_EL_ConstP.pooled17, C_5DOF_EL_ConstP.pooled15,
     C_5DOF_EL_ConstP.pooled32, 14U);
 
   // Gain: '<S6>/AG_mm' incorporates:
@@ -529,12 +561,15 @@ void C_5DOF_EL::step0()                // Sample time: [0.0005s, 0.0s]
 
   // Lookup_n-D: '<S6>/InvLUT_3' incorporates:
   //   Gain: '<S6>/AG_mm'
+  //   MATLAB Function: '<S6>/Mezclador'
+  //   SignalConversion generated from: '<S559>/ SFunction '
 
   C_5DOF_EL_B.unnamed_idx_2 = look2_binlcpw
-    (C_5DOF_EL_B.rtb_airgaps_actuadores_idx_0__c,
-     C_5DOF_EL_B.TmpRTBAtMezcladorOutport1_j[2], C_5DOF_EL_ConstP.pooled15,
-     C_5DOF_EL_ConstP.pooled16, C_5DOF_EL_ConstP.pooled14,
-     C_5DOF_EL_ConstP.pooled32, 14U);
+    (C_5DOF_EL_B.rtb_airgaps_actuadores_idx_0__c, (1.3089005235602094 *
+      C_5DOF_EL_B.TmpRTBAtb0_RollOutport1 + C_5DOF_EL_B.unnamed_idx_0_tmp) -
+     0.36764705882352938 * C_5DOF_EL_B.TmpRTBAtb0_PitchOutport1,
+     C_5DOF_EL_ConstP.pooled16, C_5DOF_EL_ConstP.pooled17,
+     C_5DOF_EL_ConstP.pooled15, C_5DOF_EL_ConstP.pooled32, 14U);
 
   // Gain: '<S6>/AG_mm' incorporates:
   //   Gain: '<S5>/AG_HEMS_mm'
@@ -545,10 +580,14 @@ void C_5DOF_EL::step0()                // Sample time: [0.0005s, 0.0s]
 
   // Lookup_n-D: '<S6>/InvLUT_4' incorporates:
   //   Gain: '<S6>/AG_mm'
+  //   MATLAB Function: '<S6>/Mezclador'
+  //   SignalConversion generated from: '<S559>/ SFunction '
 
   C_5DOF_EL_B.rtb_airgaps_actuadores_idx_0_tm = look2_binlcpw(C_5DOF_EL_B.s,
-    C_5DOF_EL_B.TmpRTBAtMezcladorOutport1_j[3], C_5DOF_EL_ConstP.pooled15,
-    C_5DOF_EL_ConstP.pooled16, C_5DOF_EL_ConstP.pooled14,
+    (C_5DOF_EL_B.unnamed_idx_0_tmp - 1.3089005235602094 *
+     C_5DOF_EL_B.TmpRTBAtb0_RollOutport1) - 0.36764705882352938 *
+    C_5DOF_EL_B.TmpRTBAtb0_PitchOutport1, C_5DOF_EL_ConstP.pooled16,
+    C_5DOF_EL_ConstP.pooled17, C_5DOF_EL_ConstP.pooled15,
     C_5DOF_EL_ConstP.pooled32, 14U);
 
   // Saturate: '<S6>/Sat_I' incorporates:
@@ -614,28 +653,28 @@ void C_5DOF_EL::step0()                // Sample time: [0.0005s, 0.0s]
 
   C_5DOF_EL_B.TmpSignalConversionAtKin_EM[0] = look2_binlcpw(C_5DOF_EL_B.smax,
     C_5DOF_EL_U.I_EMS.I_EMS5, C_5DOF_EL_ConstP.pooled11,
-    C_5DOF_EL_ConstP.pooled18, C_5DOF_EL_ConstP.pooled17,
+    C_5DOF_EL_ConstP.pooled19, C_5DOF_EL_ConstP.pooled18,
     C_5DOF_EL_ConstP.pooled33, 13U);
   C_5DOF_EL_B.TmpSignalConversionAtKin_EM[1] = look2_binlcpw
     (C_5DOF_EL_B.rtb_airgaps_actuadores_idx_4_tm, C_5DOF_EL_U.I_EMS.I_EMS6,
-     C_5DOF_EL_ConstP.pooled11, C_5DOF_EL_ConstP.pooled18,
-     C_5DOF_EL_ConstP.pooled17, C_5DOF_EL_ConstP.pooled33, 13U);
+     C_5DOF_EL_ConstP.pooled11, C_5DOF_EL_ConstP.pooled19,
+     C_5DOF_EL_ConstP.pooled18, C_5DOF_EL_ConstP.pooled33, 13U);
   C_5DOF_EL_B.TmpSignalConversionAtKin_EM[2] = look2_binlcpw(C_5DOF_EL_B.d,
     C_5DOF_EL_U.I_EMS.I_EMS7, C_5DOF_EL_ConstP.pooled11,
-    C_5DOF_EL_ConstP.pooled18, C_5DOF_EL_ConstP.pooled17,
+    C_5DOF_EL_ConstP.pooled19, C_5DOF_EL_ConstP.pooled18,
     C_5DOF_EL_ConstP.pooled33, 13U);
   C_5DOF_EL_B.TmpSignalConversionAtKin_EM[3] = look2_binlcpw(C_5DOF_EL_B.d1,
     C_5DOF_EL_U.I_EMS.I_EMS8, C_5DOF_EL_ConstP.pooled11,
-    C_5DOF_EL_ConstP.pooled18, C_5DOF_EL_ConstP.pooled17,
+    C_5DOF_EL_ConstP.pooled19, C_5DOF_EL_ConstP.pooled18,
     C_5DOF_EL_ConstP.pooled33, 13U);
   C_5DOF_EL_B.TmpSignalConversionAtKin_EM[4] = look2_binlcpw
     (C_5DOF_EL_B.rtb_airgaps_actuadores_idx_4__p, C_5DOF_EL_U.I_EMS.I_EMS9,
-     C_5DOF_EL_ConstP.pooled11, C_5DOF_EL_ConstP.pooled18,
-     C_5DOF_EL_ConstP.pooled17, C_5DOF_EL_ConstP.pooled33, 13U);
+     C_5DOF_EL_ConstP.pooled11, C_5DOF_EL_ConstP.pooled19,
+     C_5DOF_EL_ConstP.pooled18, C_5DOF_EL_ConstP.pooled33, 13U);
   C_5DOF_EL_B.TmpSignalConversionAtKin_EM[5] = look2_binlcpw
     (C_5DOF_EL_B.rtb_airgaps_actuadores_idx_4__c, C_5DOF_EL_U.I_EMS.I_EMS10,
-     C_5DOF_EL_ConstP.pooled11, C_5DOF_EL_ConstP.pooled18,
-     C_5DOF_EL_ConstP.pooled17, C_5DOF_EL_ConstP.pooled33, 13U);
+     C_5DOF_EL_ConstP.pooled11, C_5DOF_EL_ConstP.pooled19,
+     C_5DOF_EL_ConstP.pooled18, C_5DOF_EL_ConstP.pooled33, 13U);
 
   // RateTransition generated from: '<S4>/Y' incorporates:
   //   UnitDelay: '<S1>/UnitDelay'
@@ -689,15 +728,15 @@ void C_5DOF_EL::step0()                // Sample time: [0.0005s, 0.0s]
 
   C_5DOF_EL_B.rtb_airgaps_actuadores_idx_5_tm = look2_binlcpw
     (C_5DOF_EL_B.rtb_airgaps_actuadores_idx_4__b, C_5DOF_EL_U.I_HEMS.I_HEMS1,
-     C_5DOF_EL_ConstP.pooled15, C_5DOF_EL_ConstP.pooled20,
-     C_5DOF_EL_ConstP.pooled19, C_5DOF_EL_ConstP.pooled34, 14U);
+     C_5DOF_EL_ConstP.pooled16, C_5DOF_EL_ConstP.pooled21,
+     C_5DOF_EL_ConstP.pooled20, C_5DOF_EL_ConstP.pooled34, 14U);
 
   // Lookup_n-D: '<S5>/LUT_HEMS_2' incorporates:
   //   Inport: '<Root>/I_HEMS'
 
   C_5DOF_EL_B.unnamed_idx_1 = look2_binlcpw(C_5DOF_EL_B.unnamed_idx_1_tmp,
-    C_5DOF_EL_U.I_HEMS.I_HEMS2, C_5DOF_EL_ConstP.pooled15,
-    C_5DOF_EL_ConstP.pooled20, C_5DOF_EL_ConstP.pooled19,
+    C_5DOF_EL_U.I_HEMS.I_HEMS2, C_5DOF_EL_ConstP.pooled16,
+    C_5DOF_EL_ConstP.pooled21, C_5DOF_EL_ConstP.pooled20,
     C_5DOF_EL_ConstP.pooled34, 14U);
 
   // Lookup_n-D: '<S5>/LUT_HEMS_3' incorporates:
@@ -705,15 +744,15 @@ void C_5DOF_EL::step0()                // Sample time: [0.0005s, 0.0s]
 
   C_5DOF_EL_B.unnamed_idx_2 = look2_binlcpw
     (C_5DOF_EL_B.rtb_airgaps_actuadores_idx_0__c, C_5DOF_EL_U.I_HEMS.I_HEMS3,
-     C_5DOF_EL_ConstP.pooled15, C_5DOF_EL_ConstP.pooled20,
-     C_5DOF_EL_ConstP.pooled19, C_5DOF_EL_ConstP.pooled34, 14U);
+     C_5DOF_EL_ConstP.pooled16, C_5DOF_EL_ConstP.pooled21,
+     C_5DOF_EL_ConstP.pooled20, C_5DOF_EL_ConstP.pooled34, 14U);
 
   // Lookup_n-D: '<S5>/LUT_HEMS_4' incorporates:
   //   Inport: '<Root>/I_HEMS'
 
   C_5DOF_EL_B.rtb_airgaps_actuadores_idx_0_tm = look2_binlcpw(C_5DOF_EL_B.s,
-    C_5DOF_EL_U.I_HEMS.I_HEMS4, C_5DOF_EL_ConstP.pooled15,
-    C_5DOF_EL_ConstP.pooled20, C_5DOF_EL_ConstP.pooled19,
+    C_5DOF_EL_U.I_HEMS.I_HEMS4, C_5DOF_EL_ConstP.pooled16,
+    C_5DOF_EL_ConstP.pooled21, C_5DOF_EL_ConstP.pooled20,
     C_5DOF_EL_ConstP.pooled34, 14U);
 
   // Sum: '<S5>/Sum_HEMS' incorporates:
@@ -763,19 +802,18 @@ void C_5DOF_EL::step0()                // Sample time: [0.0005s, 0.0s]
 void C_5DOF_EL::step1()                // Sample time: [0.001s, 0.0s]
 {
   // local block i/o variables
-  real_T rtb_TmpRTBAtPitchInport1[2];
+  real_T rtb_TmpRTBAtZInport1[2];
+  real_T rtb_F_des_n_tmp;
   real_T rtb_TmpSignalConversionAtSFun_0;
   real_T rtb_TmpSignalConversionAtSFun_1;
-  real_T rtb_b0_Roll;
   real_T rtb_b0_Y;
-  real_T tmp;
   int32_T i;
 
   // DiscreteStateSpace: '<S4>/Y'
   {
-    C_5DOF_EL_B.TmpSignalConversionAtSFun_c[0] = (1.0)*C_5DOF_EL_DW.Y_DSTATE[0];
-    C_5DOF_EL_B.TmpSignalConversionAtSFun_c[1] = (1.0)*C_5DOF_EL_DW.Y_DSTATE[1];
-    C_5DOF_EL_B.TmpSignalConversionAtSFun_c[2] = (1.0)*C_5DOF_EL_DW.Y_DSTATE[2];
+    C_5DOF_EL_B.Roll[0] = (1.0)*C_5DOF_EL_DW.Y_DSTATE[0];
+    C_5DOF_EL_B.Roll[1] = (1.0)*C_5DOF_EL_DW.Y_DSTATE[1];
+    C_5DOF_EL_B.Roll[2] = (1.0)*C_5DOF_EL_DW.Y_DSTATE[2];
   }
 
   // Gain: '<S4>/b0_Y' incorporates:
@@ -786,15 +824,14 @@ void C_5DOF_EL::step1()                // Sample time: [0.001s, 0.0s]
   //   Sum: '<S4>/Sum3_Y'
   //   Sum: '<S4>/SumErr_Y'
 
-  rtb_b0_Y = (((0.0 - C_5DOF_EL_B.TmpSignalConversionAtSFun_c[0]) * 400.0 - 80.0
-               * C_5DOF_EL_B.TmpSignalConversionAtSFun_c[1]) -
-              C_5DOF_EL_B.TmpSignalConversionAtSFun_c[2]) * 250.0;
+  rtb_b0_Y = (((0.0 - C_5DOF_EL_B.Roll[0]) * 400.0 - 80.0 * C_5DOF_EL_B.Roll[1])
+              - C_5DOF_EL_B.Roll[2]) * 250.0;
 
   // DiscreteStateSpace: '<S4>/Yaw'
   {
-    C_5DOF_EL_B.TmpSignalConversionAtSFun_c[0] = (1.0)*C_5DOF_EL_DW.Yaw_DSTATE[0];
-    C_5DOF_EL_B.TmpSignalConversionAtSFun_c[1] = (1.0)*C_5DOF_EL_DW.Yaw_DSTATE[1];
-    C_5DOF_EL_B.TmpSignalConversionAtSFun_c[2] = (1.0)*C_5DOF_EL_DW.Yaw_DSTATE[2];
+    C_5DOF_EL_B.Roll[0] = (1.0)*C_5DOF_EL_DW.Yaw_DSTATE[0];
+    C_5DOF_EL_B.Roll[1] = (1.0)*C_5DOF_EL_DW.Yaw_DSTATE[1];
+    C_5DOF_EL_B.Roll[2] = (1.0)*C_5DOF_EL_DW.Yaw_DSTATE[2];
   }
 
   // SignalConversion generated from: '<S558>/ SFunction ' incorporates:
@@ -810,15 +847,13 @@ void C_5DOF_EL::step1()                // Sample time: [0.001s, 0.0s]
   //   Sum: '<S4>/SumErr_Yaw'
 
   rtb_TmpSignalConversionAtSFun_0 = 2.0 * rtb_b0_Y;
-  rtb_TmpSignalConversionAtSFun_1 = (((0.0 -
-    C_5DOF_EL_B.TmpSignalConversionAtSFun_c[0]) * 400.0 - 80.0 *
-    C_5DOF_EL_B.TmpSignalConversionAtSFun_c[1]) -
-    C_5DOF_EL_B.TmpSignalConversionAtSFun_c[2]) * 29.297 * 2.0;
+  rtb_TmpSignalConversionAtSFun_1 = (((0.0 - C_5DOF_EL_B.Roll[0]) * 400.0 - 80.0
+    * C_5DOF_EL_B.Roll[1]) - C_5DOF_EL_B.Roll[2]) * 29.297 * 2.0;
 
   // MATLAB Function: '<S4>/Mezclador'
   rtb_b0_Y = -0.16666666666666666 * rtb_TmpSignalConversionAtSFun_0;
-  rtb_b0_Roll = -0.30266343825665859 * rtb_TmpSignalConversionAtSFun_1;
-  C_5DOF_EL_B.F_des_n[0] = rtb_b0_Y + rtb_b0_Roll;
+  rtb_F_des_n_tmp = -0.30266343825665859 * rtb_TmpSignalConversionAtSFun_1;
+  C_5DOF_EL_B.F_des_n[0] = rtb_b0_Y + rtb_F_des_n_tmp;
   rtb_TmpSignalConversionAtSFun_0 *= 0.16666666666666666;
   rtb_TmpSignalConversionAtSFun_1 *= 0.30266343825665859;
   C_5DOF_EL_B.F_des_n[1] = rtb_TmpSignalConversionAtSFun_0 +
@@ -826,7 +861,7 @@ void C_5DOF_EL::step1()                // Sample time: [0.001s, 0.0s]
   C_5DOF_EL_B.F_des_n[2] = rtb_b0_Y;
   C_5DOF_EL_B.F_des_n[3] = rtb_TmpSignalConversionAtSFun_0;
   C_5DOF_EL_B.F_des_n[4] = rtb_b0_Y + rtb_TmpSignalConversionAtSFun_1;
-  C_5DOF_EL_B.F_des_n[5] = rtb_TmpSignalConversionAtSFun_0 + rtb_b0_Roll;
+  C_5DOF_EL_B.F_des_n[5] = rtb_TmpSignalConversionAtSFun_0 + rtb_F_des_n_tmp;
 
   // RateTransition generated from: '<S4>/Mezclador'
   for (i = 0; i < 6; i++) {
@@ -835,101 +870,61 @@ void C_5DOF_EL::step1()                // Sample time: [0.001s, 0.0s]
 
   // End of RateTransition generated from: '<S4>/Mezclador'
 
-  // DiscreteStateSpace: '<S6>/Z'
-  {
-    C_5DOF_EL_B.TmpSignalConversionAtSFun_c[0] = (1.0)*C_5DOF_EL_DW.Z_DSTATE[0];
-    C_5DOF_EL_B.TmpSignalConversionAtSFun_c[1] = (1.0)*C_5DOF_EL_DW.Z_DSTATE[1];
-    C_5DOF_EL_B.TmpSignalConversionAtSFun_c[2] = (1.0)*C_5DOF_EL_DW.Z_DSTATE[2];
-  }
-
-  // Gain: '<S6>/b0_Z' incorporates:
-  //   Constant: '<S6>/Ref_Z'
-  //   Gain: '<S6>/Kd_Z'
-  //   Gain: '<S6>/Kp_Z'
-  //   Sum: '<S6>/Sum2_Z'
-  //   Sum: '<S6>/Sum3_Z'
-  //   Sum: '<S6>/SumErr_Z'
-
-  rtb_b0_Y = (((0.01643 - C_5DOF_EL_B.TmpSignalConversionAtSFun_c[0]) * 900.0 -
-               60.0 * C_5DOF_EL_B.TmpSignalConversionAtSFun_c[1]) -
-              C_5DOF_EL_B.TmpSignalConversionAtSFun_c[2]) * 250.0;
-
-  // DiscreteStateSpace: '<S6>/Roll'
-  {
-    C_5DOF_EL_B.TmpSignalConversionAtSFun_c[0] = (1.0)*C_5DOF_EL_DW.Roll_DSTATE
-      [0];
-    C_5DOF_EL_B.TmpSignalConversionAtSFun_c[1] = (1.0)*C_5DOF_EL_DW.Roll_DSTATE
-      [1];
-    C_5DOF_EL_B.TmpSignalConversionAtSFun_c[2] = (1.0)*C_5DOF_EL_DW.Roll_DSTATE
-      [2];
-  }
-
-  // Gain: '<S6>/b0_Roll' incorporates:
-  //   Constant: '<S6>/Ref_Roll'
-  //   Gain: '<S6>/Kd_Roll'
-  //   Gain: '<S6>/Kp_Roll'
-  //   Sum: '<S6>/Sum2_Roll'
-  //   Sum: '<S6>/Sum3_Roll'
-  //   Sum: '<S6>/SumErr_Roll'
-
-  rtb_b0_Roll = (((0.0 - C_5DOF_EL_B.TmpSignalConversionAtSFun_c[0]) * 1225.0 -
-                  70.0 * C_5DOF_EL_B.TmpSignalConversionAtSFun_c[1]) -
-                 C_5DOF_EL_B.TmpSignalConversionAtSFun_c[2]) * 43.082;
-
   // DiscreteStateSpace: '<S6>/Pitch'
   {
-    C_5DOF_EL_B.TmpSignalConversionAtSFun_c[0] = (1.0)*
-      C_5DOF_EL_DW.Pitch_DSTATE[0];
-    C_5DOF_EL_B.TmpSignalConversionAtSFun_c[1] = (1.0)*
-      C_5DOF_EL_DW.Pitch_DSTATE[1];
-    C_5DOF_EL_B.TmpSignalConversionAtSFun_c[2] = (1.0)*
-      C_5DOF_EL_DW.Pitch_DSTATE[2];
+    C_5DOF_EL_B.Roll[0] = (1.0)*C_5DOF_EL_DW.Pitch_DSTATE[0];
+    C_5DOF_EL_B.Roll[1] = (1.0)*C_5DOF_EL_DW.Pitch_DSTATE[1];
+    C_5DOF_EL_B.Roll[2] = (1.0)*C_5DOF_EL_DW.Pitch_DSTATE[2];
   }
 
-  // Sum: '<S6>/SumErr_Pitch'
-  rtb_TmpSignalConversionAtSFun_1 = C_5DOF_EL_B.TmpSignalConversionAtSFun_c[0];
-
-  // Gain: '<S6>/Kd_Pitch'
-  rtb_TmpSignalConversionAtSFun_0 = C_5DOF_EL_B.TmpSignalConversionAtSFun_c[1];
-
-  // Sum: '<S6>/Sum3_Pitch'
-  tmp = C_5DOF_EL_B.TmpSignalConversionAtSFun_c[2];
-
-  // SignalConversion generated from: '<S559>/ SFunction ' incorporates:
+  // RateTransition generated from: '<S6>/b0_Pitch' incorporates:
   //   Constant: '<S6>/Ref_Pitch'
   //   Gain: '<S6>/Kd_Pitch'
   //   Gain: '<S6>/Kp_Pitch'
   //   Gain: '<S6>/b0_Pitch'
-  //   MATLAB Function: '<S6>/Mezclador'
   //   Sum: '<S6>/Sum2_Pitch'
   //   Sum: '<S6>/Sum3_Pitch'
   //   Sum: '<S6>/SumErr_Pitch'
 
-  C_5DOF_EL_B.TmpSignalConversionAtSFun_c[0] = rtb_b0_Y;
-  C_5DOF_EL_B.TmpSignalConversionAtSFun_c[1] = rtb_b0_Roll;
-  C_5DOF_EL_B.TmpSignalConversionAtSFun_c[2] = (((0.0 -
-    rtb_TmpSignalConversionAtSFun_1) * 1225.0 - 70.0 *
-    rtb_TmpSignalConversionAtSFun_0) - tmp) * 26.887;
+  C_5DOF_EL_DW.TmpRTBAtb0_PitchOutport1_Buffer = (((0.0 - C_5DOF_EL_B.Roll[0]) *
+    1225.0 - 70.0 * C_5DOF_EL_B.Roll[1]) - C_5DOF_EL_B.Roll[2]) * 26.887;
 
-  // MATLAB Function: '<S6>/Mezclador'
-  rtb_b0_Y = -0.25 * C_5DOF_EL_B.TmpSignalConversionAtSFun_c[0];
-  rtb_b0_Roll = 1.3089005235602094 * C_5DOF_EL_B.TmpSignalConversionAtSFun_c[1];
-  rtb_TmpSignalConversionAtSFun_1 = 0.36764705882352938 *
-    C_5DOF_EL_B.TmpSignalConversionAtSFun_c[2];
-  rtb_TmpSignalConversionAtSFun_0 = rtb_b0_Y + rtb_b0_Roll;
-  C_5DOF_EL_B.F_des[0] = rtb_TmpSignalConversionAtSFun_0 +
-    rtb_TmpSignalConversionAtSFun_1;
-  rtb_b0_Y -= rtb_b0_Roll;
-  C_5DOF_EL_B.F_des[1] = rtb_b0_Y + rtb_TmpSignalConversionAtSFun_1;
-  C_5DOF_EL_B.F_des[2] = rtb_TmpSignalConversionAtSFun_0 -
-    rtb_TmpSignalConversionAtSFun_1;
-  C_5DOF_EL_B.F_des[3] = rtb_b0_Y - rtb_TmpSignalConversionAtSFun_1;
+  // DiscreteStateSpace: '<S6>/Roll'
+  {
+    C_5DOF_EL_B.Roll[0] = (1.0)*C_5DOF_EL_DW.Roll_DSTATE[0];
+    C_5DOF_EL_B.Roll[1] = (1.0)*C_5DOF_EL_DW.Roll_DSTATE[1];
+    C_5DOF_EL_B.Roll[2] = (1.0)*C_5DOF_EL_DW.Roll_DSTATE[2];
+  }
 
-  // RateTransition generated from: '<S6>/Mezclador'
-  C_5DOF_EL_DW.TmpRTBAtMezcladorOutport1_Buf_g[0] = C_5DOF_EL_B.F_des[0];
-  C_5DOF_EL_DW.TmpRTBAtMezcladorOutport1_Buf_g[1] = C_5DOF_EL_B.F_des[1];
-  C_5DOF_EL_DW.TmpRTBAtMezcladorOutport1_Buf_g[2] = C_5DOF_EL_B.F_des[2];
-  C_5DOF_EL_DW.TmpRTBAtMezcladorOutport1_Buf_g[3] = C_5DOF_EL_B.F_des[3];
+  // RateTransition generated from: '<S6>/b0_Roll' incorporates:
+  //   Constant: '<S6>/Ref_Roll'
+  //   Gain: '<S6>/Kd_Roll'
+  //   Gain: '<S6>/Kp_Roll'
+  //   Gain: '<S6>/b0_Roll'
+  //   Sum: '<S6>/Sum2_Roll'
+  //   Sum: '<S6>/Sum3_Roll'
+  //   Sum: '<S6>/SumErr_Roll'
+
+  C_5DOF_EL_DW.TmpRTBAtb0_RollOutport1_Buffer0 = (((0.0 - C_5DOF_EL_B.Roll[0]) *
+    1225.0 - 70.0 * C_5DOF_EL_B.Roll[1]) - C_5DOF_EL_B.Roll[2]) * 43.082;
+
+  // DiscreteStateSpace: '<S6>/Z'
+  {
+    C_5DOF_EL_B.Z[0] = (1.0)*C_5DOF_EL_DW.Z_DSTATE[0];
+    C_5DOF_EL_B.Z[1] = (1.0)*C_5DOF_EL_DW.Z_DSTATE[1];
+    C_5DOF_EL_B.Z[2] = (1.0)*C_5DOF_EL_DW.Z_DSTATE[2];
+  }
+
+  // RateTransition generated from: '<S6>/Sum3_Z'
+  C_5DOF_EL_DW.TmpRTBAtSum3_ZInport2_Buffer0 = C_5DOF_EL_B.Z[2];
+
+  // RateTransition generated from: '<S6>/SumErr_Z'
+  C_5DOF_EL_DW.TmpRTBAtSumErr_ZInport2_Buffer0 = C_5DOF_EL_B.Z[0];
+
+  // RateTransition generated from: '<S6>/Sum2_Z' incorporates:
+  //   Gain: '<S6>/Kd_Z'
+
+  C_5DOF_EL_DW.TmpRTBAtSum2_ZInport2_Buffer0 = 60.0 * C_5DOF_EL_B.Z[1];
 
   // RateTransition generated from: '<S4>/Y'
   C_5DOF_EL_B.TmpRTBAtYInport1[0] = C_5DOF_EL_DW.TmpRTBAtYInport1_Buffer[0];
@@ -938,13 +933,14 @@ void C_5DOF_EL::step1()                // Sample time: [0.001s, 0.0s]
   C_5DOF_EL_B.TmpRTBAtYawInport1[0] = C_5DOF_EL_DW.TmpRTBAtYawInport1_Buffer[0];
 
   // RateTransition generated from: '<S6>/Pitch'
-  rtb_TmpRTBAtPitchInport1[0] = C_5DOF_EL_DW.TmpRTBAtPitchInport1_Buffer[0];
+  C_5DOF_EL_B.TmpRTBAtPitchInport1[0] =
+    C_5DOF_EL_DW.TmpRTBAtPitchInport1_Buffer[0];
 
   // RateTransition generated from: '<S6>/Roll'
   C_5DOF_EL_B.TmpRTBAtRollInport1[0] = C_5DOF_EL_DW.TmpRTBAtRollInport1_Buffer[0];
 
   // RateTransition generated from: '<S6>/Z'
-  C_5DOF_EL_B.TmpRTBAtZInport1[0] = C_5DOF_EL_DW.TmpRTBAtZInport1_Buffer[0];
+  rtb_TmpRTBAtZInport1[0] = C_5DOF_EL_DW.TmpRTBAtZInport1_Buffer[0];
 
   // RateTransition generated from: '<S4>/Y'
   C_5DOF_EL_B.TmpRTBAtYInport1[1] = C_5DOF_EL_DW.TmpRTBAtYInport1_Buffer[1];
@@ -953,13 +949,14 @@ void C_5DOF_EL::step1()                // Sample time: [0.001s, 0.0s]
   C_5DOF_EL_B.TmpRTBAtYawInport1[1] = C_5DOF_EL_DW.TmpRTBAtYawInport1_Buffer[1];
 
   // RateTransition generated from: '<S6>/Pitch'
-  rtb_TmpRTBAtPitchInport1[1] = C_5DOF_EL_DW.TmpRTBAtPitchInport1_Buffer[1];
+  C_5DOF_EL_B.TmpRTBAtPitchInport1[1] =
+    C_5DOF_EL_DW.TmpRTBAtPitchInport1_Buffer[1];
 
   // RateTransition generated from: '<S6>/Roll'
   C_5DOF_EL_B.TmpRTBAtRollInport1[1] = C_5DOF_EL_DW.TmpRTBAtRollInport1_Buffer[1];
 
   // RateTransition generated from: '<S6>/Z'
-  C_5DOF_EL_B.TmpRTBAtZInport1[1] = C_5DOF_EL_DW.TmpRTBAtZInport1_Buffer[1];
+  rtb_TmpRTBAtZInport1[1] = C_5DOF_EL_DW.TmpRTBAtZInport1_Buffer[1];
 
   // Update for DiscreteStateSpace: '<S4>/Y'
   {
@@ -1005,25 +1002,25 @@ void C_5DOF_EL::step1()                // Sample time: [0.001s, 0.0s]
                        sizeof(real_T)*3);
   }
 
-  // Update for DiscreteStateSpace: '<S6>/Z'
+  // Update for DiscreteStateSpace: '<S6>/Pitch'
   {
     real_T xnew[3];
-    xnew[0] = (0.75259320810981811)*C_5DOF_EL_DW.Z_DSTATE[0]
-      + (0.000876296604054912)*C_5DOF_EL_DW.Z_DSTATE[1]
-      + (4.3814830202746851E-7)*C_5DOF_EL_DW.Z_DSTATE[2];
-    xnew[0] += (0.24740679189018189)*C_5DOF_EL_B.TmpRTBAtZInport1[0]
-      + (1.7525932081098171E-9)*C_5DOF_EL_B.TmpRTBAtZInport1[1];
-    xnew[1] = (-21.613417590712306)*C_5DOF_EL_DW.Z_DSTATE[0]
-      + (0.98919329120464383)*C_5DOF_EL_DW.Z_DSTATE[1]
-      + (0.000994596645602322)*C_5DOF_EL_DW.Z_DSTATE[2];
-    xnew[1] += (21.613417590712306)*C_5DOF_EL_B.TmpRTBAtZInport1[0]
-      + (3.9783865824092869E-6)*C_5DOF_EL_B.TmpRTBAtZInport1[1];
-    xnew[2] = (-638.82022435602892)*C_5DOF_EL_DW.Z_DSTATE[0]
-      + (-0.31941011217801363)*C_5DOF_EL_DW.Z_DSTATE[1]
-      + (0.99984029494391125)*C_5DOF_EL_DW.Z_DSTATE[2];
-    xnew[2] += (638.82022435602892)*C_5DOF_EL_B.TmpRTBAtZInport1[0]
-      + (-6.388202243560248E-7)*C_5DOF_EL_B.TmpRTBAtZInport1[1];
-    (void) std::memcpy(&C_5DOF_EL_DW.Z_DSTATE[0], xnew,
+    xnew[0] = (0.75259320810981811)*C_5DOF_EL_DW.Pitch_DSTATE[0]
+      + (0.000876296604054912)*C_5DOF_EL_DW.Pitch_DSTATE[1]
+      + (4.3814830202746851E-7)*C_5DOF_EL_DW.Pitch_DSTATE[2];
+    xnew[0] += (0.24740679189018189)*C_5DOF_EL_B.TmpRTBAtPitchInport1[0]
+      + (1.629591631745635E-8)*C_5DOF_EL_B.TmpRTBAtPitchInport1[1];
+    xnew[1] = (-21.613417590712306)*C_5DOF_EL_DW.Pitch_DSTATE[0]
+      + (0.98919329120464383)*C_5DOF_EL_DW.Pitch_DSTATE[1]
+      + (0.000994596645602322)*C_5DOF_EL_DW.Pitch_DSTATE[2];
+    xnew[1] += (21.613417590712306)*C_5DOF_EL_B.TmpRTBAtPitchInport1[0]
+      + (3.69917300406264E-5)*C_5DOF_EL_B.TmpRTBAtPitchInport1[1];
+    xnew[2] = (-638.82022435602892)*C_5DOF_EL_DW.Pitch_DSTATE[0]
+      + (-0.31941011217801363)*C_5DOF_EL_DW.Pitch_DSTATE[1]
+      + (0.99984029494391125)*C_5DOF_EL_DW.Pitch_DSTATE[2];
+    xnew[2] += (638.82022435602892)*C_5DOF_EL_B.TmpRTBAtPitchInport1[0]
+      + (-5.9398614977128325E-6)*C_5DOF_EL_B.TmpRTBAtPitchInport1[1];
+    (void) std::memcpy(&C_5DOF_EL_DW.Pitch_DSTATE[0], xnew,
                        sizeof(real_T)*3);
   }
 
@@ -1049,25 +1046,25 @@ void C_5DOF_EL::step1()                // Sample time: [0.001s, 0.0s]
                        sizeof(real_T)*3);
   }
 
-  // Update for DiscreteStateSpace: '<S6>/Pitch'
+  // Update for DiscreteStateSpace: '<S6>/Z'
   {
     real_T xnew[3];
-    xnew[0] = (0.75259320810981811)*C_5DOF_EL_DW.Pitch_DSTATE[0]
-      + (0.000876296604054912)*C_5DOF_EL_DW.Pitch_DSTATE[1]
-      + (4.3814830202746851E-7)*C_5DOF_EL_DW.Pitch_DSTATE[2];
-    xnew[0] += (0.24740679189018189)*rtb_TmpRTBAtPitchInport1[0] +
-      (1.629591631745635E-8)*rtb_TmpRTBAtPitchInport1[1];
-    xnew[1] = (-21.613417590712306)*C_5DOF_EL_DW.Pitch_DSTATE[0]
-      + (0.98919329120464383)*C_5DOF_EL_DW.Pitch_DSTATE[1]
-      + (0.000994596645602322)*C_5DOF_EL_DW.Pitch_DSTATE[2];
-    xnew[1] += (21.613417590712306)*rtb_TmpRTBAtPitchInport1[0] +
-      (3.69917300406264E-5)*rtb_TmpRTBAtPitchInport1[1];
-    xnew[2] = (-638.82022435602892)*C_5DOF_EL_DW.Pitch_DSTATE[0]
-      + (-0.31941011217801363)*C_5DOF_EL_DW.Pitch_DSTATE[1]
-      + (0.99984029494391125)*C_5DOF_EL_DW.Pitch_DSTATE[2];
-    xnew[2] += (638.82022435602892)*rtb_TmpRTBAtPitchInport1[0] +
-      (-5.9398614977128325E-6)*rtb_TmpRTBAtPitchInport1[1];
-    (void) std::memcpy(&C_5DOF_EL_DW.Pitch_DSTATE[0], xnew,
+    xnew[0] = (0.75259320810981811)*C_5DOF_EL_DW.Z_DSTATE[0]
+      + (0.000876296604054912)*C_5DOF_EL_DW.Z_DSTATE[1]
+      + (4.3814830202746851E-7)*C_5DOF_EL_DW.Z_DSTATE[2];
+    xnew[0] += (0.24740679189018189)*rtb_TmpRTBAtZInport1[0] +
+      (1.7525932081098171E-9)*rtb_TmpRTBAtZInport1[1];
+    xnew[1] = (-21.613417590712306)*C_5DOF_EL_DW.Z_DSTATE[0]
+      + (0.98919329120464383)*C_5DOF_EL_DW.Z_DSTATE[1]
+      + (0.000994596645602322)*C_5DOF_EL_DW.Z_DSTATE[2];
+    xnew[1] += (21.613417590712306)*rtb_TmpRTBAtZInport1[0] +
+      (3.9783865824092869E-6)*rtb_TmpRTBAtZInport1[1];
+    xnew[2] = (-638.82022435602892)*C_5DOF_EL_DW.Z_DSTATE[0]
+      + (-0.31941011217801363)*C_5DOF_EL_DW.Z_DSTATE[1]
+      + (0.99984029494391125)*C_5DOF_EL_DW.Z_DSTATE[2];
+    xnew[2] += (638.82022435602892)*rtb_TmpRTBAtZInport1[0] +
+      (-6.388202243560248E-7)*rtb_TmpRTBAtZInport1[1];
+    (void) std::memcpy(&C_5DOF_EL_DW.Z_DSTATE[0], xnew,
                        sizeof(real_T)*3);
   }
 }
@@ -1091,20 +1088,20 @@ void C_5DOF_EL::initialize()
   C_5DOF_EL_DW.Yaw_DSTATE[1] = (0.0);
   C_5DOF_EL_DW.Yaw_DSTATE[2] = (0.0);
 
-  // InitializeConditions for DiscreteStateSpace: '<S6>/Z'
-  C_5DOF_EL_DW.Z_DSTATE[0] = (0.0225);
-  C_5DOF_EL_DW.Z_DSTATE[1] = (0.0);
-  C_5DOF_EL_DW.Z_DSTATE[2] = (0.0);
+  // InitializeConditions for DiscreteStateSpace: '<S6>/Pitch'
+  C_5DOF_EL_DW.Pitch_DSTATE[0] = (0.001);
+  C_5DOF_EL_DW.Pitch_DSTATE[1] = (0.0);
+  C_5DOF_EL_DW.Pitch_DSTATE[2] = (0.0);
 
   // InitializeConditions for DiscreteStateSpace: '<S6>/Roll'
   C_5DOF_EL_DW.Roll_DSTATE[0] = (0.001);
   C_5DOF_EL_DW.Roll_DSTATE[1] = (0.0);
   C_5DOF_EL_DW.Roll_DSTATE[2] = (0.0);
 
-  // InitializeConditions for DiscreteStateSpace: '<S6>/Pitch'
-  C_5DOF_EL_DW.Pitch_DSTATE[0] = (0.001);
-  C_5DOF_EL_DW.Pitch_DSTATE[1] = (0.0);
-  C_5DOF_EL_DW.Pitch_DSTATE[2] = (0.0);
+  // InitializeConditions for DiscreteStateSpace: '<S6>/Z'
+  C_5DOF_EL_DW.Z_DSTATE[0] = (0.0225);
+  C_5DOF_EL_DW.Z_DSTATE[1] = (0.0);
+  C_5DOF_EL_DW.Z_DSTATE[2] = (0.0);
 }
 
 // Model terminate function

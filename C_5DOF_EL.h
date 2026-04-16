@@ -7,9 +7,9 @@
 //
 // Code generated for Simulink model 'C_5DOF_EL'.
 //
-// Model version                  : 1.81
+// Model version                  : 1.82
 // Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
-// C/C++ source code generated on : Thu Apr 16 19:43:07 2026
+// C/C++ source code generated on : Thu Apr 16 19:58:10 2026
 //
 // Target selection: ert.tlc
 // Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -82,15 +82,19 @@ class C_5DOF_EL final
     real_T TmpSignalConversionAtKin_EM[6];
     real_T F_des_n[6];                 // '<S4>/Mezclador'
     real_T u[5];                       // '<Root>/GapToStates'
-    real_T TmpRTBAtMezcladorOutport1_j[4];// '<S6>/Mezclador'
     real_T TmpSignalConversionAtKin_HE[4];
-    real_T F_des[4];                   // '<S6>/Mezclador'
     real_T dv[3];
-    real_T TmpSignalConversionAtSFun_c[3];// '<S6>/Mezclador'
+    real_T Roll[3];                    // '<S6>/Roll'
+    real_T Z[3];                       // '<S6>/Z'
     real_T TmpRTBAtYInport1[2];
     real_T TmpRTBAtYawInport1[2];
-    real_T TmpRTBAtZInport1[2];
+    real_T TmpRTBAtPitchInport1[2];
     real_T TmpRTBAtRollInport1[2];
+    real_T TmpRTBAtSum3_ZInport2;
+    real_T TmpRTBAtSum2_ZInport2;      // '<S6>/Kd_Z'
+    real_T TmpRTBAtSumErr_ZInport2;
+    real_T TmpRTBAtb0_RollOutport1;    // '<S6>/b0_Roll'
+    real_T TmpRTBAtb0_PitchOutport1;   // '<S6>/b0_Pitch'
     real_T smax;
     real_T s;
     real_T unnamed_idx_1;
@@ -102,6 +106,7 @@ class C_5DOF_EL final
     real_T rtb_airgaps_actuadores_idx_4__b;
     real_T rtb_airgaps_actuadores_idx_4__p;
     real_T rtb_airgaps_actuadores_idx_5_tm;
+    real_T unnamed_idx_0_tmp;
     real_T d;
     real_T d1;
     real_T unnamed_idx_1_tmp;
@@ -120,11 +125,15 @@ class C_5DOF_EL final
     real_T UnitDelay_DSTATE[5];        // '<S1>/UnitDelay'
     real_T Y_DSTATE[3];                // '<S4>/Y'
     real_T Yaw_DSTATE[3];              // '<S4>/Yaw'
-    real_T Z_DSTATE[3];                // '<S6>/Z'
-    real_T Roll_DSTATE[3];             // '<S6>/Roll'
     real_T Pitch_DSTATE[3];            // '<S6>/Pitch'
+    real_T Roll_DSTATE[3];             // '<S6>/Roll'
+    real_T Z_DSTATE[3];                // '<S6>/Z'
     real_T TmpRTBAtMezcladorOutport1_Buffe[6];// synthesized block
-    real_T TmpRTBAtMezcladorOutport1_Buf_g[4];// synthesized block
+    real_T TmpRTBAtSum3_ZInport2_Buffer0;// synthesized block
+    real_T TmpRTBAtSum2_ZInport2_Buffer0;// synthesized block
+    real_T TmpRTBAtSumErr_ZInport2_Buffer0;// synthesized block
+    real_T TmpRTBAtb0_RollOutport1_Buffer0;// synthesized block
+    real_T TmpRTBAtb0_PitchOutport1_Buffer;// synthesized block
     real_T TmpRTBAtYInport1_Buffer[2]; // synthesized block
     real_T TmpRTBAtYawInport1_Buffer[2];// synthesized block
     real_T TmpRTBAtPitchInport1_Buffer[2];// synthesized block
@@ -183,7 +192,7 @@ class C_5DOF_EL final
     //    '<S6>/InvLUT_3'
     //    '<S6>/InvLUT_4'
 
-    real_T pooled14[2800];
+    real_T pooled15[2800];
 
     // Pooled Parameter (Mixed Expressions)
     //  Referenced by:
@@ -196,7 +205,7 @@ class C_5DOF_EL final
     //    '<S6>/InvLUT_3'
     //    '<S6>/InvLUT_4'
 
-    real_T pooled15[14];
+    real_T pooled16[14];
 
     // Pooled Parameter (Expression: hems_inv_F_bp)
     //  Referenced by:
@@ -205,7 +214,7 @@ class C_5DOF_EL final
     //    '<S6>/InvLUT_3'
     //    '<S6>/InvLUT_4'
 
-    real_T pooled16[200];
+    real_T pooled17[200];
 
     // Pooled Parameter (Expression: ems_direct_F_table)
     //  Referenced by:
@@ -216,7 +225,7 @@ class C_5DOF_EL final
     //    '<S5>/LUT_EMS_5'
     //    '<S5>/LUT_EMS_6'
 
-    real_T pooled17[728];
+    real_T pooled18[728];
 
     // Pooled Parameter (Expression: ems_direct_I_bp)
     //  Referenced by:
@@ -227,7 +236,7 @@ class C_5DOF_EL final
     //    '<S5>/LUT_EMS_5'
     //    '<S5>/LUT_EMS_6'
 
-    real_T pooled18[56];
+    real_T pooled19[56];
 
     // Pooled Parameter (Expression: hems_direct_F_table)
     //  Referenced by:
@@ -236,7 +245,7 @@ class C_5DOF_EL final
     //    '<S5>/LUT_HEMS_3'
     //    '<S5>/LUT_HEMS_4'
 
-    real_T pooled19[1554];
+    real_T pooled20[1554];
 
     // Pooled Parameter (Expression: hems_direct_I_bp)
     //  Referenced by:
@@ -245,7 +254,7 @@ class C_5DOF_EL final
     //    '<S5>/LUT_HEMS_3'
     //    '<S5>/LUT_HEMS_4'
 
-    real_T pooled20[111];
+    real_T pooled21[111];
 
     // Expression: K_kin_hems
     //  Referenced by: '<S5>/Kin_HEMS'
@@ -303,6 +312,7 @@ class C_5DOF_EL final
     AIRGAP_Bus SensoresPos;            // '<Root>/SensoresPos'
     HEMS I_HEMS;                       // '<Root>/I_HEMS'
     EMS I_EMS;                         // '<Root>/I_EMS'
+    real_T RefZ;                       // '<Root>/RefZ'
   };
 
   // External outputs (root outports fed by signals with default storage)
