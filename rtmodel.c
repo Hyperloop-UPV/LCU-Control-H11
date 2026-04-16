@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'C_5DOF_EL'.
  *
- * Model version                  : 1.72
+ * Model version                  : 1.74
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Thu Apr 16 15:20:29 2026
+ * C/C++ source code generated on : Thu Apr 16 16:40:05 2026
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex-M
