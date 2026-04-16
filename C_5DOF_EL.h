@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'C_5DOF_EL'.
  *
- * Model version                  : 1.71
+ * Model version                  : 1.72
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Thu Apr 16 14:47:10 2026
+ * C/C++ source code generated on : Thu Apr 16 15:20:29 2026
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -27,10 +27,12 @@
 
 #include "C_5DOF_EL_types.h"
 #include <string.h>
-#include <stddef.h>
-#include "MW_target_hardware_resources.h"
 
 /* Macros for accessing real-time model data structure */
+#ifndef rtmCounterLimit
+#define rtmCounterLimit(rtm, idx)      ((rtm)->Timing.TaskCounters.cLimit[(idx)])
+#endif
+
 #ifndef rtmGetErrorStatus
 #define rtmGetErrorStatus(rtm)         ((rtm)->errorStatus)
 #endif
@@ -52,8 +54,48 @@ typedef struct {
   real_T H[40];
   real_T A[25];
   real_T airgaps_actuadores[10];       /* '<S2>/MATLAB Function1' */
+  real_T b[8];
+  real_T TmpSignalConversionAtKin_EM[6];
+  real_T dv[6];
+  real_T u[5];                         /* '<S1>/MATLAB Function1' */
+  real_T uz[5];                        /* '<S2>/uz' */
   real_T RT_Iref_HEMS[4];              /* '<S6>/RT_Iref_HEMS' */
   real_T RT_Iref_EMS[6];               /* '<S4>/RT_Iref_EMS' */
+  real_T dv1[4];
+  real_T Yaw[3];                       /* '<S4>/Yaw' */
+  real_T TmpSignalConversionAtSFun_f[3];/* '<S6>/Mezclador' */
+  real_T smax;
+  real_T s;
+  real_T b0_Z;                         /* '<S6>/b0_Z' */
+  real_T b0_Roll;                      /* '<S6>/b0_Roll' */
+  real_T rtb_AG_mm_idx_0;
+  real_T rtb_AG_mm_idx_1;
+  real_T rtb_Sum_HEMS_idx_0;
+  real_T rtb_Sum_HEMS_idx_1;
+  real_T rtb_Sum_HEMS_idx_2;
+  real_T Saturation_g;                 /* '<S441>/Saturation' */
+  real_T Saturation;                   /* '<S387>/Saturation' */
+  real_T Saturation_n;                 /* '<S495>/Saturation' */
+  real_T Saturation_a;                 /* '<S549>/Saturation' */
+  real_T Saturation_c;                 /* '<S58>/Saturation' */
+  real_T Saturation_av;                /* '<S112>/Saturation' */
+  real_T Saturation_b;                 /* '<S166>/Saturation' */
+  real_T Saturation_at;                /* '<S220>/Saturation' */
+  real_T Saturation_h;                 /* '<S274>/Saturation' */
+  real_T Saturation_cw;                /* '<S328>/Saturation' */
+  real_T IntegralGain;                 /* '<S318>/Integral Gain' */
+  real_T DeadZone;                     /* '<S313>/DeadZone' */
+  real_T Integrator;
+  real_T Integrator_k;
+  real_T Integrator_c;
+  real_T Integrator_a;
+  real_T Integrator_f;
+  real_T Integrator_j;
+  real_T Integrator_am;
+  real_T Integrator_l;
+  real_T Integrator_j3;
+  real_T Integrator_tmp;
+  real_T Integrator_k_tmp;
 } B_C_5DOF_EL_T;
 
 /* Block states (default storage) for system '<Root>' */
@@ -265,10 +307,11 @@ struct tag_RTM_C_5DOF_EL_T {
   struct {
     struct {
       uint8_T TID[2];
+      uint8_T cLimit[2];
     } TaskCounters;
 
     struct {
-      boolean_T TID0_1;
+      uint8_T TID0_1;
     } RateInteraction;
   } Timing;
 };
@@ -288,9 +331,6 @@ extern ExtY_C_5DOF_EL_T C_5DOF_EL_Y;
 /* Constant parameters (default storage) */
 extern const ConstP_C_5DOF_EL_T C_5DOF_EL_ConstP;
 
-/* External function called from main */
-extern void C_5DOF_EL_SetEventsForThisBaseStep(boolean_T *eventFlags);
-
 /* Model entry point functions */
 extern void C_5DOF_EL_initialize(void);
 extern void C_5DOF_EL_step0(void);     /* Sample time: [0.0005s, 0.0s] */
@@ -299,8 +339,6 @@ extern void C_5DOF_EL_terminate(void);
 
 /* Real-time Model object */
 extern RT_MODEL_C_5DOF_EL_T *const C_5DOF_EL_M;
-extern volatile boolean_T stopRequested;
-extern volatile boolean_T runModel;
 
 /*-
  * The generated code includes comments that allow you to trace directly
