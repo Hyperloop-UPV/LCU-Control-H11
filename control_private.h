@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'control'.
  *
- * Model version                  : 1.108
+ * Model version                  : 1.110
  * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Tue Apr  7 22:41:27 2026
+ * C/C++ source code generated on : Thu Apr 30 22:43:24 2026
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -20,12 +20,12 @@
 #ifndef control_private_h_
 #define control_private_h_
 #include "rtwtypes.h"
-#include "control_types.h"
 #include "control.h"
+#include "control_types.h"
 
-extern real32_T look2_iflf_binlcpw(real32_T u0, real32_T u1, const real32_T bp0[],
-  const real32_T bp1[], const real32_T table[], const uint32_T maxIndex[],
-  uint32_T stride);
+extern real_T rt_hypotd_snf(real_T u0, real_T u1);
+extern void control_Simulink2(real32_T rtu_ref_out, real32_T rtu_y_out, real32_T
+  *rty_u_out, real32_T rty_Out1[3], DW_Simulink2_control_T *localDW);
 
 #endif                                 /* control_private_h_ */
 

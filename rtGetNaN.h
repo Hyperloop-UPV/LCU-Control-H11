@@ -3,7 +3,7 @@
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
  *
- * File: rtmodel.h
+ * File: rtGetNaN.h
  *
  * Code generated for Simulink model 'control'.
  *
@@ -17,20 +17,15 @@
  * Validation result: Not run
  */
 
-#ifndef rtmodel_h_
-#define rtmodel_h_
-#include "control.h"
+#ifndef rtGetNaN_h_
+#define rtGetNaN_h_
+#include "rt_nonfinite.h"
+#include "rtwtypes.h"
 
-/* Macros generated for backwards compatibility  */
-#ifndef rtmGetStopRequested
-#define rtmGetStopRequested(rtm)       ((void*) 0)
-#endif
+extern real_T rtGetNaN(void);
+extern real32_T rtGetNaNF(void);
 
-/* Model wrapper function */
-/* Use this function only if you need to maintain compatibility with an existing static main program. */
-extern void control_step(int_T tid);
-
-#endif                                 /* rtmodel_h_ */
+#endif                                 /* rtGetNaN_h_ */
 
 /*
  * File trailer for generated code.

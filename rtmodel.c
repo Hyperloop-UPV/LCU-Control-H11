@@ -3,7 +3,7 @@
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
  *
- * File: rtmodel.h
+ * File: rtmodel.c
  *
  * Code generated for Simulink model 'control'.
  *
@@ -17,20 +17,25 @@
  * Validation result: Not run
  */
 
-#ifndef rtmodel_h_
-#define rtmodel_h_
-#include "control.h"
+#include "rtmodel.h"
 
-/* Macros generated for backwards compatibility  */
-#ifndef rtmGetStopRequested
-#define rtmGetStopRequested(rtm)       ((void*) 0)
-#endif
-
-/* Model wrapper function */
 /* Use this function only if you need to maintain compatibility with an existing static main program. */
-extern void control_step(int_T tid);
+void control_step(int_T tid)
+{
+  switch (tid) {
+   case 0 :
+    control_step0();
+    break;
 
-#endif                                 /* rtmodel_h_ */
+   case 1 :
+    control_step1();
+    break;
+
+   default :
+    /* do nothing */
+    break;
+  }
+}
 
 /*
  * File trailer for generated code.

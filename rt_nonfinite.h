@@ -3,7 +3,7 @@
  * course requirements at degree granting institutions only.  Not for
  * government, commercial, or other organizational use.
  *
- * File: rtmodel.h
+ * File: rt_nonfinite.h
  *
  * Code generated for Simulink model 'control'.
  *
@@ -17,20 +17,22 @@
  * Validation result: Not run
  */
 
-#ifndef rtmodel_h_
-#define rtmodel_h_
-#include "control.h"
+#ifndef rt_nonfinite_h_
+#define rt_nonfinite_h_
+#include "rtwtypes.h"
 
-/* Macros generated for backwards compatibility  */
-#ifndef rtmGetStopRequested
-#define rtmGetStopRequested(rtm)       ((void*) 0)
-#endif
+extern real_T rtInf;
+extern real_T rtMinusInf;
+extern real_T rtNaN;
+extern real32_T rtInfF;
+extern real32_T rtMinusInfF;
+extern real32_T rtNaNF;
+extern boolean_T rtIsInf(real_T value);
+extern boolean_T rtIsInfF(real32_T value);
+extern boolean_T rtIsNaN(real_T value);
+extern boolean_T rtIsNaNF(real32_T value);
 
-/* Model wrapper function */
-/* Use this function only if you need to maintain compatibility with an existing static main program. */
-extern void control_step(int_T tid);
-
-#endif                                 /* rtmodel_h_ */
+#endif                                 /* rt_nonfinite_h_ */
 
 /*
  * File trailer for generated code.
