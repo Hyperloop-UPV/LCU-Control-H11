@@ -1,39 +1,26 @@
-/*
- * Academic License - for use in teaching, academic research, and meeting
- * course requirements at degree granting institutions only.  Not for
- * government, commercial, or other organizational use.
- *
- * File: rtmodel.h
- *
- * Code generated for Simulink model 'control'.
- *
- * Model version                  : 1.110
- * Simulink Coder version         : 25.2 (R2025b) 28-Jul-2025
- * C/C++ source code generated on : Thu Apr 30 22:43:24 2026
- *
- * Target selection: ert.tlc
- * Embedded hardware selection: ARM Compatible->ARM Cortex-M
- * Code generation objectives: Unspecified
- * Validation result: Not run
- */
-
-#ifndef rtmodel_h_
-#define rtmodel_h_
-#include "control.h"
-
-/* Macros generated for backwards compatibility  */
+#ifndef RTMODEL_H_
+#define RTMODEL_H_
+#include "CONTROLH10_1.h"
+#define MODEL_CLASSNAME                CONTROLH10_1
+#define MODEL_STEPNAME                 CONTROLH10_1_step
+#define ROOT_IO_FORMAT                 1
 #ifndef rtmGetStopRequested
 #define rtmGetStopRequested(rtm)       ((void*) 0)
 #endif
 
-/* Model wrapper function */
-/* Use this function only if you need to maintain compatibility with an existing static main program. */
-extern void control_step(int_T tid);
+#ifdef __cplusplus
 
-#endif                                 /* rtmodel_h_ */
+extern "C"
+{
 
-/*
- * File trailer for generated code.
- *
- * [EOF]
- */
+#endif
+
+  extern void CONTROLH10_1_step(CONTROLH10_1 & CONTROLH10_1_Obj_In, int_T tid);
+
+#ifdef __cplusplus
+
+}
+
+#endif
+#endif
+
