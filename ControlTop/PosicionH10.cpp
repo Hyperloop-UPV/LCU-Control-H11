@@ -156,34 +156,34 @@ void PosicionH10::step1(const real_T rtu_airgaps_sensores[8], const real_T
   rotx = look2_binlcpw(tmp_1, (-0.2781283102311205 * rotx + rotz) + tmp_2,
                        rtCP_InvLUT_4_bp01Data, rtCP_InvLUT_4_bp02Data,
                        rtCP_InvLUT_4_tableData, rtCP_InvLUT_4_maxIndex, 54U);
-  if (rtb_Kin_HEMS_1 > 45.0) {
-    rty_I_referencia[0] = 45.0;
-  } else if (rtb_Kin_HEMS_1 < -45.0) {
-    rty_I_referencia[0] = -45.0;
+  if (rtb_Kin_HEMS_1 > 55.0) {
+    rty_I_referencia[0] = 55.0;
+  } else if (rtb_Kin_HEMS_1 < -55.0) {
+    rty_I_referencia[0] = -55.0;
   } else {
     rty_I_referencia[0] = rtb_Kin_HEMS_1;
   }
 
-  if (rtb_Kin_HEMS_tmp > 45.0) {
-    rty_I_referencia[1] = 45.0;
-  } else if (rtb_Kin_HEMS_tmp < -45.0) {
-    rty_I_referencia[1] = -45.0;
+  if (rtb_Kin_HEMS_tmp > 55.0) {
+    rty_I_referencia[1] = 55.0;
+  } else if (rtb_Kin_HEMS_tmp < -55.0) {
+    rty_I_referencia[1] = -55.0;
   } else {
     rty_I_referencia[1] = rtb_Kin_HEMS_tmp;
   }
 
-  if (rtb_Kin_HEMS_tmp_0 > 45.0) {
-    rty_I_referencia[2] = 45.0;
-  } else if (rtb_Kin_HEMS_tmp_0 < -45.0) {
-    rty_I_referencia[2] = -45.0;
+  if (rtb_Kin_HEMS_tmp_0 > 55.0) {
+    rty_I_referencia[2] = 55.0;
+  } else if (rtb_Kin_HEMS_tmp_0 < -55.0) {
+    rty_I_referencia[2] = -55.0;
   } else {
     rty_I_referencia[2] = rtb_Kin_HEMS_tmp_0;
   }
 
-  if (rotx > 45.0) {
-    rty_I_referencia[3] = 45.0;
-  } else if (rotx < -45.0) {
-    rty_I_referencia[3] = -45.0;
+  if (rotx > 55.0) {
+    rty_I_referencia[3] = 55.0;
+  } else if (rotx < -55.0) {
+    rty_I_referencia[3] = -55.0;
   } else {
     rty_I_referencia[3] = rotx;
   }
