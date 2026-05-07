@@ -2967,6 +2967,13 @@ const real_T rtCP_pooled_AhNknnQ6MCgf[10800]{ 55.0, 54.819855713070318,
 extern const uint32_T rtCP_pooled_GdBY1bCPiccC[2];
 const uint32_T rtCP_pooled_GdBY1bCPiccC[2]{ 53U, 199U } ;
 
+extern const real_T rtCP_pooled_Ghx6CrC5RbMH[3];
+const real_T rtCP_pooled_Ghx6CrC5RbMH[3]{ -2816.3102265, 0.0, 0.0 } ;
+
+extern const real_T rtCP_pooled_HxUUTAiAzJUi[12];
+const real_T rtCP_pooled_HxUUTAiAzJUi[12]{ -1.0, 0.3055, 0.8498, -1.0, -0.2395,
+  0.8498, -1.0, 0.3055, -0.8752, -1.0, -0.2395, -0.8752 } ;
+
 extern const real_T rtCP_pooled_M3o5LhjHhGhf[111];
 const real_T rtCP_pooled_M3o5LhjHhGhf[111]{ -55.0, -54.0, -53.0, -52.0, -51.0,
   -50.0, -49.0, -48.0, -47.0, -46.0, -45.0, -44.0, -43.0, -42.0, -41.0, -40.0,

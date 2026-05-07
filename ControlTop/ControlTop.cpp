@@ -2,7 +2,6 @@
 #include "rtwtypes.h"
 #include "CorrienteH10.h"
 #include "PosicionH10.h"
-#include <new>
 
 void ControlTop::step0()
 {
@@ -60,34 +59,83 @@ void ControlTop::step0()
 
 void ControlTop::step1()
 {
-  int32_T i;
+  ControlTop_B.UnitDelay = ControlTop_DW.UnitDelay_DSTATE;
+  if (!ControlTop_DW.ref_not_empty) {
+    ControlTop_DW.ref = ControlTop_B.UnitDelay;
+    ControlTop_DW.ref_not_empty = true;
+  }
+
+  if (ControlTop_U.enable == 0.0) {
+    ControlTop_DW.ref = ControlTop_B.UnitDelay;
+  } else {
+    ControlTop_B.UnitDelay = ControlTop_U.RefZ - ControlTop_DW.ref;
+    if (ControlTop_B.UnitDelay > 5.0E-6) {
+      ControlTop_DW.ref += 5.0E-6;
+    } else if (ControlTop_B.UnitDelay < -5.0E-6) {
+      ControlTop_DW.ref -= 5.0E-6;
+    } else {
+      ControlTop_DW.ref = ControlTop_U.RefZ;
+    }
+  }
+
+  if (ControlTop_U.RampaStep >= 0.5) {
+    ControlTop_B.Switch1 = ControlTop_DW.ref;
+  } else {
+    ControlTop_B.Switch1 = ControlTop_U.RefZ;
+  }
+
   ControlTop_B.RT_l[0] = ControlTop_DW.RT_Buffer[0];
   ControlTop_B.RT_l[1] = ControlTop_DW.RT_Buffer[1];
   ControlTop_B.RT_l[2] = ControlTop_DW.RT_Buffer[2];
   ControlTop_B.RT_l[3] = ControlTop_DW.RT_Buffer[3];
-  ControlPosici_nMDLOBJ2.step1(&ControlTop_U.Sensores[0], &ControlTop_U.RefZ,
+  ControlPosici_nMDLOBJ2.step1(&ControlTop_U.Sensores[0], &ControlTop_B.Switch1,
     &ControlTop_B.RT_l[0], &ControlTop_B.airgaps_actuadores[0],
-    &ControlTop_B.ControlPosicin_o2[0], &ControlTop_B.estados[0]);
+    &ControlTop_B.ControlPosicin_o2[0], &ControlTop_B.estados[0],
+    &ControlTop_B.ControlPosicin_o4[0], &ControlTop_B.F_des[0],
+    &ControlTop_B.ControlPosicin_o6[0], &ControlTop_B.ControlPosicin_o7[0],
+    &ControlTop_B.ControlPosicin_o8[0], &ControlTop_B.ControlPosicin_o9[0],
+    &ControlTop_B.Fe_alloc[0]);
   ControlTop_Y.GapsLocales[0] = ControlTop_B.airgaps_actuadores[0];
   ControlTop_Y.GapsLocales[1] = ControlTop_B.airgaps_actuadores[1];
   ControlTop_Y.GapsLocales[2] = ControlTop_B.airgaps_actuadores[2];
   ControlTop_Y.GapsLocales[3] = ControlTop_B.airgaps_actuadores[3];
-  for (i = 0; i < 5; i++) {
-    ControlTop_Y.Estados[i] = ControlTop_B.estados[i];
+  for (ControlTop_B.i = 0; ControlTop_B.i < 5; ControlTop_B.i++) {
+    ControlTop_Y.Estados[ControlTop_B.i] = ControlTop_B.estados[ControlTop_B.i];
   }
 
+  ControlTop_Y.Fe[0] = ControlTop_B.ControlPosicin_o4[0];
+  ControlTop_Y.Fe[1] = ControlTop_B.ControlPosicin_o4[1];
+  ControlTop_Y.Fe[2] = ControlTop_B.ControlPosicin_o4[2];
+  ControlTop_Y.Fa[0] = ControlTop_B.F_des[0];
+  ControlTop_Y.Fa[1] = ControlTop_B.F_des[1];
+  ControlTop_Y.Fa[2] = ControlTop_B.F_des[2];
+  ControlTop_Y.Fa[3] = ControlTop_B.F_des[3];
+  ControlTop_Y.Ef[0] = ControlTop_B.ControlPosicin_o6[0];
+  ControlTop_Y.P[0] = ControlTop_B.ControlPosicin_o7[0];
+  ControlTop_Y.R[0] = ControlTop_B.ControlPosicin_o8[0];
+  ControlTop_Y.Zz[0] = ControlTop_B.ControlPosicin_o9[0];
+  ControlTop_Y.Fe_L[0] = ControlTop_B.Fe_alloc[0];
+  ControlTop_Y.Ef[1] = ControlTop_B.ControlPosicin_o6[1];
+  ControlTop_Y.P[1] = ControlTop_B.ControlPosicin_o7[1];
+  ControlTop_Y.R[1] = ControlTop_B.ControlPosicin_o8[1];
+  ControlTop_Y.Zz[1] = ControlTop_B.ControlPosicin_o9[1];
+  ControlTop_Y.Fe_L[1] = ControlTop_B.Fe_alloc[1];
+  ControlTop_Y.Ef[2] = ControlTop_B.ControlPosicin_o6[2];
+  ControlTop_Y.P[2] = ControlTop_B.ControlPosicin_o7[2];
+  ControlTop_Y.R[2] = ControlTop_B.ControlPosicin_o8[2];
+  ControlTop_Y.Zz[2] = ControlTop_B.ControlPosicin_o9[2];
+  ControlTop_Y.Fe_L[2] = ControlTop_B.Fe_alloc[2];
   ControlTop_DW.RT1_Buffer0[0] = ControlTop_B.ControlPosicin_o2[0];
   ControlTop_DW.RT1_Buffer0[1] = ControlTop_B.ControlPosicin_o2[1];
   ControlTop_DW.RT1_Buffer0[2] = ControlTop_B.ControlPosicin_o2[2];
   ControlTop_DW.RT1_Buffer0[3] = ControlTop_B.ControlPosicin_o2[3];
+  ControlTop_DW.UnitDelay_DSTATE = ControlTop_B.estados[1];
 }
 
 void ControlTop::initialize()
 {
   ((&ControlTop_M))->Timing.TaskCounters.cLimit[0] = 1;
   ((&ControlTop_M))->Timing.TaskCounters.cLimit[1] = 2;
-  ControlDeCorrienteMDLOBJ1.~CorrienteH10();
-  new (&ControlDeCorrienteMDLOBJ1) CorrienteH10();
   ControlDeCorrienteMDLOBJ1.getRTM()->setErrorStatusPointer((&ControlTop_M)
     ->getErrorStatusPointer());
   ControlPosici_nMDLOBJ2.getRTM()->setErrorStatusPointer((&ControlTop_M)

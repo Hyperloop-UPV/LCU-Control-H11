@@ -10,15 +10,28 @@ class ControlTop final
  public:
   struct B_ControlTop_T {
     real_T RT1[4];
+    real_T Switch1;
     real_T RT_l[4];
     real_T airgaps_actuadores[4];
     real_T ControlPosicin_o2[4];
     real_T estados[5];
+    real_T ControlPosicin_o4[3];
+    real_T F_des[4];
+    real_T ControlPosicin_o6[3];
+    real_T ControlPosicin_o7[3];
+    real_T ControlPosicin_o8[3];
+    real_T ControlPosicin_o9[3];
+    real_T Fe_alloc[3];
+    real_T UnitDelay;
+    int32_T i;
   };
 
   struct DW_ControlTop_T {
+    real_T UnitDelay_DSTATE;
     real_T RT1_Buffer0[4];
     real_T RT_Buffer[4];
+    real_T ref;
+    boolean_T ref_not_empty;
   };
 
   struct ExtU_ControlTop_T {
@@ -27,6 +40,8 @@ class ControlTop final
     real_T RefZ;
     real_T ManualLevitacin;
     real_T CorrienteManual;
+    real_T RampaStep;
+    real_T enable;
   };
 
   struct ExtY_ControlTop_T {
@@ -34,6 +49,13 @@ class ControlTop final
     real_T GapsLocales[4];
     real_T Estados[5];
     real_T CorrienteReferencia[4];
+    real_T Fe[3];
+    real_T Fa[4];
+    real_T Ef[3];
+    real_T P[3];
+    real_T R[3];
+    real_T Zz[3];
+    real_T Fe_L[3];
   };
 
   struct RT_MODEL_ControlTop_T {
