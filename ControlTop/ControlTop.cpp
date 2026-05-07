@@ -2,6 +2,7 @@
 #include "rtwtypes.h"
 #include "CorrienteH10.h"
 #include "PosicionH10.h"
+#include <new>
 
 void ControlTop::step0()
 {
@@ -85,6 +86,8 @@ void ControlTop::initialize()
 {
   ((&ControlTop_M))->Timing.TaskCounters.cLimit[0] = 1;
   ((&ControlTop_M))->Timing.TaskCounters.cLimit[1] = 2;
+  ControlDeCorrienteMDLOBJ1.~CorrienteH10();
+  new (&ControlDeCorrienteMDLOBJ1) CorrienteH10();
   ControlDeCorrienteMDLOBJ1.getRTM()->setErrorStatusPointer((&ControlTop_M)
     ->getErrorStatusPointer());
   ControlPosici_nMDLOBJ2.getRTM()->setErrorStatusPointer((&ControlTop_M)
