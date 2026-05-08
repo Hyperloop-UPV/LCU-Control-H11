@@ -14,7 +14,7 @@ void CorrienteH10::step(const real_T rtu_CorrienteRefHEMS[4], const real_T
   int8_T tmp;
   int8_T tmp_0;
   CorrienteH10_B.Saturation_i = rtu_CorrienteRefHEMS[0] - rtu_I_real_hems[0];
-  CorrienteH10_B.Saturation = 22.9546 * CorrienteH10_B.Saturation_i;
+  CorrienteH10_B.Saturation = 15.0 * CorrienteH10_B.Saturation_i;
   CorrienteH10_B.Saturation_e = CorrienteH10_B.Saturation +
     CorrienteH10_DW.Integrator_DSTATE;
   if (CorrienteH10_B.Saturation_e > 350.0) {
@@ -51,7 +51,7 @@ void CorrienteH10::step(const real_T rtu_CorrienteRefHEMS[4], const real_T
   }
 
   CorrienteH10_B.Saturation_e = rtu_CorrienteRefHEMS[1] - rtu_I_real_hems[1];
-  CorrienteH10_B.Saturation_i = 22.9546 * CorrienteH10_B.Saturation_e;
+  CorrienteH10_B.Saturation_i = 15.0 * CorrienteH10_B.Saturation_e;
   CorrienteH10_B.Saturation_f = CorrienteH10_B.Saturation_i +
     CorrienteH10_DW.Integrator_DSTATE_e;
   if (CorrienteH10_B.Saturation_f > 350.0) {
@@ -88,7 +88,7 @@ void CorrienteH10::step(const real_T rtu_CorrienteRefHEMS[4], const real_T
   }
 
   CorrienteH10_B.Saturation_f = rtu_CorrienteRefHEMS[2] - rtu_I_real_hems[2];
-  CorrienteH10_B.Saturation_e = 22.9546 * CorrienteH10_B.Saturation_f;
+  CorrienteH10_B.Saturation_e = 15.0 * CorrienteH10_B.Saturation_f;
   CorrienteH10_B.IntegralGain = CorrienteH10_B.Saturation_e +
     CorrienteH10_DW.Integrator_DSTATE_o;
   if (CorrienteH10_B.IntegralGain > 350.0) {
@@ -125,7 +125,7 @@ void CorrienteH10::step(const real_T rtu_CorrienteRefHEMS[4], const real_T
   }
 
   CorrienteH10_B.IntegralGain = rtu_CorrienteRefHEMS[3] - rtu_I_real_hems[3];
-  CorrienteH10_B.Saturation_f = 22.9546 * CorrienteH10_B.IntegralGain;
+  CorrienteH10_B.Saturation_f = 15.0 * CorrienteH10_B.IntegralGain;
   rtb_DeadZone = CorrienteH10_B.Saturation_f +
     CorrienteH10_DW.Integrator_DSTATE_m;
   if (rtb_DeadZone > 350.0) {

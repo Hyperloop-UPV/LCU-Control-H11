@@ -9,12 +9,12 @@ class PosicionH10 final
  public:
   struct B_PosicionH10_T {
     real_T b_A[12];
-    real_T lower[4];
     real_T upper[4];
+    real_T TmpSignalConversionAtKin_HE[4];
+    real_T LUT_HEMS_1[4];
   };
 
   struct DW_PosicionH10_T {
-    real_T uz_DSTATE[3];
     real_T Z_DSTATE[3];
     real_T Roll_DSTATE[3];
     real_T Pitch_DSTATE[3];
