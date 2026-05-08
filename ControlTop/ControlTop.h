@@ -56,6 +56,7 @@ class ControlTop final
     real_T R[3];
     real_T Zz[3];
     real_T Fe_L[3];
+    real_T Referencia;
   };
 
   struct RT_MODEL_ControlTop_T {

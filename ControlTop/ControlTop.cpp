@@ -95,6 +95,7 @@ void ControlTop::step1()
     &ControlTop_B.ControlPosicin_o6[0], &ControlTop_B.ControlPosicin_o7[0],
     &ControlTop_B.ControlPosicin_o8[0], &ControlTop_B.ControlPosicin_o9[0],
     &ControlTop_B.Fe_alloc[0]);
+  ControlTop_Y.Referencia = ControlTop_B.Switch1;
   ControlTop_Y.GapsLocales[0] = ControlTop_B.airgaps_actuadores[0];
   ControlTop_Y.GapsLocales[1] = ControlTop_B.airgaps_actuadores[1];
   ControlTop_Y.GapsLocales[2] = ControlTop_B.airgaps_actuadores[2];
