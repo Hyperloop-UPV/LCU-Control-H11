@@ -22,6 +22,8 @@ class ControlTop final
     real_T ControlPosicin_o8[3];
     real_T ControlPosicin_o9[3];
     real_T Fe_alloc[3];
+    real_T ControlPosicin_o11[4];
+    real_T ControlPosicin_o12[3];
     real_T UnitDelay;
     int32_T i;
   };
@@ -57,6 +59,10 @@ class ControlTop final
     real_T Zz[3];
     real_T Fe_L[3];
     real_T Referencia;
+    real_T I_HEMS_OUT_LOG[4];
+    real_T A[8];
+    real_T Ak[4];
+    real_T Bk[3];
   };
 
   struct RT_MODEL_ControlTop_T {

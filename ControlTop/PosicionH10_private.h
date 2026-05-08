@@ -3,7 +3,6 @@
 #include "rtwtypes.h"
 #include "PosicionH10_types.h"
 
-extern const real_T rtCP_pooled_Ghx6CrC5RbMH[3];
 extern const real_T rtCP_pooled_YAtHFqslFs0R[5994];
 extern const real_T rtCP_pooled_wXWfTicIkRLG[54];
 extern const real_T rtCP_pooled_M3o5LhjHhGhf[111];
@@ -13,7 +12,6 @@ extern const real_T rtCP_pooled_HxUUTAiAzJUi[12];
 extern const uint32_T rtCP_pooled_0czV7ndpm2oj[2];
 extern const uint32_T rtCP_pooled_GdBY1bCPiccC[2];
 
-#define rtCP_mg_const_Value            rtCP_pooled_Ghx6CrC5RbMH
 #define rtCP_LUT_HEMS_1_tableData      rtCP_pooled_YAtHFqslFs0R
 #define rtCP_LUT_HEMS_1_bp01Data       rtCP_pooled_wXWfTicIkRLG
 #define rtCP_LUT_HEMS_1_bp02Data       rtCP_pooled_M3o5LhjHhGhf

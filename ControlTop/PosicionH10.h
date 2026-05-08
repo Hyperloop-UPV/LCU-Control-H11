@@ -38,7 +38,8 @@ class PosicionH10 final
              real_T rtu_I_HEMS[4], real_T rty_GapsLoclaes[4], real_T
              rty_I_referencia[4], real_T rty_Pos[5], real_T rty_Fe[3], real_T
              rty_Fa[4], real_T rty_Ef[3], real_T rty_P[3], real_T rty_R[3],
-             real_T rty_Zz[3], real_T rty_Fe_L[3]);
+             real_T rty_Zz[3], real_T rty_Fe_L[3], real_T rty_Ak[4], real_T
+             rty_Bk[3]);
   void step0();
   PosicionH10();
   ~PosicionH10();

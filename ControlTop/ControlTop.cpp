@@ -1,5 +1,6 @@
 #include "ControlTop.h"
 #include "rtwtypes.h"
+#include <cstring>
 #include "CorrienteH10.h"
 #include "PosicionH10.h"
 
@@ -49,6 +50,10 @@ void ControlTop::step0()
   ControlTop_Y.CorrienteReferencia[2] = rtb_Switch[2];
   ControlTop_Y.CorrienteReferencia[3] = rtb_Switch[3];
   ControlPosici_nMDLOBJ2.step0();
+  ControlTop_Y.I_HEMS_OUT_LOG[0] = ControlTop_U.I_HEMS[0];
+  ControlTop_Y.I_HEMS_OUT_LOG[1] = ControlTop_U.I_HEMS[1];
+  ControlTop_Y.I_HEMS_OUT_LOG[2] = ControlTop_U.I_HEMS[2];
+  ControlTop_Y.I_HEMS_OUT_LOG[3] = ControlTop_U.I_HEMS[3];
   if ((&ControlTop_M)->Timing.RateInteraction.TID0_1 == 1) {
     ControlTop_DW.RT_Buffer[0] = ControlTop_U.I_HEMS[0];
     ControlTop_DW.RT_Buffer[1] = ControlTop_U.I_HEMS[1];
@@ -94,7 +99,8 @@ void ControlTop::step1()
     &ControlTop_B.ControlPosicin_o4[0], &ControlTop_B.F_des[0],
     &ControlTop_B.ControlPosicin_o6[0], &ControlTop_B.ControlPosicin_o7[0],
     &ControlTop_B.ControlPosicin_o8[0], &ControlTop_B.ControlPosicin_o9[0],
-    &ControlTop_B.Fe_alloc[0]);
+    &ControlTop_B.Fe_alloc[0], &ControlTop_B.ControlPosicin_o11[0],
+    &ControlTop_B.ControlPosicin_o12[0]);
   ControlTop_Y.Referencia = ControlTop_B.Switch1;
   ControlTop_Y.GapsLocales[0] = ControlTop_B.airgaps_actuadores[0];
   ControlTop_Y.GapsLocales[1] = ControlTop_B.airgaps_actuadores[1];
@@ -126,10 +132,19 @@ void ControlTop::step1()
   ControlTop_Y.R[2] = ControlTop_B.ControlPosicin_o8[2];
   ControlTop_Y.Zz[2] = ControlTop_B.ControlPosicin_o9[2];
   ControlTop_Y.Fe_L[2] = ControlTop_B.Fe_alloc[2];
+  ControlTop_Y.Ak[0] = ControlTop_B.ControlPosicin_o11[0];
+  ControlTop_Y.Ak[1] = ControlTop_B.ControlPosicin_o11[1];
+  ControlTop_Y.Ak[2] = ControlTop_B.ControlPosicin_o11[2];
+  ControlTop_Y.Ak[3] = ControlTop_B.ControlPosicin_o11[3];
+  ControlTop_Y.Bk[0] = ControlTop_B.ControlPosicin_o12[0];
+  ControlTop_Y.Bk[1] = ControlTop_B.ControlPosicin_o12[1];
+  ControlTop_Y.Bk[2] = ControlTop_B.ControlPosicin_o12[2];
   ControlTop_DW.RT1_Buffer0[0] = ControlTop_B.ControlPosicin_o2[0];
   ControlTop_DW.RT1_Buffer0[1] = ControlTop_B.ControlPosicin_o2[1];
   ControlTop_DW.RT1_Buffer0[2] = ControlTop_B.ControlPosicin_o2[2];
   ControlTop_DW.RT1_Buffer0[3] = ControlTop_B.ControlPosicin_o2[3];
+  std::memcpy(&ControlTop_Y.A[0], &ControlTop_U.Sensores[0], sizeof(real_T) <<
+              3U);
   ControlTop_DW.UnitDelay_DSTATE = ControlTop_B.estados[1];
 }
 
