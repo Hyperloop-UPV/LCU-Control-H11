@@ -448,29 +448,29 @@ void PosicionH10::step1(const real_T rtu_airgaps_sensores[8], const real_T
   rtb_AG_mm_idx_1 = 1000.0 * rty_GapsLoclaes[1];
   accumulatedData = 1000.0 * rty_GapsLoclaes[2];
   rtb_AG_mm_idx_3 = 1000.0 * rty_GapsLoclaes[3];
-  bpIndices[1U] = plook_binc(-55.0, rtCP_LUT_HEMS_2_bp02Data, 110U,
+  bpIndices[1U] = plook_binc(55.0, rtCP_LUT_HEMS_1_bp02Data, 110U,
     &b_accumulatedData);
   fractions[1U] = b_accumulatedData;
-  bpIndices[0U] = plook_binc(rotz, rtCP_LUT_HEMS_2_bp01Data, 53U,
+  bpIndices[0U] = plook_binc(rotz, rtCP_LUT_HEMS_1_bp01Data, 53U,
     &b_accumulatedData);
   fractions[0U] = b_accumulatedData;
-  rtb_LUT_HEMS_2[0] = intrp2d_l_pw(bpIndices, fractions,
-    rtCP_LUT_HEMS_2_tableData, 54U);
-  bpIndices[0U] = plook_binc(rtb_AG_mm_idx_1, rtCP_LUT_HEMS_2_bp01Data, 53U,
+  rtb_LUT_HEMS_1[0] = intrp2d_l_pw(bpIndices, fractions,
+    rtCP_LUT_HEMS_1_tableData, 54U);
+  bpIndices[0U] = plook_binc(rtb_AG_mm_idx_1, rtCP_LUT_HEMS_1_bp01Data, 53U,
     &b_accumulatedData);
   fractions[0U] = b_accumulatedData;
-  rtb_LUT_HEMS_2[1] = intrp2d_l_pw(bpIndices, fractions,
-    rtCP_LUT_HEMS_2_tableData, 54U);
-  bpIndices[0U] = plook_binc(accumulatedData, rtCP_LUT_HEMS_2_bp01Data, 53U,
+  rtb_LUT_HEMS_1[1] = intrp2d_l_pw(bpIndices, fractions,
+    rtCP_LUT_HEMS_1_tableData, 54U);
+  bpIndices[0U] = plook_binc(accumulatedData, rtCP_LUT_HEMS_1_bp01Data, 53U,
     &b_accumulatedData);
   fractions[0U] = b_accumulatedData;
-  rtb_LUT_HEMS_2[2] = intrp2d_l_pw(bpIndices, fractions,
-    rtCP_LUT_HEMS_2_tableData, 54U);
-  bpIndices[0U] = plook_binc(rtb_AG_mm_idx_3, rtCP_LUT_HEMS_2_bp01Data, 53U,
+  rtb_LUT_HEMS_1[2] = intrp2d_l_pw(bpIndices, fractions,
+    rtCP_LUT_HEMS_1_tableData, 54U);
+  bpIndices[0U] = plook_binc(rtb_AG_mm_idx_3, rtCP_LUT_HEMS_1_bp01Data, 53U,
     &b_accumulatedData);
   fractions[0U] = b_accumulatedData;
-  rtb_LUT_HEMS_2[3] = intrp2d_l_pw(bpIndices, fractions,
-    rtCP_LUT_HEMS_2_tableData, 54U);
+  rtb_LUT_HEMS_1[3] = intrp2d_l_pw(bpIndices, fractions,
+    rtCP_LUT_HEMS_1_tableData, 54U);
   rty_Ef[0] = PosicionH10_DW.uz_DSTATE[0];
   rty_Ef[1] = PosicionH10_DW.uz_DSTATE[1];
   rty_Ef[2] = PosicionH10_DW.uz_DSTATE[2];
@@ -526,99 +526,99 @@ void PosicionH10::step1(const real_T rtu_airgaps_sensores[8], const real_T
     rty_P[2] += 154.68317402206583*rty_Pos[3] + 1.7465637931791013E-6*rty_Ef[2];
   }
 
-  bpIndices_0[1U] = plook_binc(55.0, rtCP_LUT_HEMS_1_bp02Data, 110U,
+  bpIndices_0[1U] = plook_binc(-55.0, rtCP_LUT_HEMS_2_bp02Data, 110U,
     &b_accumulatedData);
   fractions_0[1U] = b_accumulatedData;
-  bpIndices_0[0U] = plook_binc(rotz, rtCP_LUT_HEMS_1_bp01Data, 53U,
+  bpIndices_0[0U] = plook_binc(rotz, rtCP_LUT_HEMS_2_bp01Data, 53U,
     &b_accumulatedData);
   fractions_0[0U] = b_accumulatedData;
-  rtb_LUT_HEMS_1[0] = intrp2d_l_pw(bpIndices_0, fractions_0,
-    rtCP_LUT_HEMS_1_tableData, 54U);
-  bpIndices_0[0U] = plook_binc(rtb_AG_mm_idx_1, rtCP_LUT_HEMS_1_bp01Data, 53U,
+  rtb_LUT_HEMS_2[0] = intrp2d_l_pw(bpIndices_0, fractions_0,
+    rtCP_LUT_HEMS_2_tableData, 54U);
+  bpIndices_0[0U] = plook_binc(rtb_AG_mm_idx_1, rtCP_LUT_HEMS_2_bp01Data, 53U,
     &b_accumulatedData);
   fractions_0[0U] = b_accumulatedData;
-  rtb_LUT_HEMS_1[1] = intrp2d_l_pw(bpIndices_0, fractions_0,
-    rtCP_LUT_HEMS_1_tableData, 54U);
-  bpIndices_0[0U] = plook_binc(accumulatedData, rtCP_LUT_HEMS_1_bp01Data, 53U,
+  rtb_LUT_HEMS_2[1] = intrp2d_l_pw(bpIndices_0, fractions_0,
+    rtCP_LUT_HEMS_2_tableData, 54U);
+  bpIndices_0[0U] = plook_binc(accumulatedData, rtCP_LUT_HEMS_2_bp01Data, 53U,
     &b_accumulatedData);
   fractions_0[0U] = b_accumulatedData;
-  rtb_LUT_HEMS_1[2] = intrp2d_l_pw(bpIndices_0, fractions_0,
-    rtCP_LUT_HEMS_1_tableData, 54U);
-  bpIndices_0[0U] = plook_binc(rtb_AG_mm_idx_3, rtCP_LUT_HEMS_1_bp01Data, 53U,
+  rtb_LUT_HEMS_2[2] = intrp2d_l_pw(bpIndices_0, fractions_0,
+    rtCP_LUT_HEMS_2_tableData, 54U);
+  bpIndices_0[0U] = plook_binc(rtb_AG_mm_idx_3, rtCP_LUT_HEMS_2_bp01Data, 53U,
     &b_accumulatedData);
   fractions_0[0U] = b_accumulatedData;
-  rtb_LUT_HEMS_1[3] = intrp2d_l_pw(bpIndices_0, fractions_0,
-    rtCP_LUT_HEMS_1_tableData, 54U);
+  rtb_LUT_HEMS_2[3] = intrp2d_l_pw(bpIndices_0, fractions_0,
+    rtCP_LUT_HEMS_2_tableData, 54U);
   rty_Fe[0] = (((*rtu_RefZ - rty_Zz[0]) * 625.0 - 50.0 * rty_Zz[1]) - rty_Zz[2])
     * -287.08565;
   rty_Fe[1] = (((0.0 - rty_R[0]) * 225.0 - 30.0 * rty_R[1]) - rty_R[2]) *
     -144.54009410557;
   rty_Fe[2] = (((0.0 - rty_P[0]) * 1225.0 - 70.0 * rty_P[1]) - rty_P[2]) *
     -22.1410713176;
-  rotz_0 = std::fmin(rtb_LUT_HEMS_2[0], rtb_LUT_HEMS_1[0]);
+  rotz_0 = std::fmin(rtb_LUT_HEMS_1[0], rtb_LUT_HEMS_2[0]);
   PosicionH10_B.lower[0] = rotz_0;
-  b_accumulatedData_tmp = std::fmax(rtb_LUT_HEMS_2[0], rtb_LUT_HEMS_1[0]);
+  b_accumulatedData_tmp = std::fmax(rtb_LUT_HEMS_1[0], rtb_LUT_HEMS_2[0]);
   PosicionH10_B.upper[0] = b_accumulatedData_tmp;
-  rtb_LUT_HEMS_2[0] = std::fmin(std::fmax(-629.1804054957391, rotz_0),
+  rtb_LUT_HEMS_1[0] = std::fmin(std::fmax(-629.1804054957391, rotz_0),
     b_accumulatedData_tmp);
   a[0] = -0.22340593006249168 * rty_Fe[0];
-  rotz_0 = std::fmin(rtb_LUT_HEMS_2[1], rtb_LUT_HEMS_1[1]);
+  rotz_0 = std::fmin(rtb_LUT_HEMS_1[1], rtb_LUT_HEMS_2[1]);
   PosicionH10_B.lower[1] = rotz_0;
-  b_accumulatedData_tmp = std::fmax(rtb_LUT_HEMS_2[1], rtb_LUT_HEMS_1[1]);
+  b_accumulatedData_tmp = std::fmax(rtb_LUT_HEMS_1[1], rtb_LUT_HEMS_2[1]);
   PosicionH10_B.upper[1] = b_accumulatedData_tmp;
-  rtb_LUT_HEMS_2[1] = std::fmin(std::fmax(-799.7092815957393, rotz_0),
+  rtb_LUT_HEMS_1[1] = std::fmin(std::fmax(-799.7092815957393, rotz_0),
     b_accumulatedData_tmp);
   a[1] = -0.28395638877808804 * rty_Fe[0];
-  rotz_0 = std::fmin(rtb_LUT_HEMS_2[2], rtb_LUT_HEMS_1[2]);
+  rotz_0 = std::fmin(rtb_LUT_HEMS_1[2], rtb_LUT_HEMS_2[2]);
   PosicionH10_B.lower[2] = rotz_0;
-  b_accumulatedData_tmp = std::fmax(rtb_LUT_HEMS_2[2], rtb_LUT_HEMS_1[2]);
+  b_accumulatedData_tmp = std::fmax(rtb_LUT_HEMS_1[2], rtb_LUT_HEMS_2[2]);
   PosicionH10_B.upper[2] = b_accumulatedData_tmp;
-  rtb_LUT_HEMS_2[2] = std::fmin(std::fmax(-608.4458316542609, rotz_0),
+  rtb_LUT_HEMS_1[2] = std::fmin(std::fmax(-608.4458316542609, rotz_0),
     b_accumulatedData_tmp);
   a[2] = -0.21604361122191199 * rty_Fe[0];
-  rotz_0 = std::fmin(rtb_LUT_HEMS_2[3], rtb_LUT_HEMS_1[3]);
+  rotz_0 = std::fmin(rtb_LUT_HEMS_1[3], rtb_LUT_HEMS_2[3]);
   PosicionH10_B.lower[3] = rotz_0;
-  b_accumulatedData_tmp = std::fmax(rtb_LUT_HEMS_2[3], rtb_LUT_HEMS_1[3]);
+  b_accumulatedData_tmp = std::fmax(rtb_LUT_HEMS_1[3], rtb_LUT_HEMS_2[3]);
   PosicionH10_B.upper[3] = b_accumulatedData_tmp;
-  rtb_LUT_HEMS_2[3] = std::fmin(std::fmax(-778.9747077542611, rotz_0),
+  rtb_LUT_HEMS_1[3] = std::fmin(std::fmax(-778.9747077542611, rotz_0),
     b_accumulatedData_tmp);
   a[3] = -0.27659406993750835 * rty_Fe[0];
-  PosicionH10_local_add_limited(rtb_LUT_HEMS_2, a, PosicionH10_B.lower,
+  PosicionH10_local_add_limited(rtb_LUT_HEMS_1, a, PosicionH10_B.lower,
     PosicionH10_B.upper, rty_Fa, &b_accumulatedData);
   b_accumulatedData = 0.2898550724637681 * rty_Fe[2];
-  rtb_LUT_HEMS_1[0] = b_accumulatedData;
-  rtb_LUT_HEMS_1[1] = b_accumulatedData;
+  rtb_LUT_HEMS_2[0] = b_accumulatedData;
+  rtb_LUT_HEMS_2[1] = b_accumulatedData;
   b_accumulatedData = -0.2898550724637681 * rty_Fe[2];
-  rtb_LUT_HEMS_1[2] = b_accumulatedData;
-  rtb_LUT_HEMS_1[3] = b_accumulatedData;
-  PosicionH10_local_add_limited(rty_Fa, rtb_LUT_HEMS_1, PosicionH10_B.lower,
-    PosicionH10_B.upper, rtb_LUT_HEMS_2, &b_accumulatedData);
+  rtb_LUT_HEMS_2[2] = b_accumulatedData;
+  rtb_LUT_HEMS_2[3] = b_accumulatedData;
+  PosicionH10_local_add_limited(rty_Fa, rtb_LUT_HEMS_2, PosicionH10_B.lower,
+    PosicionH10_B.upper, rtb_LUT_HEMS_1, &b_accumulatedData);
   b_accumulatedData = 0.9174311926605505 * rty_Fe[1];
   a[0] = b_accumulatedData;
   b_accumulatedData_tmp_0 = -0.9174311926605505 * rty_Fe[1];
   a[1] = b_accumulatedData_tmp_0;
   a[2] = b_accumulatedData;
   a[3] = b_accumulatedData_tmp_0;
-  PosicionH10_local_add_limited(rtb_LUT_HEMS_2, a, PosicionH10_B.lower,
-    PosicionH10_B.upper, rtb_LUT_HEMS_1, &b_accumulatedData);
-  rty_Fa[0] = std::fmin(std::fmax(rtb_LUT_HEMS_1[0], PosicionH10_B.lower[0]),
+  PosicionH10_local_add_limited(rtb_LUT_HEMS_1, a, PosicionH10_B.lower,
+    PosicionH10_B.upper, rtb_LUT_HEMS_2, &b_accumulatedData);
+  rty_Fa[0] = std::fmin(std::fmax(rtb_LUT_HEMS_2[0], PosicionH10_B.lower[0]),
                         PosicionH10_B.upper[0]);
-  rty_Fa[1] = std::fmin(std::fmax(rtb_LUT_HEMS_1[1], PosicionH10_B.lower[1]),
+  rty_Fa[1] = std::fmin(std::fmax(rtb_LUT_HEMS_2[1], PosicionH10_B.lower[1]),
                         PosicionH10_B.upper[1]);
-  rty_Fa[2] = std::fmin(std::fmax(rtb_LUT_HEMS_1[2], PosicionH10_B.lower[2]),
+  rty_Fa[2] = std::fmin(std::fmax(rtb_LUT_HEMS_2[2], PosicionH10_B.lower[2]),
                         PosicionH10_B.upper[2]);
-  rty_Fa[3] = std::fmin(std::fmax(rtb_LUT_HEMS_1[3], rotz_0),
+  rty_Fa[3] = std::fmin(std::fmax(rtb_LUT_HEMS_2[3], rotz_0),
                         b_accumulatedData_tmp);
-  rtb_LUT_HEMS_2[0] = rty_Fa[0] - -629.1804054957391;
-  rtb_LUT_HEMS_2[1] = rty_Fa[1] - -799.7092815957393;
-  rtb_LUT_HEMS_2[2] = rty_Fa[2] - -608.4458316542609;
-  rtb_LUT_HEMS_2[3] = rty_Fa[3] - -778.9747077542611;
+  rtb_LUT_HEMS_1[0] = rty_Fa[0] - -629.1804054957391;
+  rtb_LUT_HEMS_1[1] = rty_Fa[1] - -799.7092815957393;
+  rtb_LUT_HEMS_1[2] = rty_Fa[2] - -608.4458316542609;
+  rtb_LUT_HEMS_1[3] = rty_Fa[3] - -778.9747077542611;
   b_accumulatedData = 0.0;
   b_accumulatedData_tmp = 0.0;
   b_accumulatedData_tmp_0 = 0.0;
   i_0 = 0;
   for (i = 0; i < 4; i++) {
-    rotz_0 = rtb_LUT_HEMS_2[i];
+    rotz_0 = rtb_LUT_HEMS_1[i];
     b_accumulatedData += d_a[i_0] * rotz_0;
     b_accumulatedData_tmp += d_a[i_0 + 1] * rotz_0;
     b_accumulatedData_tmp_0 += d_a[i_0 + 2] * rotz_0;

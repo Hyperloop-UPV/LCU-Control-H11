@@ -14,12 +14,12 @@ extern const uint32_T rtCP_pooled_0czV7ndpm2oj[2];
 extern const uint32_T rtCP_pooled_GdBY1bCPiccC[2];
 
 #define rtCP_mg_const_Value            rtCP_pooled_Ghx6CrC5RbMH
-#define rtCP_LUT_HEMS_2_tableData      rtCP_pooled_YAtHFqslFs0R
-#define rtCP_LUT_HEMS_2_bp01Data       rtCP_pooled_wXWfTicIkRLG
-#define rtCP_LUT_HEMS_2_bp02Data       rtCP_pooled_M3o5LhjHhGhf
 #define rtCP_LUT_HEMS_1_tableData      rtCP_pooled_YAtHFqslFs0R
 #define rtCP_LUT_HEMS_1_bp01Data       rtCP_pooled_wXWfTicIkRLG
 #define rtCP_LUT_HEMS_1_bp02Data       rtCP_pooled_M3o5LhjHhGhf
+#define rtCP_LUT_HEMS_2_tableData      rtCP_pooled_YAtHFqslFs0R
+#define rtCP_LUT_HEMS_2_bp01Data       rtCP_pooled_wXWfTicIkRLG
+#define rtCP_LUT_HEMS_2_bp02Data       rtCP_pooled_M3o5LhjHhGhf
 #define rtCP_LUT_HEMS_1_tableData_m    rtCP_pooled_YAtHFqslFs0R
 #define rtCP_LUT_HEMS_1_bp01Data_k     rtCP_pooled_wXWfTicIkRLG
 #define rtCP_LUT_HEMS_1_bp02Data_g     rtCP_pooled_M3o5LhjHhGhf
