@@ -64,19 +64,21 @@ void ControlTop::step0()
 
 void ControlTop::step1()
 {
-  ControlTop_B.UnitDelay = ControlTop_DW.UnitDelay_DSTATE;
+  real_T rtb_UnitDelay;
+  int32_T i;
+  rtb_UnitDelay = ControlTop_DW.UnitDelay_DSTATE;
   if (!ControlTop_DW.ref_not_empty) {
-    ControlTop_DW.ref = ControlTop_B.UnitDelay;
+    ControlTop_DW.ref = rtb_UnitDelay;
     ControlTop_DW.ref_not_empty = true;
   }
 
   if (ControlTop_U.enable == 0.0) {
-    ControlTop_DW.ref = ControlTop_B.UnitDelay;
+    ControlTop_DW.ref = rtb_UnitDelay;
   } else {
-    ControlTop_B.UnitDelay = ControlTop_U.RefZ - ControlTop_DW.ref;
-    if (ControlTop_B.UnitDelay > 5.0E-6) {
+    rtb_UnitDelay = ControlTop_U.RefZ - ControlTop_DW.ref;
+    if (rtb_UnitDelay > 5.0E-6) {
       ControlTop_DW.ref += 5.0E-6;
-    } else if (ControlTop_B.UnitDelay < -5.0E-6) {
+    } else if (rtb_UnitDelay < -5.0E-6) {
       ControlTop_DW.ref -= 5.0E-6;
     } else {
       ControlTop_DW.ref = ControlTop_U.RefZ;
@@ -106,8 +108,8 @@ void ControlTop::step1()
   ControlTop_Y.GapsLocales[1] = ControlTop_B.airgaps_actuadores[1];
   ControlTop_Y.GapsLocales[2] = ControlTop_B.airgaps_actuadores[2];
   ControlTop_Y.GapsLocales[3] = ControlTop_B.airgaps_actuadores[3];
-  for (ControlTop_B.i = 0; ControlTop_B.i < 5; ControlTop_B.i++) {
-    ControlTop_Y.Estados[ControlTop_B.i] = ControlTop_B.estados[ControlTop_B.i];
+  for (i = 0; i < 5; i++) {
+    ControlTop_Y.Estados[i] = ControlTop_B.estados[i];
   }
 
   ControlTop_Y.Fe[0] = ControlTop_B.ControlPosicin_o4[0];

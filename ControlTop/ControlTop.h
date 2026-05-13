@@ -24,8 +24,6 @@ class ControlTop final
     real_T Fe_alloc[3];
     real_T ControlPosicin_o11[4];
     real_T ControlPosicin_o12[3];
-    real_T UnitDelay;
-    int32_T i;
   };
 
   struct DW_ControlTop_T {
