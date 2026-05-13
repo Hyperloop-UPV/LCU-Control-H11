@@ -4,8 +4,6 @@
 #include <cstring>
 #include "xnrm2_l2M7eLKH.h"
 #include "rt_hypotd.h"
-#include "plook_binc.h"
-#include "intrp2d_l_pw.h"
 #include "look2_binlcpw.h"
 #include "PosicionH10_private.h"
 
@@ -347,7 +345,7 @@ void PosicionH10::init(void)
 {
   PosicionH10_DW.Z_DSTATE[0] = 0.025;
   PosicionH10_DW.Z_DSTATE[1] = 0.0;
-  PosicionH10_DW.Z_DSTATE[2] = 0.0;
+  PosicionH10_DW.Z_DSTATE[2] = 9.81;
 }
 
 void PosicionH10::step0(void)
@@ -360,28 +358,24 @@ void PosicionH10::step1(const real_T rtu_airgaps_sensores[8], const real_T
   real_T rty_Ef[3], real_T rty_P[3], real_T rty_R[3], real_T rty_Zz[3], real_T
   rty_Fe_L[3], real_T rty_Ak[4], real_T rty_Bk[3])
 {
-  real_T a[4];
-  real_T rtb_LUT_HEMS_2[4];
+  real_T c_a[4];
+  real_T rtb_TmpSignalConversionAtSFun_f[4];
+  real_T rtb_TmpSignalConversionAtSFun_l[4];
+  real_T upper[4];
   real_T theta_l[3];
   real_T theta_v[3];
-  real_T fractions[2];
-  real_T fractions_0[2];
+  real_T accumulatedData;
   real_T b_accumulatedData;
-  real_T frac;
+  real_T f_x;
   real_T g_v_idx_0;
+  real_T g_v_idx_1;
+  real_T g_v_idx_1_tmp;
   real_T g_v_idx_2;
   real_T g_v_idx_3;
   real_T rotz;
-  real_T rotz_0;
-  real_T rtb_InvLUT_2;
-  real_T rtb_Sum_HEMS;
-  real_T rtb_TmpSignalConversionAtKin__0;
-  real_T rty_Bk_0;
-  real_T rty_Bk_1;
+  real_T rtb_InvLUT_1;
   int32_T i;
   int32_T tmp;
-  uint32_T bpIndices[2];
-  uint32_T bpIndices_0[2];
   static const real_T b[12]{ 1.0, 1.0, 1.0, 1.0, -0.305, 0.239, -0.305, 0.239,
     -1.2536, -1.256, 1.2814, 1.279 };
 
@@ -391,315 +385,269 @@ void PosicionH10::step1(const real_T rtu_airgaps_sensores[8], const real_T
   static const real_T d_a[12]{ 1.0, 0.3055, 0.8498, 1.0, -0.2395, 0.8498, 1.0,
     0.3055, -0.8752, 1.0, -0.2395, -0.8752 };
 
-  PosicionH10_B.TmpSignalConversionAtKin_HE[0] = ((-rtu_airgaps_sensores[0] -
-    0.015) - 0.032) - -0.157;
-  PosicionH10_B.TmpSignalConversionAtKin_HE[1] = ((-rtu_airgaps_sensores[1] -
-    0.015) - 0.032) - -0.157;
-  PosicionH10_B.TmpSignalConversionAtKin_HE[2] = ((-rtu_airgaps_sensores[2] -
-    0.015) - 0.032) - -0.157;
-  PosicionH10_B.TmpSignalConversionAtKin_HE[3] = ((-rtu_airgaps_sensores[3] -
-    0.015) - 0.032) - -0.157;
-  PosicionH10_mldivide_l89k28gF(b, PosicionH10_B.TmpSignalConversionAtKin_HE,
-    theta_v);
+  PosicionH10_B.lower[0] = ((-rtu_airgaps_sensores[0] - 0.015) - 0.032) - -0.157;
+  PosicionH10_B.lower[1] = ((-rtu_airgaps_sensores[1] - 0.015) - 0.032) - -0.157;
+  PosicionH10_B.lower[2] = ((-rtu_airgaps_sensores[2] - 0.015) - 0.032) - -0.157;
+  PosicionH10_B.lower[3] = ((-rtu_airgaps_sensores[3] - 0.015) - 0.032) - -0.157;
+  PosicionH10_mldivide_l89k28gF(b, PosicionH10_B.lower, theta_v);
   rotz = std::sin(theta_v[2]);
   b_accumulatedData = std::sin(theta_v[1]);
-  g_v_idx_2 = 0.184 * b_accumulatedData;
-  PosicionH10_B.TmpSignalConversionAtKin_HE[0] = (-0.277 -
-    (-rtu_airgaps_sensores[4])) + g_v_idx_2;
-  PosicionH10_B.TmpSignalConversionAtKin_HE[1] = (0.277 - rtu_airgaps_sensores[5])
-    + g_v_idx_2;
-  PosicionH10_B.TmpSignalConversionAtKin_HE[2] = (-0.277 -
-    (-rtu_airgaps_sensores[6])) + g_v_idx_2;
-  PosicionH10_B.TmpSignalConversionAtKin_HE[3] = (0.277 - rtu_airgaps_sensores[7])
-    + g_v_idx_2;
-  PosicionH10_mldivide_l89k28gF(e, PosicionH10_B.TmpSignalConversionAtKin_HE,
-    theta_l);
-  rotz_0 = std::atan2(theta_l[2], theta_l[1]);
-  rtb_InvLUT_2 = std::cos(rotz_0);
-  rtb_Sum_HEMS = std::sin(rotz_0);
-  rtb_TmpSignalConversionAtKin__0 = 1.005 * rtb_Sum_HEMS;
-  g_v_idx_3 = -0.134 * rtb_InvLUT_2;
-  rtb_InvLUT_2 *= 0.134;
-  rtb_Sum_HEMS *= -1.005;
-  rty_Pos[0] = (((((-0.277 - (-rtu_airgaps_sensores[4])) - ((g_v_idx_3 +
-    rtb_TmpSignalConversionAtKin__0) - g_v_idx_2)) + ((0.277 -
-    rtu_airgaps_sensores[5]) - ((rtb_InvLUT_2 + rtb_TmpSignalConversionAtKin__0)
-    - g_v_idx_2))) + ((-0.277 - (-rtu_airgaps_sensores[6])) - ((g_v_idx_3 +
-    rtb_Sum_HEMS) - g_v_idx_2))) + ((0.277 - rtu_airgaps_sensores[7]) -
-    ((rtb_InvLUT_2 + rtb_Sum_HEMS) - g_v_idx_2))) / 4.0;
-  rtb_TmpSignalConversionAtKin__0 = -0.157 * std::cos(theta_v[1]);
-  g_v_idx_3 = -0.305 * b_accumulatedData;
-  rtb_InvLUT_2 = 0.239 * b_accumulatedData;
-  rty_Pos[1] = ((((((((-rtu_airgaps_sensores[0] - 0.015) - 0.032) -
-                     rtb_TmpSignalConversionAtKin__0) + 1.2536 * rotz) -
-                   g_v_idx_3) + (((((-rtu_airgaps_sensores[1] - 0.015) - 0.032)
-    - rtb_TmpSignalConversionAtKin__0) + 1.256 * rotz) - rtb_InvLUT_2)) +
-                 (((((-rtu_airgaps_sensores[2] - 0.015) - 0.032) -
-                    rtb_TmpSignalConversionAtKin__0) + -1.2814 * rotz) -
-                  g_v_idx_3)) + (((((-rtu_airgaps_sensores[3] - 0.015) - 0.032)
-    - rtb_TmpSignalConversionAtKin__0) + -1.279 * rotz) - rtb_InvLUT_2)) / 4.0;
+  g_v_idx_3 = -0.157 * std::cos(theta_v[1]);
+  g_v_idx_2 = -0.305 * b_accumulatedData;
+  g_v_idx_0 = ((((-rtu_airgaps_sensores[0] - 0.015) - 0.032) - g_v_idx_3) +
+               1.2536 * rotz) - g_v_idx_2;
+  g_v_idx_1_tmp = 0.239 * b_accumulatedData;
+  g_v_idx_1 = ((((-rtu_airgaps_sensores[1] - 0.015) - 0.032) - g_v_idx_3) +
+               1.256 * rotz) - g_v_idx_1_tmp;
+  g_v_idx_2 = ((((-rtu_airgaps_sensores[2] - 0.015) - 0.032) - g_v_idx_3) +
+               -1.2814 * rotz) - g_v_idx_2;
+  g_v_idx_3 = ((((-rtu_airgaps_sensores[3] - 0.015) - 0.032) - g_v_idx_3) +
+               -1.279 * rotz) - g_v_idx_1_tmp;
+  accumulatedData = 0.184 * b_accumulatedData;
+  PosicionH10_B.lower[0] = (-0.277 - (-rtu_airgaps_sensores[4])) +
+    accumulatedData;
+  PosicionH10_B.lower[1] = (0.277 - rtu_airgaps_sensores[5]) + accumulatedData;
+  PosicionH10_B.lower[2] = (-0.277 - (-rtu_airgaps_sensores[6])) +
+    accumulatedData;
+  PosicionH10_B.lower[3] = (0.277 - rtu_airgaps_sensores[7]) + accumulatedData;
+  PosicionH10_mldivide_l89k28gF(e, PosicionH10_B.lower, theta_l);
+  rotz = std::atan2(theta_l[2], theta_l[1]);
+  rtb_InvLUT_1 = std::cos(rotz);
+  f_x = std::sin(rotz);
+  b_accumulatedData = 1.005 * f_x;
+  g_v_idx_1_tmp = -0.134 * rtb_InvLUT_1;
+  rtb_InvLUT_1 *= 0.134;
+  f_x *= -1.005;
+  rty_Pos[0] = (((((-0.277 - (-rtu_airgaps_sensores[4])) - ((g_v_idx_1_tmp +
+    b_accumulatedData) - accumulatedData)) + ((0.277 - rtu_airgaps_sensores[5])
+    - ((rtb_InvLUT_1 + b_accumulatedData) - accumulatedData))) + ((-0.277 -
+    (-rtu_airgaps_sensores[6])) - ((g_v_idx_1_tmp + f_x) - accumulatedData))) +
+                ((0.277 - rtu_airgaps_sensores[7]) - ((rtb_InvLUT_1 + f_x) -
+    accumulatedData))) / 4.0;
+  rty_Pos[1] = (((g_v_idx_0 + g_v_idx_1) + g_v_idx_2) + g_v_idx_3) / 4.0;
   rty_Pos[2] = theta_v[1];
   rty_Pos[3] = theta_v[2];
-  rty_Pos[4] = rotz_0;
-  rotz_0 = std::sin(rty_Pos[2]);
+  rty_Pos[4] = rotz;
+  accumulatedData = std::sin(rty_Pos[2]);
   rotz = std::sin(rty_Pos[3]);
-  rtb_TmpSignalConversionAtKin__0 = 0.8498 * rotz;
-  g_v_idx_3 = rty_Pos[1] - -0.3055 * rotz_0;
-  rty_GapsLoclaes[0] = std::abs(g_v_idx_3 + rtb_TmpSignalConversionAtKin__0);
-  rtb_InvLUT_2 = rty_Pos[1] - 0.2395 * rotz_0;
-  rty_GapsLoclaes[1] = std::abs(rtb_InvLUT_2 + rtb_TmpSignalConversionAtKin__0);
-  rtb_TmpSignalConversionAtKin__0 = -0.8752 * rotz;
-  rty_GapsLoclaes[2] = std::abs(g_v_idx_3 + rtb_TmpSignalConversionAtKin__0);
-  rty_GapsLoclaes[3] = std::abs(rtb_InvLUT_2 + rtb_TmpSignalConversionAtKin__0);
+  b_accumulatedData = 0.8498 * rotz;
+  g_v_idx_1_tmp = rty_Pos[1] - -0.3055 * accumulatedData;
+  rty_GapsLoclaes[0] = std::abs(g_v_idx_1_tmp + b_accumulatedData);
+  rtb_InvLUT_1 = rty_Pos[1] - 0.2395 * accumulatedData;
+  rty_GapsLoclaes[1] = std::abs(rtb_InvLUT_1 + b_accumulatedData);
+  b_accumulatedData = -0.8752 * rotz;
+  rty_GapsLoclaes[2] = std::abs(g_v_idx_1_tmp + b_accumulatedData);
+  rty_GapsLoclaes[3] = std::abs(rtb_InvLUT_1 + b_accumulatedData);
   g_v_idx_0 = 1000.0 * rty_GapsLoclaes[0];
-  rtb_Sum_HEMS = 1000.0 * rty_GapsLoclaes[1];
+  g_v_idx_1 = 1000.0 * rty_GapsLoclaes[1];
   g_v_idx_2 = 1000.0 * rty_GapsLoclaes[2];
   g_v_idx_3 = 1000.0 * rty_GapsLoclaes[3];
-  bpIndices[1U] = plook_binc(55.0, rtCP_LUT_HEMS_1_bp02Data, 110U, &frac);
-  fractions[1U] = frac;
-  bpIndices[0U] = plook_binc(g_v_idx_0, rtCP_LUT_HEMS_1_bp01Data, 53U, &frac);
-  fractions[0U] = frac;
-  PosicionH10_B.LUT_HEMS_1[0] = intrp2d_l_pw(bpIndices, fractions,
-    rtCP_LUT_HEMS_1_tableData, 54U);
-  bpIndices[0U] = plook_binc(rtb_Sum_HEMS, rtCP_LUT_HEMS_1_bp01Data, 53U, &frac);
-  fractions[0U] = frac;
-  PosicionH10_B.LUT_HEMS_1[1] = intrp2d_l_pw(bpIndices, fractions,
-    rtCP_LUT_HEMS_1_tableData, 54U);
-  bpIndices[0U] = plook_binc(g_v_idx_2, rtCP_LUT_HEMS_1_bp01Data, 53U, &frac);
-  fractions[0U] = frac;
-  PosicionH10_B.LUT_HEMS_1[2] = intrp2d_l_pw(bpIndices, fractions,
-    rtCP_LUT_HEMS_1_tableData, 54U);
-  bpIndices[0U] = plook_binc(g_v_idx_3, rtCP_LUT_HEMS_1_bp01Data, 53U, &frac);
-  fractions[0U] = frac;
-  PosicionH10_B.LUT_HEMS_1[3] = intrp2d_l_pw(bpIndices, fractions,
-    rtCP_LUT_HEMS_1_tableData, 54U);
   b_accumulatedData = look2_binlcpw(g_v_idx_0, rtu_I_HEMS[0],
-    rtCP_LUT_HEMS_1_bp01Data_k, rtCP_LUT_HEMS_1_bp02Data_g,
-    rtCP_LUT_HEMS_1_tableData_m, rtCP_LUT_HEMS_1_maxIndex_i, 54U);
-  rotz_0 = look2_binlcpw(rtb_Sum_HEMS, rtu_I_HEMS[1], rtCP_LUT_HEMS_2_bp01Data,
-    rtCP_LUT_HEMS_2_bp02Data, rtCP_LUT_HEMS_2_tableData,
-    rtCP_LUT_HEMS_2_maxIndex, 54U);
+    rtCP_LUT_HEMS_1_bp01Data, rtCP_LUT_HEMS_1_bp02Data,
+    rtCP_LUT_HEMS_1_tableData, rtCP_LUT_HEMS_1_maxIndex, 54U);
+  accumulatedData = look2_binlcpw(g_v_idx_1, rtu_I_HEMS[1],
+    rtCP_LUT_HEMS_2_bp01Data, rtCP_LUT_HEMS_2_bp02Data,
+    rtCP_LUT_HEMS_2_tableData, rtCP_LUT_HEMS_2_maxIndex, 54U);
   rotz = look2_binlcpw(g_v_idx_2, rtu_I_HEMS[2], rtCP_LUT_HEMS_3_bp01Data,
                        rtCP_LUT_HEMS_3_bp02Data, rtCP_LUT_HEMS_3_tableData,
                        rtCP_LUT_HEMS_3_maxIndex, 54U);
-  rtb_InvLUT_2 = look2_binlcpw(g_v_idx_3, rtu_I_HEMS[3],
+  rtb_InvLUT_1 = look2_binlcpw(g_v_idx_3, rtu_I_HEMS[3],
     rtCP_LUT_HEMS_4_bp01Data, rtCP_LUT_HEMS_4_bp02Data,
     rtCP_LUT_HEMS_4_tableData, rtCP_LUT_HEMS_4_maxIndex, 54U);
-  PosicionH10_B.TmpSignalConversionAtKin_HE[0] = b_accumulatedData;
-  PosicionH10_B.TmpSignalConversionAtKin_HE[1] = rotz_0;
-  PosicionH10_B.TmpSignalConversionAtKin_HE[2] = rotz;
-  PosicionH10_B.TmpSignalConversionAtKin_HE[3] = rtb_InvLUT_2;
+  rty_Ak[0] = b_accumulatedData;
+  rty_Ak[1] = accumulatedData;
+  rty_Ak[2] = rotz;
+  rty_Ak[3] = rtb_InvLUT_1;
+  PosicionH10_B.lower[0] = b_accumulatedData;
+  PosicionH10_B.lower[1] = accumulatedData;
+  PosicionH10_B.lower[2] = rotz;
+  PosicionH10_B.lower[3] = rtb_InvLUT_1;
   rty_Bk[0] = 0.0;
   rty_Bk[1] = 0.0;
   rty_Bk[2] = 0.0;
-  rty_Bk_0 = rty_Bk[0];
-  frac = rty_Bk[1];
-  rty_Bk_1 = rty_Bk[2];
+  rotz = rty_Bk[0];
+  g_v_idx_1_tmp = rty_Bk[1];
+  accumulatedData = rty_Bk[2];
   tmp = 0;
   for (i = 0; i < 4; i++) {
-    rtb_TmpSignalConversionAtKin__0 =
-      PosicionH10_B.TmpSignalConversionAtKin_HE[i];
-    rty_Bk_0 += rtCP_Kin_HEMS_Gain[tmp] * rtb_TmpSignalConversionAtKin__0;
-    frac += rtCP_Kin_HEMS_Gain[tmp + 1] * rtb_TmpSignalConversionAtKin__0;
-    rty_Bk_1 += rtCP_Kin_HEMS_Gain[tmp + 2] * rtb_TmpSignalConversionAtKin__0;
+    b_accumulatedData = PosicionH10_B.lower[i];
+    rotz += rtCP_Kin_HEMS_Gain[tmp] * b_accumulatedData;
+    g_v_idx_1_tmp += rtCP_Kin_HEMS_Gain[tmp + 1] * b_accumulatedData;
+    accumulatedData += rtCP_Kin_HEMS_Gain[tmp + 2] * b_accumulatedData;
     tmp += 3;
   }
 
-  rty_Bk[2] = rty_Bk_1;
-  rty_Bk[1] = frac;
-  rty_Bk[0] = rty_Bk_0;
+  rty_Bk[2] = accumulatedData;
+  rty_Bk[1] = g_v_idx_1_tmp;
+  rty_Bk[0] = rotz;
 
   {
-    rty_Zz[0] = 0.88899635867091475*PosicionH10_DW.Z_DSTATE[0] +
-      0.00044449817933545744*PosicionH10_DW.Z_DSTATE[1]
-      + 2.2224908966797172E-7*PosicionH10_DW.Z_DSTATE[2];
-    rty_Zz[0] += 0.11100364132908513*rty_Pos[1] + (-7.7415603903479239E-10)*
-      (rty_Bk[0] - 2816.3);
-    rty_Zz[1] = (-8.64815657715066)*PosicionH10_DW.Z_DSTATE[0] +
-      0.99567592171142483*PosicionH10_DW.Z_DSTATE[1]
-      + 0.00049783796085570153*PosicionH10_DW.Z_DSTATE[2];
-    rty_Zz[1] += 8.64815657715066*rty_Pos[1] + (-1.7341095274379351E-6)*(rty_Bk
-      [0] - 2816.3);
-    rty_Zz[2] = (-227.58306781975418)*PosicionH10_DW.Z_DSTATE[0] +
-      (-0.1137915339098771)*PosicionH10_DW.Z_DSTATE[1]
-      + 0.999943104233045*PosicionH10_DW.Z_DSTATE[2];
-    rty_Zz[2] += 227.58306781975421*rty_Pos[1] + 1.9818394599290685E-7*(rty_Bk[0]
-      - 2816.3);
+    rty_Zz[0] = 0.83961928303230193*PosicionH10_DW.Z_DSTATE[0] +
+      0.000419809641516151*PosicionH10_DW.Z_DSTATE[1]
+      + 2.09904820758029E-7*PosicionH10_DW.Z_DSTATE[2];
+    rty_Zz[0] += 0.16038071696769815*rty_Pos[1] + (-7.3115748125367993E-10)*
+      rty_Bk[0];
+    rty_Zz[1] = (-18.49849204376768)*PosicionH10_DW.Z_DSTATE[0] +
+      0.99075075397811618*PosicionH10_DW.Z_DSTATE[1]
+      + 0.000495375376989058*PosicionH10_DW.Z_DSTATE[2];
+    rty_Zz[1] += 18.498492043767676*rty_Pos[1] + (-1.7255316557586842E-6)*
+      rty_Bk[0];
+    rty_Zz[2] = (-725.43106053990891)*PosicionH10_DW.Z_DSTATE[0] +
+      (-0.36271553026995451)*PosicionH10_DW.Z_DSTATE[1]
+      + 0.999818642234865*PosicionH10_DW.Z_DSTATE[2];
+    rty_Zz[2] += 725.4310605399088*rty_Pos[1] + 6.3172006380317947E-7*rty_Bk[0];
   }
 
   {
-    rty_R[0] = 0.90194270566802215*PosicionH10_DW.Roll_DSTATE[0] +
-      0.00045097135283401124*PosicionH10_DW.Roll_DSTATE[1]
-      + 2.2548567641700562E-7*PosicionH10_DW.Roll_DSTATE[2];
-    rty_R[0] += 0.098057294331977823*rty_Pos[2] + 1.5600216522089305E-9*rty_Bk[1];
-    rty_R[1] = (-6.7066204736709976)*PosicionH10_DW.Roll_DSTATE[0] +
-      0.99664668976316451*PosicionH10_DW.Roll_DSTATE[1]
-      + 0.00049832334488158223*PosicionH10_DW.Roll_DSTATE[2];
-    rty_R[1] += 6.7066204736709958*rty_Pos[2] + 3.447647851381736E-6*rty_Bk[1];
-    rty_R[2] = (-154.68317402206583)*PosicionH10_DW.Roll_DSTATE[0] +
-      (-0.077341587011032914)*PosicionH10_DW.Roll_DSTATE[1]
-      + 0.9999613292064945*PosicionH10_DW.Roll_DSTATE[2];
-    rty_R[2] += 154.68317402206583*rty_Pos[2] + (-2.6754371335383154E-7)*rty_Bk
-      [1];
+    rty_R[0] = 0.83961928303230193*PosicionH10_DW.Roll_DSTATE[0] +
+      0.000419809641516151*PosicionH10_DW.Roll_DSTATE[1]
+      + 2.09904820758029E-7*PosicionH10_DW.Roll_DSTATE[2];
+    rty_R[0] += 0.16038071696769815*rty_Pos[2] + 1.4522255714373899E-9*rty_Bk[1];
+    rty_R[1] = (-18.49849204376768)*PosicionH10_DW.Roll_DSTATE[0] +
+      0.99075075397811618*PosicionH10_DW.Roll_DSTATE[1]
+      + 0.000495375376989058*PosicionH10_DW.Roll_DSTATE[2];
+    rty_R[1] += 18.498492043767676*rty_Pos[2] + 3.4272523485922392E-6*rty_Bk[1];
+    rty_R[2] = (-725.43106053990891)*PosicionH10_DW.Roll_DSTATE[0] +
+      (-0.36271553026995451)*PosicionH10_DW.Roll_DSTATE[1]
+      + 0.999818642234865*PosicionH10_DW.Roll_DSTATE[2];
+    rty_R[2] += 725.4310605399088*rty_Pos[2] + (-1.2547228937219048E-6)*rty_Bk[1];
   }
 
   {
-    rty_P[0] = 0.87629660405490917*PosicionH10_DW.Pitch_DSTATE[0] +
-      0.000438148302027456*PosicionH10_DW.Pitch_DSTATE[1]
-      + 2.1907415101372875E-7*PosicionH10_DW.Pitch_DSTATE[2];
-    rty_P[0] += 0.12370339594509094*rty_Pos[3] + 9.89446932676578E-9*rty_Bk[2];
-    rty_P[1] = (-10.806708795356153)*PosicionH10_DW.Pitch_DSTATE[0] +
-      0.99459664560232186*PosicionH10_DW.Pitch_DSTATE[1]
-      + 0.00049729832280116109*PosicionH10_DW.Pitch_DSTATE[2];
-    rty_P[1] += 10.806708795356153*rty_Pos[3] + 2.2460445371758375E-5*rty_Bk[2];
-    rty_P[2] = (-319.41011217801451)*PosicionH10_DW.Pitch_DSTATE[0] +
-      (-0.15970505608900332)*PosicionH10_DW.Pitch_DSTATE[1]
-      + 0.99992014747195579*PosicionH10_DW.Pitch_DSTATE[2];
-    rty_P[2] += 319.41011217801446*rty_Pos[3] + (-3.6065340696060982E-6)*rty_Bk
-      [2];
+    rty_P[0] = 0.83961928303230193*PosicionH10_DW.Pitch_DSTATE[0] +
+      0.000419809641516151*PosicionH10_DW.Pitch_DSTATE[1]
+      + 2.09904820758029E-7*PosicionH10_DW.Pitch_DSTATE[2];
+    rty_P[0] += 0.16038071696769815*rty_Pos[3] + 9.4803371411943186E-9*rty_Bk[2];
+    rty_P[1] = (-18.49849204376768)*PosicionH10_DW.Pitch_DSTATE[0] +
+      0.99075075397811618*PosicionH10_DW.Pitch_DSTATE[1]
+      + 0.000495375376989058*PosicionH10_DW.Pitch_DSTATE[2];
+    rty_P[1] += 18.498492043767676*rty_Pos[3] + 2.2373595653218587E-5*rty_Bk[2];
+    rty_P[2] = (-725.43106053990891)*PosicionH10_DW.Pitch_DSTATE[0] +
+      (-0.36271553026995451)*PosicionH10_DW.Pitch_DSTATE[1]
+      + 0.999818642234865*PosicionH10_DW.Pitch_DSTATE[2];
+    rty_P[2] += 725.4310605399088*rty_Pos[3] + (-8.1910112899918923E-6)*rty_Bk[2];
   }
 
-  bpIndices_0[1U] = plook_binc(-55.0, rtCP_LUT_HEMS_2_bp02Data_k, 110U, &frac);
-  fractions_0[1U] = frac;
-  bpIndices_0[0U] = plook_binc(g_v_idx_0, rtCP_LUT_HEMS_2_bp01Data_h, 53U, &frac);
-  fractions_0[0U] = frac;
-  rtb_LUT_HEMS_2[0] = intrp2d_l_pw(bpIndices_0, fractions_0,
-    rtCP_LUT_HEMS_2_tableData_f, 54U);
-  bpIndices_0[0U] = plook_binc(rtb_Sum_HEMS, rtCP_LUT_HEMS_2_bp01Data_h, 53U,
-    &frac);
-  fractions_0[0U] = frac;
-  rtb_LUT_HEMS_2[1] = intrp2d_l_pw(bpIndices_0, fractions_0,
-    rtCP_LUT_HEMS_2_tableData_f, 54U);
-  bpIndices_0[0U] = plook_binc(g_v_idx_2, rtCP_LUT_HEMS_2_bp01Data_h, 53U, &frac);
-  fractions_0[0U] = frac;
-  rtb_LUT_HEMS_2[2] = intrp2d_l_pw(bpIndices_0, fractions_0,
-    rtCP_LUT_HEMS_2_tableData_f, 54U);
-  bpIndices_0[0U] = plook_binc(g_v_idx_3, rtCP_LUT_HEMS_2_bp01Data_h, 53U, &frac);
-  fractions_0[0U] = frac;
-  rtb_LUT_HEMS_2[3] = intrp2d_l_pw(bpIndices_0, fractions_0,
-    rtCP_LUT_HEMS_2_tableData_f, 54U);
   rty_Fe[0] = (((*rtu_RefZ - rty_Zz[0]) * 900.0 - 60.0 * rty_Zz[1]) - rty_Zz[2])
     * -287.08565;
-  rty_Fe[1] = (((0.0 - rty_R[0]) * 400.0 - 40.0 * rty_R[1]) - rty_R[2]) *
+  rty_Fe[1] = (((0.0 - rty_R[0]) * 900.0 - 60.0 * rty_R[1]) - rty_R[2]) *
     144.54009410557;
   rty_Fe[2] = (((0.0 - rty_P[0]) * 900.0 - 60.0 * rty_P[1]) - rty_P[2]) *
     22.1410713176;
-  rtb_TmpSignalConversionAtKin__0 = std::fmin(PosicionH10_B.LUT_HEMS_1[0],
-    rtb_LUT_HEMS_2[0]);
-  PosicionH10_B.TmpSignalConversionAtKin_HE[0] = rtb_TmpSignalConversionAtKin__0;
-  rty_Bk_0 = std::fmax(PosicionH10_B.LUT_HEMS_1[0], rtb_LUT_HEMS_2[0]);
-  PosicionH10_B.upper[0] = rty_Bk_0;
-  PosicionH10_B.LUT_HEMS_1[0] = std::fmin(std::fmax(629.1804054957391,
-    rtb_TmpSignalConversionAtKin__0), rty_Bk_0);
-  a[0] = 0.22340593006249168 * rty_Fe[0];
-  rtb_TmpSignalConversionAtKin__0 = std::fmin(PosicionH10_B.LUT_HEMS_1[1],
-    rtb_LUT_HEMS_2[1]);
-  PosicionH10_B.TmpSignalConversionAtKin_HE[1] = rtb_TmpSignalConversionAtKin__0;
-  rty_Bk_0 = std::fmax(PosicionH10_B.LUT_HEMS_1[1], rtb_LUT_HEMS_2[1]);
-  PosicionH10_B.upper[1] = rty_Bk_0;
-  PosicionH10_B.LUT_HEMS_1[1] = std::fmin(std::fmax(799.7092815957393,
-    rtb_TmpSignalConversionAtKin__0), rty_Bk_0);
-  a[1] = 0.28395638877808804 * rty_Fe[0];
-  rtb_TmpSignalConversionAtKin__0 = std::fmin(PosicionH10_B.LUT_HEMS_1[2],
-    rtb_LUT_HEMS_2[2]);
-  PosicionH10_B.TmpSignalConversionAtKin_HE[2] = rtb_TmpSignalConversionAtKin__0;
-  rty_Bk_0 = std::fmax(PosicionH10_B.LUT_HEMS_1[2], rtb_LUT_HEMS_2[2]);
-  PosicionH10_B.upper[2] = rty_Bk_0;
-  PosicionH10_B.LUT_HEMS_1[2] = std::fmin(std::fmax(608.4458316542609,
-    rtb_TmpSignalConversionAtKin__0), rty_Bk_0);
-  a[2] = 0.21604361122191199 * rty_Fe[0];
-  rtb_TmpSignalConversionAtKin__0 = std::fmin(PosicionH10_B.LUT_HEMS_1[3],
-    rtb_LUT_HEMS_2[3]);
-  PosicionH10_B.TmpSignalConversionAtKin_HE[3] = rtb_TmpSignalConversionAtKin__0;
-  rty_Bk_0 = std::fmax(PosicionH10_B.LUT_HEMS_1[3], rtb_LUT_HEMS_2[3]);
-  PosicionH10_B.upper[3] = rty_Bk_0;
-  PosicionH10_B.LUT_HEMS_1[3] = std::fmin(std::fmax(778.9747077542611,
-    rtb_TmpSignalConversionAtKin__0), rty_Bk_0);
-  a[3] = 0.27659406993750835 * rty_Fe[0];
-  PosicionH10_local_add_limited(PosicionH10_B.LUT_HEMS_1, a,
-    PosicionH10_B.TmpSignalConversionAtKin_HE, PosicionH10_B.upper, rty_Fa,
-    &frac);
-  frac = 0.2898550724637681 * rty_Fe[2];
-  rtb_LUT_HEMS_2[0] = frac;
-  rtb_LUT_HEMS_2[1] = frac;
-  frac = -0.2898550724637681 * rty_Fe[2];
-  rtb_LUT_HEMS_2[2] = frac;
-  rtb_LUT_HEMS_2[3] = frac;
-  PosicionH10_local_add_limited(rty_Fa, rtb_LUT_HEMS_2,
-    PosicionH10_B.TmpSignalConversionAtKin_HE, PosicionH10_B.upper,
-    PosicionH10_B.LUT_HEMS_1, &frac);
-  frac = 0.9174311926605505 * rty_Fe[1];
-  a[0] = frac;
-  rty_Bk_1 = -0.9174311926605505 * rty_Fe[1];
-  a[1] = rty_Bk_1;
-  a[2] = frac;
-  a[3] = rty_Bk_1;
-  PosicionH10_local_add_limited(PosicionH10_B.LUT_HEMS_1, a,
-    PosicionH10_B.TmpSignalConversionAtKin_HE, PosicionH10_B.upper,
-    rtb_LUT_HEMS_2, &frac);
-  rty_Fa[0] = std::fmin(std::fmax(rtb_LUT_HEMS_2[0],
-    PosicionH10_B.TmpSignalConversionAtKin_HE[0]), PosicionH10_B.upper[0]);
-  rty_Fa[1] = std::fmin(std::fmax(rtb_LUT_HEMS_2[1],
-    PosicionH10_B.TmpSignalConversionAtKin_HE[1]), PosicionH10_B.upper[1]);
-  rty_Fa[2] = std::fmin(std::fmax(rtb_LUT_HEMS_2[2],
-    PosicionH10_B.TmpSignalConversionAtKin_HE[2]), PosicionH10_B.upper[2]);
-  rty_Fa[3] = std::fmin(std::fmax(rtb_LUT_HEMS_2[3],
-    rtb_TmpSignalConversionAtKin__0), rty_Bk_0);
-  PosicionH10_B.LUT_HEMS_1[0] = rty_Fa[0] - 629.1804054957391;
-  PosicionH10_B.LUT_HEMS_1[1] = rty_Fa[1] - 799.7092815957393;
-  PosicionH10_B.LUT_HEMS_1[2] = rty_Fa[2] - 608.4458316542609;
-  PosicionH10_B.LUT_HEMS_1[3] = rty_Fa[3] - 778.9747077542611;
-  rty_Bk_0 = 0.0;
-  frac = 0.0;
-  rty_Bk_1 = 0.0;
+  accumulatedData = std::abs(look2_binlcpw(g_v_idx_0, -55.0,
+    rtCP_LUT_HEMS_2_bp01Data_h, rtCP_LUT_HEMS_2_bp02Data_k,
+    rtCP_LUT_HEMS_2_tableData_f, rtCP_LUT_HEMS_2_maxIndex_j, 54U));
+  rotz = std::abs(look2_binlcpw(g_v_idx_0, 55.0, rtCP_LUT_HEMS_1_bp01Data_f,
+    rtCP_LUT_HEMS_1_bp02Data_a, rtCP_LUT_HEMS_1_tableData_o,
+    rtCP_LUT_HEMS_1_maxIndex_p, 54U));
+  PosicionH10_B.lower[0] = std::fmin(accumulatedData, rotz);
+  upper[0] = std::fmax(accumulatedData, rotz);
+  accumulatedData = std::abs(look2_binlcpw(g_v_idx_1, -55.0,
+    rtCP_LUT_HEMS_2_bp01Data_m, rtCP_LUT_HEMS_2_bp02Data_b,
+    rtCP_LUT_HEMS_2_tableData_b, rtCP_LUT_HEMS_2_maxIndex_p, 54U));
+  rotz = std::abs(look2_binlcpw(g_v_idx_1, 55.0, rtCP_LUT_HEMS_1_bp01Data_a,
+    rtCP_LUT_HEMS_1_bp02Data_g, rtCP_LUT_HEMS_1_tableData_n,
+    rtCP_LUT_HEMS_1_maxIndex_g, 54U));
+  PosicionH10_B.lower[1] = std::fmin(accumulatedData, rotz);
+  upper[1] = std::fmax(accumulatedData, rotz);
+  accumulatedData = std::abs(look2_binlcpw(g_v_idx_2, -55.0,
+    rtCP_LUT_HEMS_2_bp01Data_a, rtCP_LUT_HEMS_2_bp02Data_p,
+    rtCP_LUT_HEMS_2_tableData_c, rtCP_LUT_HEMS_2_maxIndex_b, 54U));
+  rotz = std::abs(look2_binlcpw(g_v_idx_2, 55.0, rtCP_LUT_HEMS_1_bp01Data_av,
+    rtCP_LUT_HEMS_1_bp02Data_h, rtCP_LUT_HEMS_1_tableData_c,
+    rtCP_LUT_HEMS_1_maxIndex_j, 54U));
+  PosicionH10_B.lower[2] = std::fmin(accumulatedData, rotz);
+  upper[2] = std::fmax(accumulatedData, rotz);
+  accumulatedData = std::abs(look2_binlcpw(g_v_idx_3, -55.0,
+    rtCP_LUT_HEMS_2_bp01Data_c, rtCP_LUT_HEMS_2_bp02Data_i,
+    rtCP_LUT_HEMS_2_tableData_e, rtCP_LUT_HEMS_2_maxIndex_jh, 54U));
+  rotz = std::abs(look2_binlcpw(g_v_idx_3, 55.0, rtCP_LUT_HEMS_1_bp01Data_p,
+    rtCP_LUT_HEMS_1_bp02Data_ha, rtCP_LUT_HEMS_1_tableData_p,
+    rtCP_LUT_HEMS_1_maxIndex_d, 54U));
+  PosicionH10_B.lower[3] = std::fmin(accumulatedData, rotz);
+  upper[3] = std::fmax(accumulatedData, rotz);
+  rtb_TmpSignalConversionAtSFun_f[0] = 0.0;
+  rtb_TmpSignalConversionAtSFun_l[0] = 0.22340593006249168 * rty_Fe[0];
+  rtb_TmpSignalConversionAtSFun_f[1] = 0.0;
+  rtb_TmpSignalConversionAtSFun_l[1] = 0.28395638877808804 * rty_Fe[0];
+  rtb_TmpSignalConversionAtSFun_f[2] = 0.0;
+  rtb_TmpSignalConversionAtSFun_l[2] = 0.21604361122191199 * rty_Fe[0];
+  rtb_TmpSignalConversionAtSFun_f[3] = 0.0;
+  rtb_TmpSignalConversionAtSFun_l[3] = 0.27659406993750835 * rty_Fe[0];
+  PosicionH10_local_add_limited(rtb_TmpSignalConversionAtSFun_f,
+    rtb_TmpSignalConversionAtSFun_l, PosicionH10_B.lower, upper, rty_Fa,
+    &accumulatedData);
+  b_accumulatedData = 0.2898550724637681 * rty_Fe[2];
+  rtb_TmpSignalConversionAtSFun_l[0] = b_accumulatedData;
+  rtb_TmpSignalConversionAtSFun_l[1] = b_accumulatedData;
+  b_accumulatedData = -0.2898550724637681 * rty_Fe[2];
+  rtb_TmpSignalConversionAtSFun_l[2] = b_accumulatedData;
+  rtb_TmpSignalConversionAtSFun_l[3] = b_accumulatedData;
+  PosicionH10_local_add_limited(rty_Fa, rtb_TmpSignalConversionAtSFun_l,
+    PosicionH10_B.lower, upper, rtb_TmpSignalConversionAtSFun_f,
+    &accumulatedData);
+  b_accumulatedData = 0.9174311926605505 * rty_Fe[1];
+  c_a[0] = b_accumulatedData;
+  rotz = -0.9174311926605505 * rty_Fe[1];
+  c_a[1] = rotz;
+  c_a[2] = b_accumulatedData;
+  c_a[3] = rotz;
+  PosicionH10_local_add_limited(rtb_TmpSignalConversionAtSFun_f, c_a,
+    PosicionH10_B.lower, upper, rtb_TmpSignalConversionAtSFun_l,
+    &accumulatedData);
+  rty_Fa[0] = std::fmin(std::fmax(rtb_TmpSignalConversionAtSFun_l[0],
+    PosicionH10_B.lower[0]), upper[0]);
+  rty_Fa[1] = std::fmin(std::fmax(rtb_TmpSignalConversionAtSFun_l[1],
+    PosicionH10_B.lower[1]), upper[1]);
+  rty_Fa[2] = std::fmin(std::fmax(rtb_TmpSignalConversionAtSFun_l[2],
+    PosicionH10_B.lower[2]), upper[2]);
+  rty_Fa[3] = std::fmin(std::fmax(rtb_TmpSignalConversionAtSFun_l[3],
+    PosicionH10_B.lower[3]), upper[3]);
+  rotz = 0.0;
+  g_v_idx_1_tmp = 0.0;
+  accumulatedData = 0.0;
   tmp = 0;
   for (i = 0; i < 4; i++) {
-    rtb_TmpSignalConversionAtKin__0 = PosicionH10_B.LUT_HEMS_1[i];
-    rty_Bk_0 += d_a[tmp] * rtb_TmpSignalConversionAtKin__0;
-    frac += d_a[tmp + 1] * rtb_TmpSignalConversionAtKin__0;
-    rty_Bk_1 += d_a[tmp + 2] * rtb_TmpSignalConversionAtKin__0;
+    b_accumulatedData = rty_Fa[i];
+    rotz += d_a[tmp] * b_accumulatedData;
+    g_v_idx_1_tmp += d_a[tmp + 1] * b_accumulatedData;
+    accumulatedData += d_a[tmp + 2] * b_accumulatedData;
     tmp += 3;
   }
 
-  rty_Fe_L[0] = rty_Bk_0;
-  rty_Fe_L[1] = frac;
-  rty_Fe_L[2] = rty_Bk_1;
-  rty_Ak[0] = b_accumulatedData;
-  rty_Ak[1] = rotz_0;
-  rty_Ak[2] = rotz;
-  rty_Ak[3] = rtb_InvLUT_2;
-  rotz = look2_binlcpw(g_v_idx_0, rty_Fa[0], rtCP_InvLUT_1_bp01Data,
-                       rtCP_InvLUT_1_bp02Data, rtCP_InvLUT_1_tableData,
-                       rtCP_InvLUT_1_maxIndex, 54U);
-  b_accumulatedData = look2_binlcpw(rtb_Sum_HEMS, rty_Fa[1],
-    rtCP_InvLUT_2_bp01Data, rtCP_InvLUT_2_bp02Data, rtCP_InvLUT_2_tableData,
-    rtCP_InvLUT_2_maxIndex, 54U);
-  rtb_InvLUT_2 = look2_binlcpw(g_v_idx_2, rty_Fa[2], rtCP_InvLUT_3_bp01Data,
+  rty_Fe_L[0] = rotz;
+  rty_Fe_L[1] = g_v_idx_1_tmp;
+  rty_Fe_L[2] = accumulatedData;
+  g_v_idx_0 = look2_binlcpw(g_v_idx_0, rty_Fa[0], rtCP_InvLUT_1_bp01Data,
+    rtCP_InvLUT_1_bp02Data, rtCP_InvLUT_1_tableData, rtCP_InvLUT_1_maxIndex, 54U);
+  g_v_idx_1 = look2_binlcpw(g_v_idx_1, rty_Fa[1], rtCP_InvLUT_2_bp01Data,
+    rtCP_InvLUT_2_bp02Data, rtCP_InvLUT_2_tableData, rtCP_InvLUT_2_maxIndex, 54U);
+  g_v_idx_2 = look2_binlcpw(g_v_idx_2, rty_Fa[2], rtCP_InvLUT_3_bp01Data,
     rtCP_InvLUT_3_bp02Data, rtCP_InvLUT_3_tableData, rtCP_InvLUT_3_maxIndex, 54U);
   g_v_idx_3 = look2_binlcpw(g_v_idx_3, rty_Fa[3], rtCP_InvLUT_4_bp01Data,
     rtCP_InvLUT_4_bp02Data, rtCP_InvLUT_4_tableData, rtCP_InvLUT_4_maxIndex, 54U);
-  if (rotz > 55.0) {
+  if (g_v_idx_0 > 55.0) {
     rty_I_referencia[0] = 55.0;
-  } else if (rotz < -55.0) {
+  } else if (g_v_idx_0 < -55.0) {
     rty_I_referencia[0] = -55.0;
   } else {
-    rty_I_referencia[0] = rotz;
+    rty_I_referencia[0] = g_v_idx_0;
   }
 
-  if (b_accumulatedData > 55.0) {
+  if (g_v_idx_1 > 55.0) {
     rty_I_referencia[1] = 55.0;
-  } else if (b_accumulatedData < -55.0) {
+  } else if (g_v_idx_1 < -55.0) {
     rty_I_referencia[1] = -55.0;
   } else {
-    rty_I_referencia[1] = b_accumulatedData;
+    rty_I_referencia[1] = g_v_idx_1;
   }
 
-  if (rtb_InvLUT_2 > 55.0) {
+  if (g_v_idx_2 > 55.0) {
     rty_I_referencia[2] = 55.0;
-  } else if (rtb_InvLUT_2 < -55.0) {
+  } else if (g_v_idx_2 < -55.0) {
     rty_I_referencia[2] = -55.0;
   } else {
-    rty_I_referencia[2] = rtb_InvLUT_2;
+    rty_I_referencia[2] = g_v_idx_2;
   }
 
   if (g_v_idx_3 > 55.0) {
@@ -710,63 +658,60 @@ void PosicionH10::step1(const real_T rtu_airgaps_sensores[8], const real_T
     rty_I_referencia[3] = g_v_idx_3;
   }
 
-  rty_Ef[0] = rty_Bk[0] - 2816.3;
+  rty_Ef[0] = rty_Bk[0];
   rty_Ef[1] = rty_Bk[1];
   rty_Ef[2] = rty_Bk[2];
 
   {
     real_T xnew[3];
-    xnew[0] = 0.77799271734182973*PosicionH10_DW.Z_DSTATE[0] +
-      0.00088899635867091488*PosicionH10_DW.Z_DSTATE[1]
-      + 4.4449817933594343E-7*PosicionH10_DW.Z_DSTATE[2];
-    xnew[0] += 0.22200728265817027*rty_Pos[1] + (-1.5483120780695848E-9)*
-      (rty_Bk[0] - 2816.3);
-    xnew[1] = (-17.29631315430132)*PosicionH10_DW.Z_DSTATE[0] +
-      0.99135184342284943*PosicionH10_DW.Z_DSTATE[1]
-      + 0.00099567592171142128*PosicionH10_DW.Z_DSTATE[2];
-    xnew[1] += 17.29631315430132*rty_Pos[1] + (-3.46821905487587E-6)*(rty_Bk[0]
-      - 2816.3);
-    xnew[2] = (-455.16613563950841)*PosicionH10_DW.Z_DSTATE[0] +
-      (-0.22758306781975421)*PosicionH10_DW.Z_DSTATE[1]
-      + 0.99988620846609*PosicionH10_DW.Z_DSTATE[2];
-    xnew[2] += 455.16613563950841*rty_Pos[1] + 3.963678919858137E-7*(rty_Bk[0] -
-      2816.3);
+    xnew[0] = 0.6792385660646042*PosicionH10_DW.Z_DSTATE[0] +
+      0.000839619283032302*PosicionH10_DW.Z_DSTATE[1]
+      + 4.1980964151605781E-7*PosicionH10_DW.Z_DSTATE[2];
+    xnew[0] += 0.3207614339353963*rty_Pos[1] + (-1.4623149625073599E-9)*rty_Bk[0];
+    xnew[1] = (-36.99698408753536)*PosicionH10_DW.Z_DSTATE[0] +
+      0.98150150795623237*PosicionH10_DW.Z_DSTATE[1]
+      + 0.000990750753978121*PosicionH10_DW.Z_DSTATE[2];
+    xnew[1] += 36.996984087535353*rty_Pos[1] + (-3.4510633115173684E-6)*rty_Bk[0];
+    xnew[2] = (-1450.8621210798178)*PosicionH10_DW.Z_DSTATE[0] +
+      (-0.72543106053990891)*PosicionH10_DW.Z_DSTATE[1]
+      + 0.9996372844697301*PosicionH10_DW.Z_DSTATE[2];
+    xnew[2] += 1450.8621210798176*rty_Pos[1] + 1.2634401276063589E-6*rty_Bk[0];
     (void) std::memcpy(PosicionH10_DW.Z_DSTATE, xnew,
                        sizeof(real_T)*3);
   }
 
   {
     real_T xnew[3];
-    xnew[0] = 0.8038854113360443*PosicionH10_DW.Roll_DSTATE[0] +
-      0.00090194270566802237*PosicionH10_DW.Roll_DSTATE[1]
-      + 4.5097135283401114E-7*PosicionH10_DW.Roll_DSTATE[2];
-    xnew[0] += 0.19611458866395565*rty_Pos[2] + 3.1200433044178609E-9*rty_Bk[1];
-    xnew[1] = (-13.413240947341995)*PosicionH10_DW.Roll_DSTATE[0] +
-      0.99329337952632912*PosicionH10_DW.Roll_DSTATE[1]
-      + 0.00099664668976316446*PosicionH10_DW.Roll_DSTATE[2];
-    xnew[1] += 13.413240947341992*rty_Pos[2] + 6.895295702763472E-6*rty_Bk[1];
-    xnew[2] = (-309.36634804413166)*PosicionH10_DW.Roll_DSTATE[0] +
-      (-0.15468317402206583)*PosicionH10_DW.Roll_DSTATE[1]
-      + 0.99992265841298889*PosicionH10_DW.Roll_DSTATE[2];
-    xnew[2] += 309.36634804413166*rty_Pos[2] + (-5.3508742670766309E-7)*rty_Bk[1];
+    xnew[0] = 0.6792385660646042*PosicionH10_DW.Roll_DSTATE[0] +
+      0.000839619283032302*PosicionH10_DW.Roll_DSTATE[1]
+      + 4.1980964151605781E-7*PosicionH10_DW.Roll_DSTATE[2];
+    xnew[0] += 0.3207614339353963*rty_Pos[2] + 2.9044511428747797E-9*rty_Bk[1];
+    xnew[1] = (-36.99698408753536)*PosicionH10_DW.Roll_DSTATE[0] +
+      0.98150150795623237*PosicionH10_DW.Roll_DSTATE[1]
+      + 0.000990750753978121*PosicionH10_DW.Roll_DSTATE[2];
+    xnew[1] += 36.996984087535353*rty_Pos[2] + 6.8545046971844784E-6*rty_Bk[1];
+    xnew[2] = (-1450.8621210798178)*PosicionH10_DW.Roll_DSTATE[0] +
+      (-0.72543106053990891)*PosicionH10_DW.Roll_DSTATE[1]
+      + 0.9996372844697301*PosicionH10_DW.Roll_DSTATE[2];
+    xnew[2] += 1450.8621210798176*rty_Pos[2] + (-2.5094457874438095E-6)*rty_Bk[1];
     (void) std::memcpy(PosicionH10_DW.Roll_DSTATE, xnew,
                        sizeof(real_T)*3);
   }
 
   {
     real_T xnew[3];
-    xnew[0] = 0.75259320810981811*PosicionH10_DW.Pitch_DSTATE[0] +
-      0.000876296604054912*PosicionH10_DW.Pitch_DSTATE[1]
-      + 4.3814830202746851E-7*PosicionH10_DW.Pitch_DSTATE[2];
-    xnew[0] += 0.24740679189018189*rty_Pos[3] + 1.9788938653531559E-8*rty_Bk[2];
-    xnew[1] = (-21.613417590712306)*PosicionH10_DW.Pitch_DSTATE[0] +
-      0.98919329120464383*PosicionH10_DW.Pitch_DSTATE[1]
-      + 0.000994596645602322*PosicionH10_DW.Pitch_DSTATE[2];
-    xnew[1] += 21.613417590712306*rty_Pos[3] + 4.4920890743516751E-5*rty_Bk[2];
-    xnew[2] = (-638.82022435602892)*PosicionH10_DW.Pitch_DSTATE[0] +
-      (-0.31941011217801363)*PosicionH10_DW.Pitch_DSTATE[1]
-      + 0.99984029494391125*PosicionH10_DW.Pitch_DSTATE[2];
-    xnew[2] += 638.82022435602892*rty_Pos[3] + (-7.2130681392121963E-6)*rty_Bk[2];
+    xnew[0] = 0.6792385660646042*PosicionH10_DW.Pitch_DSTATE[0] +
+      0.000839619283032302*PosicionH10_DW.Pitch_DSTATE[1]
+      + 4.1980964151605781E-7*PosicionH10_DW.Pitch_DSTATE[2];
+    xnew[0] += 0.3207614339353963*rty_Pos[3] + 1.8960674282388637E-8*rty_Bk[2];
+    xnew[1] = (-36.99698408753536)*PosicionH10_DW.Pitch_DSTATE[0] +
+      0.98150150795623237*PosicionH10_DW.Pitch_DSTATE[1]
+      + 0.000990750753978121*PosicionH10_DW.Pitch_DSTATE[2];
+    xnew[1] += 36.996984087535353*rty_Pos[3] + 4.4747191306437174E-5*rty_Bk[2];
+    xnew[2] = (-1450.8621210798178)*PosicionH10_DW.Pitch_DSTATE[0] +
+      (-0.72543106053990891)*PosicionH10_DW.Pitch_DSTATE[1]
+      + 0.9996372844697301*PosicionH10_DW.Pitch_DSTATE[2];
+    xnew[2] += 1450.8621210798176*rty_Pos[3] + (-1.6382022579983785E-5)*rty_Bk[2];
     (void) std::memcpy(PosicionH10_DW.Pitch_DSTATE, xnew,
                        sizeof(real_T)*3);
   }
