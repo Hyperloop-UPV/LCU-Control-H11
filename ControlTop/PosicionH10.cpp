@@ -479,57 +479,58 @@ void PosicionH10::step1(const real_T rtu_airgaps_sensores[8], const real_T
   rty_Bk[0] = rotz;
 
   {
-    rty_Zz[0] = 0.9151416593531595*PosicionH10_DW.Z_DSTATE[0] +
-      0.00045757082967659378*PosicionH10_DW.Z_DSTATE[1]
-      + 2.2878541483830569E-7*PosicionH10_DW.Z_DSTATE[2];
-    rty_Zz[0] += 0.084858340646840488*rty_Pos[1] + (-7.9692389653852942E-10)*
+    rty_Zz[0] = 0.9423223345470445*PosicionH10_DW.Z_DSTATE[0] +
+      0.00047116116727352229*PosicionH10_DW.Z_DSTATE[1]
+      + 2.3558058363676119E-7*PosicionH10_DW.Z_DSTATE[2];
+    rty_Zz[0] += 0.057677665452955496*rty_Pos[1] + (-8.2059337914229138E-10)*
       rty_Bk[0];
-    rty_Zz[1] = (-4.9911826101121326)*PosicionH10_DW.Z_DSTATE[0] +
-      0.99750440869494383*PosicionH10_DW.Z_DSTATE[1]
-      + 0.000498752204347472*PosicionH10_DW.Z_DSTATE[2];
-    rty_Zz[1] += 4.9911826101121326*rty_Pos[1] + (-1.7372940944539445E-6)*
-      rty_Bk[0];
-    rty_Zz[2] = (-98.83529921014123)*PosicionH10_DW.Z_DSTATE[0] +
-      (-0.049417649605073846)*PosicionH10_DW.Z_DSTATE[1]
-      + 0.99997529117519768*PosicionH10_DW.Z_DSTATE[2];
-    rty_Zz[2] += 98.83529921014123*rty_Pos[1] + 8.6067780826161244E-8*rty_Bk[0];
+    rty_Zz[1] = (-2.27665076026566)*PosicionH10_DW.Z_DSTATE[0] +
+      0.99886167461986741*PosicionH10_DW.Z_DSTATE[1]
+      + 0.00049943083730993377*PosicionH10_DW.Z_DSTATE[2];
+    rty_Zz[1] += 2.2766507602656603*rty_Pos[1] + (-1.739657963781658E-6)*rty_Bk
+      [0];
+    rty_Zz[2] = (-30.154314705505424)*PosicionH10_DW.Z_DSTATE[0] +
+      (-0.015077157352752711)*PosicionH10_DW.Z_DSTATE[1]
+      + 0.99999246142132359*PosicionH10_DW.Z_DSTATE[2];
+    rty_Zz[2] += 30.154314705505424*rty_Pos[1] + 2.6258988132553331E-8*rty_Bk[0];
   }
 
   {
-    rty_R[0] = 0.9151416593531595*PosicionH10_DW.Roll_DSTATE[0] +
-      0.00045757082967659378*PosicionH10_DW.Roll_DSTATE[1]
-      + 2.2878541483830569E-7*PosicionH10_DW.Roll_DSTATE[2];
-    rty_R[0] += 0.084858340646840488*rty_Pos[2] + 1.0333077905604138E-8*rty_Bk[1];
-    rty_R[1] = (-4.9911826101121326)*PosicionH10_DW.Roll_DSTATE[0] +
-      0.99750440869494383*PosicionH10_DW.Roll_DSTATE[1]
-      + 0.000498752204347472*PosicionH10_DW.Roll_DSTATE[2];
-    rty_R[1] += 4.9911826101121326*rty_Pos[2] + 2.252610983421622E-5*rty_Bk[1];
-    rty_R[2] = (-98.83529921014123)*PosicionH10_DW.Roll_DSTATE[0] +
-      (-0.049417649605073846)*PosicionH10_DW.Roll_DSTATE[1]
-      + 0.99997529117519768*PosicionH10_DW.Roll_DSTATE[2];
-    rty_R[2] += 98.83529921014123*rty_Pos[2] + (-1.1159724138052105E-6)*rty_Bk[1];
+    rty_R[0] = 0.9423223345470445*PosicionH10_DW.Roll_DSTATE[0] +
+      0.00047116116727352229*PosicionH10_DW.Roll_DSTATE[1]
+      + 2.3558058363676119E-7*PosicionH10_DW.Roll_DSTATE[2];
+    rty_R[0] += 0.057677665452955496*rty_Pos[2] + 1.0639981248310121E-8*rty_Bk[1];
+    rty_R[1] = (-2.27665076026566)*PosicionH10_DW.Roll_DSTATE[0] +
+      0.99886167461986741*PosicionH10_DW.Roll_DSTATE[1]
+      + 0.00049943083730993377*PosicionH10_DW.Roll_DSTATE[2];
+    rty_R[1] += 2.2766507602656603*rty_Pos[2] + 2.2556760246417461E-5*rty_Bk[1];
+    rty_R[2] = (-30.154314705505424)*PosicionH10_DW.Roll_DSTATE[0] +
+      (-0.015077157352752711)*PosicionH10_DW.Roll_DSTATE[1]
+      + 0.99999246142132359*PosicionH10_DW.Roll_DSTATE[2];
+    rty_R[2] += 30.154314705505424*rty_Pos[2] + (-3.4047939994592397E-7)*rty_Bk
+      [1];
   }
 
   {
-    rty_P[0] = 0.9151416593531595*PosicionH10_DW.Pitch_DSTATE[0] +
-      0.00045757082967659378*PosicionH10_DW.Pitch_DSTATE[1]
-      + 2.2878541483830569E-7*PosicionH10_DW.Pitch_DSTATE[2];
-    rty_P[0] += 0.084858340646840488*rty_Pos[3] + 1.5828508778415032E-9*rty_Bk[2];
-    rty_P[1] = (-4.9911826101121326)*PosicionH10_DW.Pitch_DSTATE[0] +
-      0.99750440869494383*PosicionH10_DW.Pitch_DSTATE[1]
-      + 0.000498752204347472*PosicionH10_DW.Pitch_DSTATE[2];
-    rty_P[1] += 4.9911826101121326*rty_Pos[3] + 3.4506149136944008E-6*rty_Bk[2];
-    rty_P[2] = (-98.83529921014123)*PosicionH10_DW.Pitch_DSTATE[0] +
-      (-0.049417649605073846)*PosicionH10_DW.Pitch_DSTATE[1]
-      + 0.99997529117519768*PosicionH10_DW.Pitch_DSTATE[2];
-    rty_P[2] += 98.83529921014123*rty_Pos[3] + (-1.7094789480688236E-7)*rty_Bk[2];
+    rty_P[0] = 0.9423223345470445*PosicionH10_DW.Pitch_DSTATE[0] +
+      0.00047116116727352229*PosicionH10_DW.Pitch_DSTATE[1]
+      + 2.3558058363676119E-7*PosicionH10_DW.Pitch_DSTATE[2];
+    rty_P[0] += 0.057677665452955496*rty_Pos[3] + 1.6298632230355159E-9*rty_Bk[2];
+    rty_P[1] = (-2.27665076026566)*PosicionH10_DW.Pitch_DSTATE[0] +
+      0.99886167461986741*PosicionH10_DW.Pitch_DSTATE[1]
+      + 0.00049943083730993377*PosicionH10_DW.Pitch_DSTATE[2];
+    rty_P[1] += 2.2766507602656603*rty_Pos[3] + 3.4553100328352941E-6*rty_Bk[2];
+    rty_P[2] = (-30.154314705505424)*PosicionH10_DW.Pitch_DSTATE[0] +
+      (-0.015077157352752711)*PosicionH10_DW.Pitch_DSTATE[1]
+      + 0.99999246142132359*PosicionH10_DW.Pitch_DSTATE[2];
+    rty_P[2] += 30.154314705505424*rty_Pos[3] + (-5.215562313713651E-8)*rty_Bk[2];
   }
 
-  rty_Fe[0] = (((*rtu_RefZ - rty_Zz[0]) * 400.0 - 40.0 * rty_Zz[1]) - rty_Zz[2])
+  rty_Fe[0] = (((*rtu_RefZ - rty_Zz[0]) * 225.0 - 30.0 * rty_Zz[1]) - rty_Zz[2])
     * -287.08565;
-  rty_Fe[1] = (((0.0 - rty_R[0]) * 225.0 - 30.0 * rty_R[1]) - rty_R[2]) *
+  rty_Fe[1] = (((0.0 - rty_R[0]) * 100.0 - 20.0 * rty_R[1]) - rty_R[2]) *
     22.1410713176;
-  rty_Fe[2] = (((0.0 - rty_P[0]) * 400.0 - 40.0 * rty_P[1]) - rty_P[2]) *
+  rty_Fe[2] = (((0.0 - rty_P[0]) * 225.0 - 30.0 * rty_P[1]) - rty_P[2]) *
     144.54009410557;
   accumulatedData = std::abs(look2_binlcpw(g_v_idx_0, -55.0,
     rtCP_LUT_HEMS_2_bp01Data_h, rtCP_LUT_HEMS_2_bp02Data_k,
@@ -642,55 +643,55 @@ void PosicionH10::step1(const real_T rtu_airgaps_sensores[8], const real_T
 
   {
     real_T xnew[3];
-    xnew[0] = 0.83028331870631911*PosicionH10_DW.Z_DSTATE[0] +
-      0.00091514165935316794*PosicionH10_DW.Z_DSTATE[1]
-      + 4.5757082967659735E-7*PosicionH10_DW.Z_DSTATE[2];
-    xnew[0] += 0.16971668129368098*rty_Pos[1] + (-1.5938477930770588E-9)*rty_Bk
+    xnew[0] = 0.8846446690940889*PosicionH10_DW.Z_DSTATE[0] +
+      0.00094232233454704436*PosicionH10_DW.Z_DSTATE[1]
+      + 4.7116116727352223E-7*PosicionH10_DW.Z_DSTATE[2];
+    xnew[0] += 0.11535533090591099*rty_Pos[1] + (-1.6411867582845828E-9)*rty_Bk
       [0];
-    xnew[1] = (-9.9823652202242652)*PosicionH10_DW.Z_DSTATE[0] +
-      0.99500881738988789*PosicionH10_DW.Z_DSTATE[1]
-      + 0.000997504408694944*PosicionH10_DW.Z_DSTATE[2];
-    xnew[1] += 9.9823652202242652*rty_Pos[1] + (-3.474588188907889E-6)*rty_Bk[0];
-    xnew[2] = (-197.67059842028246)*PosicionH10_DW.Z_DSTATE[0] +
-      (-0.098835299210142877)*PosicionH10_DW.Z_DSTATE[1]
-      + 0.99995058235039513*PosicionH10_DW.Z_DSTATE[2];
-    xnew[2] += 197.67059842028246*rty_Pos[1] + 1.7213556165232249E-7*rty_Bk[0];
+    xnew[1] = (-4.55330152053132)*PosicionH10_DW.Z_DSTATE[0] +
+      0.99772334923973427*PosicionH10_DW.Z_DSTATE[1]
+      + 0.00099886167461986732*PosicionH10_DW.Z_DSTATE[2];
+    xnew[1] += 4.5533015205313205*rty_Pos[1] + (-3.479315927563316E-6)*rty_Bk[0];
+    xnew[2] = (-60.308629411010841)*PosicionH10_DW.Z_DSTATE[0] +
+      (-0.030154314705505426)*PosicionH10_DW.Z_DSTATE[1]
+      + 0.99998492284264728*PosicionH10_DW.Z_DSTATE[2];
+    xnew[2] += 60.308629411010848*rty_Pos[1] + 5.2517976265106661E-8*rty_Bk[0];
     (void) std::memcpy(PosicionH10_DW.Z_DSTATE, xnew,
                        sizeof(real_T)*3);
   }
 
   {
     real_T xnew[3];
-    xnew[0] = 0.83028331870631911*PosicionH10_DW.Roll_DSTATE[0] +
-      0.00091514165935316794*PosicionH10_DW.Roll_DSTATE[1]
-      + 4.5757082967659735E-7*PosicionH10_DW.Roll_DSTATE[2];
-    xnew[0] += 0.16971668129368098*rty_Pos[2] + 2.0666155811208275E-8*rty_Bk[1];
-    xnew[1] = (-9.9823652202242652)*PosicionH10_DW.Roll_DSTATE[0] +
-      0.99500881738988789*PosicionH10_DW.Roll_DSTATE[1]
-      + 0.000997504408694944*PosicionH10_DW.Roll_DSTATE[2];
-    xnew[1] += 9.9823652202242652*rty_Pos[2] + 4.5052219668432439E-5*rty_Bk[1];
-    xnew[2] = (-197.67059842028246)*PosicionH10_DW.Roll_DSTATE[0] +
-      (-0.098835299210142877)*PosicionH10_DW.Roll_DSTATE[1]
-      + 0.99995058235039513*PosicionH10_DW.Roll_DSTATE[2];
-    xnew[2] += 197.67059842028246*rty_Pos[2] + (-2.2319448276104209E-6)*rty_Bk[1];
+    xnew[0] = 0.8846446690940889*PosicionH10_DW.Roll_DSTATE[0] +
+      0.00094232233454704436*PosicionH10_DW.Roll_DSTATE[1]
+      + 4.7116116727352223E-7*PosicionH10_DW.Roll_DSTATE[2];
+    xnew[0] += 0.11535533090591099*rty_Pos[2] + 2.1279962496620242E-8*rty_Bk[1];
+    xnew[1] = (-4.55330152053132)*PosicionH10_DW.Roll_DSTATE[0] +
+      0.99772334923973427*PosicionH10_DW.Roll_DSTATE[1]
+      + 0.00099886167461986732*PosicionH10_DW.Roll_DSTATE[2];
+    xnew[1] += 4.5533015205313205*rty_Pos[2] + 4.5113520492834922E-5*rty_Bk[1];
+    xnew[2] = (-60.308629411010841)*PosicionH10_DW.Roll_DSTATE[0] +
+      (-0.030154314705505426)*PosicionH10_DW.Roll_DSTATE[1]
+      + 0.99998492284264728*PosicionH10_DW.Roll_DSTATE[2];
+    xnew[2] += 60.308629411010848*rty_Pos[2] + (-6.8095879989184794E-7)*rty_Bk[1];
     (void) std::memcpy(PosicionH10_DW.Roll_DSTATE, xnew,
                        sizeof(real_T)*3);
   }
 
   {
     real_T xnew[3];
-    xnew[0] = 0.83028331870631911*PosicionH10_DW.Pitch_DSTATE[0] +
-      0.00091514165935316794*PosicionH10_DW.Pitch_DSTATE[1]
-      + 4.5757082967659735E-7*PosicionH10_DW.Pitch_DSTATE[2];
-    xnew[0] += 0.16971668129368098*rty_Pos[3] + 3.1657017556830063E-9*rty_Bk[2];
-    xnew[1] = (-9.9823652202242652)*PosicionH10_DW.Pitch_DSTATE[0] +
-      0.99500881738988789*PosicionH10_DW.Pitch_DSTATE[1]
-      + 0.000997504408694944*PosicionH10_DW.Pitch_DSTATE[2];
-    xnew[1] += 9.9823652202242652*rty_Pos[3] + 6.9012298273888017E-6*rty_Bk[2];
-    xnew[2] = (-197.67059842028246)*PosicionH10_DW.Pitch_DSTATE[0] +
-      (-0.098835299210142877)*PosicionH10_DW.Pitch_DSTATE[1]
-      + 0.99995058235039513*PosicionH10_DW.Pitch_DSTATE[2];
-    xnew[2] += 197.67059842028246*rty_Pos[3] + (-3.4189578961376471E-7)*rty_Bk[2];
+    xnew[0] = 0.8846446690940889*PosicionH10_DW.Pitch_DSTATE[0] +
+      0.00094232233454704436*PosicionH10_DW.Pitch_DSTATE[1]
+      + 4.7116116727352223E-7*PosicionH10_DW.Pitch_DSTATE[2];
+    xnew[0] += 0.11535533090591099*rty_Pos[3] + 3.2597264460710319E-9*rty_Bk[2];
+    xnew[1] = (-4.55330152053132)*PosicionH10_DW.Pitch_DSTATE[0] +
+      0.99772334923973427*PosicionH10_DW.Pitch_DSTATE[1]
+      + 0.00099886167461986732*PosicionH10_DW.Pitch_DSTATE[2];
+    xnew[1] += 4.5533015205313205*rty_Pos[3] + 6.9106200656705882E-6*rty_Bk[2];
+    xnew[2] = (-60.308629411010841)*PosicionH10_DW.Pitch_DSTATE[0] +
+      (-0.030154314705505426)*PosicionH10_DW.Pitch_DSTATE[1]
+      + 0.99998492284264728*PosicionH10_DW.Pitch_DSTATE[2];
+    xnew[2] += 60.308629411010848*rty_Pos[3] + (-1.0431124627427302E-7)*rty_Bk[2];
     (void) std::memcpy(PosicionH10_DW.Pitch_DSTATE, xnew,
                        sizeof(real_T)*3);
   }
