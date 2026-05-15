@@ -98,10 +98,9 @@ void ControlTop::step1()
   ControlPosici_nMDLOBJ2.step1(&ControlTop_U.Sensores[0], &ControlTop_B.Switch1,
     &ControlTop_B.RT_l[0], &ControlTop_B.airgaps_actuadores[0],
     &ControlTop_B.ControlPosicin_o2[0], &ControlTop_B.estados[0],
-    &ControlTop_B.ControlPosicin_o4[0], &ControlTop_B.F_des[0],
-    &ControlTop_B.ControlPosicin_o6[0], &ControlTop_B.ControlPosicin_o7[0],
-    &ControlTop_B.ControlPosicin_o8[0], &ControlTop_B.ControlPosicin_o9[0],
-    &ControlTop_B.Fe_alloc[0], &ControlTop_B.ControlPosicin_o11[0],
+    &ControlTop_B.ControlPosicin_o4[0], &ControlTop_B.ControlPosicin_o6[0],
+    &ControlTop_B.ControlPosicin_o7[0], &ControlTop_B.ControlPosicin_o8[0],
+    &ControlTop_B.ControlPosicin_o9[0], &ControlTop_B.ControlPosicin_o11[0],
     &ControlTop_B.ControlPosicin_o12[0]);
   ControlTop_Y.Referencia = ControlTop_B.Switch1;
   ControlTop_Y.GapsLocales[0] = ControlTop_B.airgaps_actuadores[0];
@@ -113,27 +112,20 @@ void ControlTop::step1()
   }
 
   ControlTop_Y.Fe[0] = ControlTop_B.ControlPosicin_o4[0];
-  ControlTop_Y.Fe[1] = ControlTop_B.ControlPosicin_o4[1];
-  ControlTop_Y.Fe[2] = ControlTop_B.ControlPosicin_o4[2];
-  ControlTop_Y.Fa[0] = ControlTop_B.F_des[0];
-  ControlTop_Y.Fa[1] = ControlTop_B.F_des[1];
-  ControlTop_Y.Fa[2] = ControlTop_B.F_des[2];
-  ControlTop_Y.Fa[3] = ControlTop_B.F_des[3];
   ControlTop_Y.Ef[0] = ControlTop_B.ControlPosicin_o6[0];
   ControlTop_Y.P[0] = ControlTop_B.ControlPosicin_o7[0];
   ControlTop_Y.R[0] = ControlTop_B.ControlPosicin_o8[0];
   ControlTop_Y.Zz[0] = ControlTop_B.ControlPosicin_o9[0];
-  ControlTop_Y.Fe_L[0] = ControlTop_B.Fe_alloc[0];
+  ControlTop_Y.Fe[1] = ControlTop_B.ControlPosicin_o4[1];
   ControlTop_Y.Ef[1] = ControlTop_B.ControlPosicin_o6[1];
   ControlTop_Y.P[1] = ControlTop_B.ControlPosicin_o7[1];
   ControlTop_Y.R[1] = ControlTop_B.ControlPosicin_o8[1];
   ControlTop_Y.Zz[1] = ControlTop_B.ControlPosicin_o9[1];
-  ControlTop_Y.Fe_L[1] = ControlTop_B.Fe_alloc[1];
+  ControlTop_Y.Fe[2] = ControlTop_B.ControlPosicin_o4[2];
   ControlTop_Y.Ef[2] = ControlTop_B.ControlPosicin_o6[2];
   ControlTop_Y.P[2] = ControlTop_B.ControlPosicin_o7[2];
   ControlTop_Y.R[2] = ControlTop_B.ControlPosicin_o8[2];
   ControlTop_Y.Zz[2] = ControlTop_B.ControlPosicin_o9[2];
-  ControlTop_Y.Fe_L[2] = ControlTop_B.Fe_alloc[2];
   ControlTop_Y.Ak[0] = ControlTop_B.ControlPosicin_o11[0];
   ControlTop_Y.Ak[1] = ControlTop_B.ControlPosicin_o11[1];
   ControlTop_Y.Ak[2] = ControlTop_B.ControlPosicin_o11[2];
@@ -159,6 +151,8 @@ void ControlTop::initialize()
   ControlPosici_nMDLOBJ2.getRTM()->setErrorStatusPointer((&ControlTop_M)
     ->getErrorStatusPointer());
   ControlPosici_nMDLOBJ2.init();
+  ControlTop_Y.Fa = ControlTop_B.F_des;
+  ControlTop_Y.Fe_L = ControlTop_B.Fe_alloc;
 }
 
 void ControlTop::terminate()

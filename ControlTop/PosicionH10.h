@@ -18,6 +18,11 @@ class PosicionH10 final
     real_T Pitch_DSTATE[3];
   };
 
+  struct ConstB_PosicionH10_h_T {
+    real_T TmpSignalConversionAtFaInpo;
+    real_T TmpSignalConversionAtFe_LIn;
+  };
+
   struct RT_MODEL_PosicionH10_T {
     const char_T **errorStatus;
     const char_T* getErrorStatus() const;
@@ -35,9 +40,8 @@ class PosicionH10 final
   void step1(const real_T rtu_airgaps_sensores[8], const real_T *rtu_RefZ, const
              real_T rtu_I_HEMS[4], real_T rty_GapsLoclaes[4], real_T
              rty_I_referencia[4], real_T rty_Pos[5], real_T rty_Fe[3], real_T
-             rty_Fa[4], real_T rty_Ef[3], real_T rty_P[3], real_T rty_R[3],
-             real_T rty_Zz[3], real_T rty_Fe_L[3], real_T rty_Ak[4], real_T
-             rty_Bk[3]);
+             rty_Ef[3], real_T rty_P[3], real_T rty_R[3], real_T rty_Zz[3],
+             real_T rty_Ak[4], real_T rty_Bk[3]);
   void step0();
   PosicionH10();
   ~PosicionH10();
@@ -51,6 +55,8 @@ class PosicionH10 final
     *alpha);
   RT_MODEL_PosicionH10_T PosicionH10_M;
 };
+
+extern const PosicionH10::ConstB_PosicionH10_h_T PosicionH10_ConstB;
 
 #endif
 

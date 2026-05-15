@@ -16,14 +16,14 @@ class ControlTop final
     real_T ControlPosicin_o2[4];
     real_T estados[5];
     real_T ControlPosicin_o4[3];
-    real_T F_des[4];
     real_T ControlPosicin_o6[3];
     real_T ControlPosicin_o7[3];
     real_T ControlPosicin_o8[3];
     real_T ControlPosicin_o9[3];
-    real_T Fe_alloc[3];
     real_T ControlPosicin_o11[4];
     real_T ControlPosicin_o12[3];
+    real_T F_des;
+    real_T Fe_alloc;
   };
 
   struct DW_ControlTop_T {
@@ -50,15 +50,15 @@ class ControlTop final
     real_T Estados[5];
     real_T CorrienteReferencia[4];
     real_T Fe[3];
-    real_T Fa[4];
+    real_T Fa;
     real_T Ef[3];
     real_T P[3];
     real_T R[3];
-    real_T Zz[3];
-    real_T Fe_L[3];
     real_T Referencia;
     real_T I_HEMS_OUT_LOG[4];
     real_T A[8];
+    real_T Zz[3];
+    real_T Fe_L;
     real_T Ak[4];
     real_T Bk[3];
   };
