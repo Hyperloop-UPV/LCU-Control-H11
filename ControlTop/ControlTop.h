@@ -31,6 +31,14 @@ class ControlTop final
     real_T RT1_Buffer0[4];
     real_T RT_Buffer[4];
     real_T ref;
+    real_T s;
+    real_T c;
+    real_T durs[319];
+    real_T gains[319];
+    real_T sinInc[319];
+    real_T cosInc[319];
+    uint32_T note_idx;
+    uint32_T sample_in_note;
     boolean_T ref_not_empty;
   };
 
@@ -42,6 +50,8 @@ class ControlTop final
     real_T CorrienteManual;
     real_T RampaStep;
     real_T enable;
+    real_T ABSOLUTECINEMA;
+    real_T amp_A;
   };
 
   struct ExtY_ControlTop_T {
