@@ -116,8 +116,6 @@ class ControlTop final
   ExtY_ControlTop_T ControlTop_Y;
   B_ControlTop_T ControlTop_B;
   DW_ControlTop_T ControlTop_DW;
-  void ControlTop_stem_injector_lookup(uint32_T idx, int16_T x[4], uint32_T
-    *sample_count, real_T *max_current_A);
   CorrienteH10 ControlDeCorrienteMDLOBJ1;
   PosicionH10 ControlPosici_nMDLOBJ2;
   RT_MODEL_ControlTop_T ControlTop_M;
