@@ -22,7 +22,7 @@ class ControlTop final
     real_T ControlPosicin_o9[3];
     real_T ControlPosicin_o11[4];
     real_T ControlPosicin_o12[3];
-    real_T F_des;
+    real_T u_opt;
     real_T Fe_alloc;
   };
 
@@ -30,15 +30,12 @@ class ControlTop final
     real_T UnitDelay_DSTATE;
     real_T RT1_Buffer0[4];
     real_T RT_Buffer[4];
+    real_T max_current_A_p;
     real_T ref;
-    real_T s;
-    real_T c;
-    real_T durs[319];
-    real_T gains[319];
-    real_T sinInc[319];
-    real_T cosInc[319];
-    uint32_T note_idx;
-    uint32_T sample_in_note;
+    uint32_T sample_idx;
+    uint32_T sample_count_p;
+    int16_T stems[3999220];
+    boolean_T sample_count_p_not_empty;
     boolean_T ref_not_empty;
   };
 
@@ -121,6 +118,8 @@ class ControlTop final
   ExtY_ControlTop_T ControlTop_Y;
   B_ControlTop_T ControlTop_B;
   DW_ControlTop_T ControlTop_DW;
+  void ControlTop_stem_injector_lookup(uint32_T idx, int16_T x[4], uint32_T
+    *sample_count, real_T *max_current_A);
   CorrienteH10 ControlDeCorrienteMDLOBJ1;
   PosicionH10 ControlPosici_nMDLOBJ2;
   RT_MODEL_ControlTop_T ControlTop_M;

@@ -529,7 +529,7 @@ void PosicionH10::step1(const real_T rtu_airgaps_sensores[8], const real_T
 
   rty_Fe[0] = (((*rtu_RefZ - rty_Zz[0]) * 100.0 - 20.0 * rty_Zz[1]) - rty_Zz[2])
     * -287.08565;
-  rty_Fe[1] = (((0.0 - rty_R[0]) * 25.0 - 10.0 * rty_R[1]) - rty_R[2]) *
+  rty_Fe[1] = (((0.0 - rty_R[0]) * 100.0 - 20.0 * rty_R[1]) - rty_R[2]) *
     22.1410713176;
   rty_Fe[2] = (((0.0 - rty_P[0]) * 100.0 - 20.0 * rty_P[1]) - rty_P[2]) *
     144.54009410557;
