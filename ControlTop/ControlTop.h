@@ -47,8 +47,6 @@ class ControlTop final
     real_T CorrienteManual;
     real_T RampaStep;
     real_T enable;
-    real_T ABSOLUTECINEMA;
-    real_T amp_A;
   };
 
   struct ExtY_ControlTop_T {
