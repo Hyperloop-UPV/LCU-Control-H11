@@ -34,7 +34,7 @@ class ControlTop final
     real_T ref;
     uint32_T sample_idx;
     uint32_T sample_count_p;
-    int16_T stems[240000];
+    int16_T stems[80000];
     boolean_T sample_count_p_not_empty;
     boolean_T ref_not_empty;
   };
