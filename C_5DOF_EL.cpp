@@ -632,6 +632,16 @@ void C_5DOF_EL::step0()                // Sample time: [0.0005s, 0.0s]
 
   // End of Saturate: '<S6>/Sat_I'
 
+  // Manual current override (quick test)
+  if (manual_current_active) {
+    for (int32_T i = 0; i < 6; i++) {
+      C_5DOF_EL_B.AG_mm[i] = manual_current;
+    }
+    for (int32_T i = 0; i < 4; i++) {
+      C_5DOF_EL_B.TmpSignalConversionAtKin_HE[i] = manual_current;
+    }
+  }
+
   // Outputs for Atomic SubSystem: '<S1>/ControlDeCorriente'
   // Inport: '<Root>/I_HEMS' incorporates:
   //   Inport: '<Root>/I_EMS'
@@ -1126,7 +1136,7 @@ const char_T* C_5DOF_EL::RT_MODEL_C_5DOF_EL_T::getErrorStatus() const
 }
 
 void C_5DOF_EL::RT_MODEL_C_5DOF_EL_T::setErrorStatus(const char_T* const
-  volatile aErrorStatus)
+  aErrorStatus)
 {
   (errorStatus = aErrorStatus);
 }

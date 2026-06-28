@@ -343,7 +343,7 @@ class C_5DOF_EL final
     boolean_T StepTask(int32_T idx) const;
     uint8_T &CounterLimit(int32_T idx);
     const char_T* getErrorStatus() const;
-    void setErrorStatus(const char_T* const volatile aErrorStatus);
+    void setErrorStatus(const char_T* const aErrorStatus);
     uint8_T &TaskCounter(int32_T idx);
   };
 
@@ -361,6 +361,13 @@ class C_5DOF_EL final
 
   // Real-Time Model get method
   C_5DOF_EL::RT_MODEL_C_5DOF_EL_T * getRTM();
+
+  // Quick-test manual current override
+  double manual_current = 0.0;
+  bool manual_current_active = false;
+
+  // Block signals (exposed for manual override)
+  B_C_5DOF_EL_T &getBlockSignals() { return C_5DOF_EL_B; }
 
   // Root inports set method
   void setExternalInputs(const ExtU_C_5DOF_EL_T *pExtU_C_5DOF_EL_T)

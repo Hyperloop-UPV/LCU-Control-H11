@@ -41,7 +41,7 @@ void C_5DOF_EL::C_5DOF_E_ControlDeCorriente(const real_T rtu_CorrienteRefHEMS[4]
   localB->DeadZone = rtu_CorrienteRefHEMS[0] - rtu_I_real_hems->I_HEMS1;
 
   // Gain: '<S383>/Proportional Gain'
-  localB->Sum = 22.9546 * localB->DeadZone;
+  localB->Sum =15.0 * localB->DeadZone;
 
   // Sum: '<S388>/Sum Fdbk'
   localB->IntegralGain = localB->Sum + localDW->Integrator_DSTATE;
@@ -135,7 +135,7 @@ void C_5DOF_EL::C_5DOF_E_ControlDeCorriente(const real_T rtu_CorrienteRefHEMS[4]
   localB->IntegralGain = rtu_CorrienteRefHEMS[1] - rtu_I_real_hems->I_HEMS2;
 
   // Gain: '<S437>/Proportional Gain'
-  localB->Sum = 22.9546 * localB->IntegralGain;
+  localB->Sum =15.0 * localB->IntegralGain;
 
   // Sum: '<S442>/Sum Fdbk'
   localB->DeadZone = localB->Sum + localDW->Integrator_DSTATE_o;
@@ -229,7 +229,7 @@ void C_5DOF_EL::C_5DOF_E_ControlDeCorriente(const real_T rtu_CorrienteRefHEMS[4]
   localB->IntegralGain = rtu_CorrienteRefHEMS[2] - rtu_I_real_hems->I_HEMS3;
 
   // Gain: '<S491>/Proportional Gain'
-  localB->Sum = 22.9546 * localB->IntegralGain;
+  localB->Sum =15.0 * localB->IntegralGain;
 
   // Sum: '<S496>/Sum Fdbk'
   localB->DeadZone = localB->Sum + localDW->Integrator_DSTATE_c;
@@ -323,7 +323,7 @@ void C_5DOF_EL::C_5DOF_E_ControlDeCorriente(const real_T rtu_CorrienteRefHEMS[4]
   localB->IntegralGain = rtu_CorrienteRefHEMS[3] - rtu_I_real_hems->I_HEMS4;
 
   // Gain: '<S545>/Proportional Gain'
-  localB->Sum = 22.9546 * localB->IntegralGain;
+  localB->Sum =15.0 * localB->IntegralGain;
 
   // Sum: '<S550>/Sum Fdbk'
   localB->DeadZone = localB->Sum + localDW->Integrator_DSTATE_om;
