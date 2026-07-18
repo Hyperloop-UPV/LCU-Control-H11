@@ -64,6 +64,7 @@ class CorrienteH11 final
             rty_V_EMS[6]);
   CorrienteH11();
   ~CorrienteH11();
+  const DW_CorrienteH11_T& get_dw() const { return CorrienteH11_DW; }
  private:
   B_CorrienteH11_T CorrienteH11_B;
   DW_CorrienteH11_T CorrienteH11_DW;

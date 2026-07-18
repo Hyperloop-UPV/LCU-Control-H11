@@ -93,6 +93,7 @@ class ControlTop final
   static void terminate();
   ControlTop();
   ~ControlTop();
+  const CorrienteH11& get_corriente() const { return ControlDeCorrienteMDLOBJ1; }
  private:
   ExtU_ControlTop_T ControlTop_U;
   ExtY_ControlTop_T ControlTop_Y;
