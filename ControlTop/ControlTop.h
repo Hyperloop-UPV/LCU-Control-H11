@@ -39,6 +39,9 @@ class ControlTop final
     real_T enable;
     real_T ABSOLUTECINEMA;
     real_T amp_A;
+    uint8_T Ganancia_HEMS;
+    uint8_T Ganancia_EMS;
+    boolean_T Vibra;
   };
 
   struct ExtY_ControlTop_T {
@@ -48,6 +51,12 @@ class ControlTop final
     real_T A[8];
     real_T Estados[5];
     real_T GL[10];
+    real_T status;
+    real_T v_alloc;
+    real_T Min;
+    real_T Max;
+    real_T prev;
+    real_T Iterations;
   };
 
   struct RT_MODEL_ControlTop_T {
@@ -93,7 +102,6 @@ class ControlTop final
   static void terminate();
   ControlTop();
   ~ControlTop();
-  const CorrienteH11& get_corriente() const { return ControlDeCorrienteMDLOBJ1; }
  private:
   ExtU_ControlTop_T ControlTop_U;
   ExtY_ControlTop_T ControlTop_Y;

@@ -15,7 +15,7 @@ void CorrienteH11::step(const real_T rtu_I_real_hems[4], const real_T
   int8_T tmp;
   int8_T tmp_0;
   CorrienteH11_B.Saturation_i = rtu_CorrrienteRef[0] - rtu_I_real_hems[0];
-  CorrienteH11_B.Saturation = 15.0 * CorrienteH11_B.Saturation_i;
+  CorrienteH11_B.Saturation = 20.0 * CorrienteH11_B.Saturation_i;
   CorrienteH11_B.Saturation_e = CorrienteH11_B.Saturation +
     CorrienteH11_DW.Integrator_DSTATE;
   if (CorrienteH11_B.Saturation_e > 350.0) {
@@ -53,7 +53,7 @@ void CorrienteH11::step(const real_T rtu_I_real_hems[4], const real_T
   }
 
   CorrienteH11_B.Saturation_e = rtu_CorrrienteRef[1] - rtu_I_real_hems[1];
-  CorrienteH11_B.Saturation_i = 15.0 * CorrienteH11_B.Saturation_e;
+  CorrienteH11_B.Saturation_i = 20.0 * CorrienteH11_B.Saturation_e;
   CorrienteH11_B.Saturation_f = CorrienteH11_B.Saturation_i +
     CorrienteH11_DW.Integrator_DSTATE_e;
   if (CorrienteH11_B.Saturation_f > 350.0) {
@@ -91,7 +91,7 @@ void CorrienteH11::step(const real_T rtu_I_real_hems[4], const real_T
   }
 
   CorrienteH11_B.Saturation_f = rtu_CorrrienteRef[2] - rtu_I_real_hems[2];
-  CorrienteH11_B.Saturation_e = 15.0 * CorrienteH11_B.Saturation_f;
+  CorrienteH11_B.Saturation_e = 20.0 * CorrienteH11_B.Saturation_f;
   CorrienteH11_B.Saturation_j = CorrienteH11_B.Saturation_e +
     CorrienteH11_DW.Integrator_DSTATE_o;
   if (CorrienteH11_B.Saturation_j > 350.0) {
@@ -129,7 +129,7 @@ void CorrienteH11::step(const real_T rtu_I_real_hems[4], const real_T
   }
 
   CorrienteH11_B.Saturation_j = rtu_CorrrienteRef[3] - rtu_I_real_hems[3];
-  CorrienteH11_B.Saturation_f = 15.0 * CorrienteH11_B.Saturation_j;
+  CorrienteH11_B.Saturation_f = 20.0 * CorrienteH11_B.Saturation_j;
   CorrienteH11_B.Saturation_p = CorrienteH11_B.Saturation_f +
     CorrienteH11_DW.Integrator_DSTATE_m;
   if (CorrienteH11_B.Saturation_p > 350.0) {
@@ -167,7 +167,7 @@ void CorrienteH11::step(const real_T rtu_I_real_hems[4], const real_T
   }
 
   CorrienteH11_B.Saturation_p = rtu_CorrrienteRef[4] - rtu_I_real_ems[0];
-  CorrienteH11_B.Saturation_j = 5.0 * CorrienteH11_B.Saturation_p;
+  CorrienteH11_B.Saturation_j = 0.5039 * CorrienteH11_B.Saturation_p;
   CorrienteH11_B.Saturation_g = CorrienteH11_B.Saturation_j +
     CorrienteH11_DW.Integrator_DSTATE_a;
   if (CorrienteH11_B.Saturation_g > 350.0) {
@@ -178,7 +178,7 @@ void CorrienteH11::step(const real_T rtu_I_real_hems[4], const real_T
     CorrienteH11_B.Saturation_g -= -350.0;
   }
 
-  CorrienteH11_B.Saturation_p *= 0.7;
+  CorrienteH11_B.Saturation_p *= 70.0;
   if (CorrienteH11_B.Saturation_g > 0.0) {
     tmp = 1;
   } else {
@@ -205,7 +205,7 @@ void CorrienteH11::step(const real_T rtu_I_real_hems[4], const real_T
   }
 
   CorrienteH11_B.Saturation_g = rtu_CorrrienteRef[5] - rtu_I_real_ems[1];
-  CorrienteH11_B.Saturation_p = 5.0 * CorrienteH11_B.Saturation_g;
+  CorrienteH11_B.Saturation_p = 0.5039 * CorrienteH11_B.Saturation_g;
   CorrienteH11_B.Saturation_gq = CorrienteH11_B.Saturation_p +
     CorrienteH11_DW.Integrator_DSTATE_f;
   if (CorrienteH11_B.Saturation_gq > 350.0) {
@@ -216,7 +216,7 @@ void CorrienteH11::step(const real_T rtu_I_real_hems[4], const real_T
     CorrienteH11_B.Saturation_gq -= -350.0;
   }
 
-  CorrienteH11_B.Saturation_g *= 0.7;
+  CorrienteH11_B.Saturation_g *= 70.0;
   if (CorrienteH11_B.Saturation_gq > 0.0) {
     tmp = 1;
   } else {
@@ -243,7 +243,7 @@ void CorrienteH11::step(const real_T rtu_I_real_hems[4], const real_T
   }
 
   CorrienteH11_B.Saturation_gq = rtu_CorrrienteRef[6] - rtu_I_real_ems[2];
-  CorrienteH11_B.Saturation_g = 5.0 * CorrienteH11_B.Saturation_gq;
+  CorrienteH11_B.Saturation_g = 0.5039 * CorrienteH11_B.Saturation_gq;
   CorrienteH11_B.Saturation_er = CorrienteH11_B.Saturation_g +
     CorrienteH11_DW.Integrator_DSTATE_j;
   if (CorrienteH11_B.Saturation_er > 350.0) {
@@ -254,7 +254,7 @@ void CorrienteH11::step(const real_T rtu_I_real_hems[4], const real_T
     CorrienteH11_B.Saturation_er -= -350.0;
   }
 
-  CorrienteH11_B.Saturation_gq *= 0.7;
+  CorrienteH11_B.Saturation_gq *= 70.0;
   if (CorrienteH11_B.Saturation_er > 0.0) {
     tmp = 1;
   } else {
@@ -281,7 +281,7 @@ void CorrienteH11::step(const real_T rtu_I_real_hems[4], const real_T
   }
 
   CorrienteH11_B.Saturation_er = rtu_CorrrienteRef[7] - rtu_I_real_ems[3];
-  CorrienteH11_B.Saturation_gq = 5.0 * CorrienteH11_B.Saturation_er;
+  CorrienteH11_B.Saturation_gq = 0.5039 * CorrienteH11_B.Saturation_er;
   CorrienteH11_B.Saturation_o = CorrienteH11_B.Saturation_gq +
     CorrienteH11_DW.Integrator_DSTATE_k;
   if (CorrienteH11_B.Saturation_o > 350.0) {
@@ -292,7 +292,7 @@ void CorrienteH11::step(const real_T rtu_I_real_hems[4], const real_T
     CorrienteH11_B.Saturation_o -= -350.0;
   }
 
-  CorrienteH11_B.Saturation_er *= 0.7;
+  CorrienteH11_B.Saturation_er *= 70.0;
   if (CorrienteH11_B.Saturation_o > 0.0) {
     tmp = 1;
   } else {
@@ -319,7 +319,7 @@ void CorrienteH11::step(const real_T rtu_I_real_hems[4], const real_T
   }
 
   CorrienteH11_B.Saturation_o = rtu_CorrrienteRef[8] - rtu_I_real_ems[4];
-  CorrienteH11_B.Saturation_er = 5.0 * CorrienteH11_B.Saturation_o;
+  CorrienteH11_B.Saturation_er = 0.5039 * CorrienteH11_B.Saturation_o;
   CorrienteH11_B.IntegralGain = CorrienteH11_B.Saturation_er +
     CorrienteH11_DW.Integrator_DSTATE_b;
   if (CorrienteH11_B.IntegralGain > 350.0) {
@@ -330,7 +330,7 @@ void CorrienteH11::step(const real_T rtu_I_real_hems[4], const real_T
     CorrienteH11_B.IntegralGain -= -350.0;
   }
 
-  CorrienteH11_B.Saturation_o *= 0.7;
+  CorrienteH11_B.Saturation_o *= 70.0;
   if (CorrienteH11_B.IntegralGain > 0.0) {
     tmp = 1;
   } else {
@@ -357,7 +357,7 @@ void CorrienteH11::step(const real_T rtu_I_real_hems[4], const real_T
   }
 
   CorrienteH11_B.IntegralGain = rtu_CorrrienteRef[9] - rtu_I_real_ems[5];
-  CorrienteH11_B.Saturation_o = 5.0 * CorrienteH11_B.IntegralGain;
+  CorrienteH11_B.Saturation_o = 0.5039 * CorrienteH11_B.IntegralGain;
   CorrienteH11_B.DeadZone = CorrienteH11_B.Saturation_o +
     CorrienteH11_DW.Integrator_DSTATE_j2;
   if (CorrienteH11_B.DeadZone > 350.0) {
@@ -368,7 +368,7 @@ void CorrienteH11::step(const real_T rtu_I_real_hems[4], const real_T
     CorrienteH11_B.DeadZone -= -350.0;
   }
 
-  CorrienteH11_B.IntegralGain *= 0.7;
+  CorrienteH11_B.IntegralGain *= 70.0;
   if (CorrienteH11_B.DeadZone > 0.0) {
     tmp = 1;
   } else {

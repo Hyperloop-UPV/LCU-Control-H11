@@ -219,9 +219,11 @@ void ControlTop::step1()
   Model1MDLOBJ2.step(&ControlTop_U.Sensores[0], &e,
                      &ControlTop_DW.TmpRTBAtModel1Inport3_Buffer[0],
                      &ControlTop_DW.TmpRTBAtModel1Inport4_Buffer[0],
-                     &rtb_estados[0], &rtb_Model1_o2[0], &rtb_Model1_o3[0],
-                     &rtb_Model1_o4[0], &rtb_Model1_o5[0], &rtb_Model1_o6[0],
-                     &rtb_Model1_o7[0], &rtb_airgaps_actuadores[0]);
+                     &ControlTop_U.Ganancia_HEMS, &ControlTop_U.Ganancia_EMS,
+                     &ControlTop_U.Vibra, &rtb_estados[0], &rtb_Model1_o2[0],
+                     &rtb_Model1_o3[0], &rtb_Model1_o4[0], &rtb_Model1_o5[0],
+                     &rtb_Model1_o6[0], &rtb_Model1_o7[0],
+                     &rtb_airgaps_actuadores[0]);
   std::memcpy(&ControlTop_Y.GL[0], &rtb_airgaps_actuadores[0], 10U * sizeof
               (real_T));
   std::memcpy(&ControlTop_DW.TmpRTBAtSwitchInport1_Buffer0[0], &rtb_Model1_o7[0],
@@ -556,6 +558,12 @@ void ControlTop::initialize()
     ControlTop_DW.note_idx = 1U;
     ControlTop_DW.c = 1.0;
     Model1MDLOBJ2.init(&rtb_Model1_o5[0]);
+    ControlTop_Y.status = 0.0;
+    ControlTop_Y.v_alloc = 0.0;
+    ControlTop_Y.Min = 0.0;
+    ControlTop_Y.Max = 0.0;
+    ControlTop_Y.prev = 0.0;
+    ControlTop_Y.Iterations = 0.0;
   }
 }
 
